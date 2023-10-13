@@ -1,5 +1,5 @@
 const statics = {
-    calendlyUrl: "https://calendly.com/alienjungle"
+  calendlyUrl: "https://calendly.com/alienjungle",
 };
 
 export { statics };

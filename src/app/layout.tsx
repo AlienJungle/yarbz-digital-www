@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const poppins = Poppins({
   weight: ["400", "500", "600"],
   subsets: ["latin"],
-  variable: "--font-poppins"
+  variable: "--font-poppins",
 });
 
 export default function RootLayout({
@@ -22,7 +22,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={poppins.className}>
-
       <body>
         <>
           <HeaderNav />

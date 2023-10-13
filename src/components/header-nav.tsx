@@ -12,7 +12,10 @@ export default function HeaderNav() {
         <a href="#services">Services</a>
         <a href="#work">Work</a>
         <a href="#testimonials">Testimonials</a>
-        <a className="bg-yd-orange text-yd-white btn" href={statics.calendlyUrl}>
+        <a
+          className="bg-yd-orange text-yd-white btn"
+          href={statics.calendlyUrl}
+        >
           Get in touch
         </a>
       </div>

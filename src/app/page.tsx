@@ -8,7 +8,7 @@ import thumbHosting from "../../public/thumb-hosting.png";
 import thumbAccessibility from "../../public/thumb-accessibility.png";
 import workFFF from "../../public/work-fff.png";
 import workSportank from "../../public/work-sportank.png";
-import workNSFGroup from "../../public/work-nsfgroup.png"; 
+import workNSFGroup from "../../public/work-nsfgroup.png";
 
 import Flickity from "react-flickity-component";
 
@@ -69,12 +69,7 @@ export default function Home() {
               <ServiceCard
                 imageSrc={thumbBespokeDev}
                 imageAlt="a person sitting in front of a computer"
-                title={
-                  <>
-                    Bespoke Software
-                    Development
-                  </>
-                }
+                title={<>Bespoke Software Development</>}
                 description={<></>}
               />
 
@@ -97,9 +92,7 @@ export default function Home() {
       </div>
 
       <div className="my-[272px] container">
-        <Flickity elementType={'div'} options={{
-
-        }}></Flickity>
+        <Flickity elementType={"div"} options={{}}></Flickity>
       </div>
     </main>
   );
@@ -127,7 +120,9 @@ function ServiceCard({
         height={115}
         width={115}
       />
-      <p className="text-yd-white font-semibold text-[22.5px] pr-[20px]">{title}</p>
+      <p className="text-yd-white font-semibold text-[22.5px] pr-[20px]">
+        {title}
+      </p>
     </div>
   );
 }
@@ -137,6 +132,4 @@ interface WorkImageProps {
   imageAlt: string;
 }
 
-function WorkImage({imageSrc, imageAlt}: WorkImageProps) {
-
-}
+function WorkImage({ imageSrc, imageAlt }: WorkImageProps) {}
