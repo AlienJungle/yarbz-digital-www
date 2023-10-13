@@ -1,5 +1,4 @@
 import Image, { StaticImageData } from "next/image";
-import Flickity from 'react-flickity-component'
 
 // Images
 import bgWave from "../../public/bg-wave.png";
@@ -7,6 +6,11 @@ import aaron from "../../public/aaron@2x.png";
 import thumbBespokeDev from "../../public/thumb-bespoke-dev.png";
 import thumbHosting from "../../public/thumb-hosting.png";
 import thumbAccessibility from "../../public/thumb-accessibility.png";
+import workFFF from "../../public/work-fff.png";
+import workSportank from "../../public/work-sportank.png";
+import workNSFGroup from "../../public/work-nsfgroup.png"; 
+
+import Flickity from "react-flickity-component";
 
 export default function Home() {
   return (
@@ -93,7 +97,9 @@ export default function Home() {
       </div>
 
       <div className="my-[272px] container">
-          <Flickity></Flickity>
+        <Flickity elementType={'div'} options={{
+
+        }}></Flickity>
       </div>
     </main>
   );
@@ -124,4 +130,13 @@ function ServiceCard({
       <p className="text-yd-white font-semibold text-[22.5px] pr-[20px]">{title}</p>
     </div>
   );
+}
+
+interface WorkImageProps {
+  imageSrc: string;
+  imageAlt: string;
+}
+
+function WorkImage({imageSrc, imageAlt}: WorkImageProps) {
+
 }
