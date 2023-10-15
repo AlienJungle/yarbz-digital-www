@@ -22,6 +22,15 @@ const config: Config = {
         "yd-dark-blue": "#050533",
       },
     },
+    fontSize: {
+      xs: "0.64rem",
+      sm: "0.8rem",
+      base: "1rem",
+      lg: "1.25rem",
+      xl: "1.562rem",
+      "2xl": "1.953rem",
+      "3xl": "2.441rem",
+    },
   },
   plugins: [],
 };
