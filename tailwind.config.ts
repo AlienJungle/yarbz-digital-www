@@ -21,6 +21,7 @@ const config: Config = {
         "yd-white": "#FAFAFA",
         "yd-dark-blue": "#050533",
         "yd-grey": "#D9D9D9",
+        "yd-light-grey": "#F6F6F6",
       },
     },
     fontSize: {

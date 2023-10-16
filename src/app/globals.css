@@ -31,3 +31,7 @@
 .flickity-page-dots .dot.is-selected {
   @apply bg-yd-orange transition-colors duration-500;
 }
+
+.service-card strong {
+  @apply text-yd-orange;
+}
