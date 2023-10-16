@@ -3,7 +3,7 @@
 import Image from "next/image";
 
 import { statics } from "@/static";
-import { Variants, motion } from "framer-motion";
+import { Variant, Variants, motion } from "framer-motion";
 import logo from "../../public/logo.svg";
 
 export default function HeaderNav() {
@@ -36,6 +36,14 @@ export default function HeaderNav() {
     visible: { opacity: 1, y: 0 },
   };
 
+  const itemHover: Variant = {
+    scale: 1.1,
+  };
+
+  const itemTap: Variant = {
+    scale: 0.85,
+  };
+
   return (
     <nav className="flex flex-row justify-between items-center gap-[47px] px-[45px] py-[25px]">
       <Image src={logo} alt="yarbz.digital logo" />
@@ -48,7 +56,13 @@ export default function HeaderNav() {
       >
         {links.map((link) => {
           return (
-            <motion.a key={link.href} href={link.href} variants={item}>
+            <motion.a
+              key={link.href}
+              href={link.href}
+              variants={item}
+              whileTap={itemTap}
+              whileHover={itemHover}
+            >
               {link.text}
             </motion.a>
           );
@@ -58,6 +72,8 @@ export default function HeaderNav() {
           className="bg-yd-orange text-yd-white btn"
           href={statics.calendlyUrl}
           variants={item}
+          whileTap={itemTap}
+          whileHover={itemHover}
         >
           Get in touch
         </motion.a>

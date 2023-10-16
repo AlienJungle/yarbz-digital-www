@@ -12,7 +12,7 @@ export default function WorkSlider({
         elementType={"div"}
         className="w-full"
         reloadOnUpdate={true}
-        static={true}
+        static={false}
         options={{
           wrapAround: false,
           autoPlay: 3000,
