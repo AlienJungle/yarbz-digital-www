@@ -1,5 +1,5 @@
 const statics = {
-  calendlyUrl: "https://calendly.com/alienjungle",
+  bookingURL: "https://meetings-eu1.hubspot.com/ayarborough",
 };
 
 export { statics };

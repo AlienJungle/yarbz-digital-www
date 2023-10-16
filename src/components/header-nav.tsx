@@ -2,8 +2,9 @@
 
 import Image from "next/image";
 
+import { hoverVariant, tapVariant } from "@/animations";
 import { statics } from "@/static";
-import { Variant, Variants, motion } from "framer-motion";
+import { Variants, motion } from "framer-motion";
 import logo from "../../public/logo.svg";
 
 export default function HeaderNav() {
@@ -36,14 +37,6 @@ export default function HeaderNav() {
     visible: { opacity: 1, y: 0 },
   };
 
-  const itemHover: Variant = {
-    scale: 1.1,
-  };
-
-  const itemTap: Variant = {
-    scale: 0.85,
-  };
-
   return (
     <nav className="flex flex-row justify-between items-center gap-[47px] px-[45px] py-[25px]">
       <Image src={logo} alt="yarbz.digital logo" />
@@ -60,8 +53,8 @@ export default function HeaderNav() {
               key={link.href}
               href={link.href}
               variants={item}
-              whileTap={itemTap}
-              whileHover={itemHover}
+              whileTap={tapVariant}
+              whileHover={hoverVariant}
             >
               {link.text}
             </motion.a>
@@ -70,10 +63,12 @@ export default function HeaderNav() {
 
         <motion.a
           className="bg-yd-orange text-yd-white btn"
-          href={statics.calendlyUrl}
+          href={statics.bookingURL}
+          target="_blank"
+          rel="nofollow noopener"
           variants={item}
-          whileTap={itemTap}
-          whileHover={itemHover}
+          whileTap={tapVariant}
+          whileHover={hoverVariant}
         >
           Get in touch
         </motion.a>

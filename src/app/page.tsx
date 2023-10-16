@@ -21,11 +21,14 @@ import workFFF from "../../public/work-fff.png";
 import workNSFGroup from "../../public/work-nsfgroup.png";
 import workSportank from "../../public/work-sportank.png";
 
+import { hoverVariant, tapVariant } from "@/animations";
 import RebrandBanner from "@/components/rebrand-banner";
 import ServiceCard from "@/components/service-card";
 import WorkImage from "@/components/work-image";
 import WorkSlider from "@/components/work-slider";
-import { Variants, motion } from "framer-motion";
+import { statics } from "@/static";
+import { Variants, motion, useAnimationControls } from "framer-motion";
+import { useEffect } from "react";
 
 export default function Home({
   searchParams,
@@ -66,6 +69,30 @@ export default function Home({
       opacity: 1,
     },
   };
+
+  const hireMeVariants: Variants = {
+    hidden: {
+      y: "20px",
+      opacity: 0,
+    },
+    visible: {
+      y: "0px",
+      opacity: 1,
+      transition: {
+        delay: 2.1,
+        // duration: 1,
+      },
+    },
+  };
+
+  // Using useAnimationControls() to work around motion bug
+  // where setting duration/delay messes up animation after
+  // leaving the whenHover={} or whenTap={} state
+  const hireMeControls = useAnimationControls();
+
+  useEffect(() => {
+    hireMeControls.start("visible");
+  }, [hireMeControls]);
 
   return (
     <>
@@ -109,9 +136,6 @@ export default function Home({
             initial={"hidden"}
             animate={"visible"}
           >
-            {/* With over a decade of expertise, I transform businesses and their
-            clients into digital success stories by crafting elegant, efficient,
-            and cost-effective web and mobile solutions. */}
             {headingCaption.split("").map((char, i) => (
               <motion.span key={i} variants={captionCharacterVariants}>
                 {char}
@@ -119,22 +143,15 @@ export default function Home({
             ))}
           </motion.p>
           <motion.a
-            href="#"
+            href={statics.bookingURL}
+            target="_blank"
+            rel="nofollow noopener"
             className="btn bg-yd-dark-blue text-yd-white mt-[50px] !px-[30px]"
-            initial={{
-              y: "50px",
-              opacity: 0,
-              scale: 0.8,
-            }}
-            animate={{
-              y: "0px",
-              opacity: 1,
-              scale: 1,
-            }}
-            transition={{
-              delay: 2.1,
-              duration: 1,
-            }}
+            variants={hireMeVariants}
+            initial={"hidden"}
+            animate={hireMeControls}
+            whileTap={tapVariant}
+            whileHover={hoverVariant}
           >
             Hire me!
           </motion.a>
@@ -142,7 +159,10 @@ export default function Home({
 
         <div className="mb-[280px] container px-[125px]">
           <div className="px-[125px] pt-[104px] container faded-bg rounded-[50px]">
-            <h2 className="text-[43.95px] font-semibold text-yd-orange">
+            <h2
+              id="services"
+              className="text-[43.95px] font-semibold text-yd-orange"
+            >
               Services I offer
             </h2>
             <div className="flex flex-row gap-x-[77px] items-stretch">
@@ -228,7 +248,7 @@ export default function Home({
           </div>
         </div>
 
-        <div className="my-[400px] container relative">
+        <div id="work" className="my-[400px] container relative">
           <Image
             src={blobOrange}
             alt=""
@@ -267,39 +287,51 @@ export default function Home({
           />
 
           <div className="grid grid-cols-4 gap-x-[50px] items-center px-[10%]">
-            <div className="flex flex-row items-center justify-center">
+            <motion.div
+              className="flex flex-row items-center justify-center"
+              whileHover={hoverVariant}
+            >
               <Image
                 src={clientSportank}
                 alt="sportank logo"
                 width={328}
                 height={38.11}
               ></Image>
-            </div>
-            <div className="flex flex-row items-center justify-center">
+            </motion.div>
+            <motion.div
+              className="flex flex-row items-center justify-center"
+              whileHover={hoverVariant}
+            >
               <Image
                 src={clientAverbis}
                 alt="averbis GmbH logo"
                 width={200}
                 height={66}
               ></Image>
-            </div>
-            <div className="flex flex-row items-center justify-center">
+            </motion.div>
+            <motion.div
+              className="flex flex-row items-center justify-center"
+              whileHover={hoverVariant}
+            >
               <Image
                 src={clientHippo}
                 alt="hippo digital logo"
                 width={192.13}
                 height={57.39}
               ></Image>
-            </div>
+            </motion.div>
 
-            <div className="flex flex-row items-center justify-center">
+            <motion.div
+              className="flex flex-row items-center justify-center"
+              whileHover={hoverVariant}
+            >
               <Image
                 src={clientFFF}
                 alt="Fifty Five and Five logo"
                 width={301}
                 height={45}
               ></Image>
-            </div>
+            </motion.div>
           </div>
         </div>
 
@@ -324,9 +356,16 @@ export default function Home({
               Book a free call with me to get started. If you&apos;d rather, you
               can contact me by email at aaron AT alienjungle DOT digital.
             </p>
-            <a href="#" className="btn text-yd-white bg-yd-dark-blue">
+            <motion.a
+              href={statics.bookingURL}
+              className="btn text-yd-white bg-yd-dark-blue"
+              target="_blank"
+              rel="nofollow noopener"
+              whileHover={hoverVariant}
+              whileTap={tapVariant}
+            >
               Get in touch
-            </a>
+            </motion.a>
           </div>
         </div>
       </main>
