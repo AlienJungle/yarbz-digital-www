@@ -39,9 +39,16 @@ export default function HeaderNav() {
 
   return (
     <nav className="flex flex-row justify-between items-center gap-[47px] px-[45px] py-[25px]">
-      <motion.div variants={item} initial="hidden" animate="visible">
+      <motion.a
+        variants={item}
+        initial="hidden"
+        animate="visible"
+        href="/"
+        whileTap={tapVariant}
+        whileHover={hoverVariant}
+      >
         <Image src={logo} alt="yarbz.digital logo" />
-      </motion.div>
+      </motion.a>
 
       <motion.div
         className="flex flex-row gap-[47px] justify-end items-center font-semibold"

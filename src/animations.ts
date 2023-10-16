@@ -1,4 +1,4 @@
-import { TargetAndTransition, VariantLabels } from "framer-motion";
+import { TargetAndTransition, VariantLabels, Variants } from "framer-motion";
 
 // Unsure why using Variant export from framer-motion library doesn't
 // work, so recreating it myself here.
@@ -10,4 +10,15 @@ export const tapVariant: Variant = {
 
 export const hoverVariant: Variant = {
   scale: 1.1,
+};
+
+export const introVariants: Variants = {
+  hidden: {
+    y: "-50px",
+    opacity: 0,
+  },
+  visible: {
+    y: "0px",
+    opacity: 1,
+  },
 };

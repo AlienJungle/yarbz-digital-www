@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --yd-orange: theme("colors.yd-orange");
+  --yd-dark-blue: theme("colors.yd-dark-blue");
+  --yd-white: theme("colors.yd-white");
+}
+
 @layer base {
   html {
     @apply text-yd-dark-blue text-[18px] overflow-x-hidden scroll-smooth;
@@ -33,5 +39,25 @@
 }
 
 .service-card strong {
+  @apply text-yd-orange;
+}
+
+.full-screen {
+  @apply h-[calc(100vh-142px)] min-h-[700px];
+}
+
+.prose {
+  @apply max-w-[1000px];
+}
+.prose h1 {
+  @apply mt-20 mb-20;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
   @apply text-yd-orange;
 }

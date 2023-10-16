@@ -1,4 +1,6 @@
+import { Variants, motion, useAnimation } from "framer-motion";
 import Image, { StaticImageData } from "next/image";
+import { useEffect } from "react";
 
 interface ServiceCardProps {
   imageSrc: StaticImageData;
@@ -13,8 +15,70 @@ export default function ServiceCard({
   title,
   description,
 }: ServiceCardProps) {
+  const cardVariants: Variants = {
+    hidden: {
+      opacity: 0,
+      y: "-50px",
+    },
+    visible: {
+      opacity: 1,
+      y: "0px",
+    },
+    inactive: {
+      background: "rgba(0,0,0,0)",
+    },
+    active: {
+      border: "2px solid var(--yd-dark-blue)",
+      color: "var(--yd-white)",
+      background: "var(--yd-dark-blue)",
+      transition: {
+        duration: 0.5,
+        type: "spring",
+        stiffness: 170,
+        damping: 20,
+      },
+    },
+  };
+
+  const textVariants: Variants = {
+    inactive: {
+      opacity: 0,
+      maxHeight: 0,
+    },
+    active: {
+      maxHeight: 900,
+      paddingTop: 25,
+      paddingBottom: 25,
+      borderTop: "2px solid var(--yd-orange)",
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        type: "spring",
+        stiffness: 170,
+        damping: 20,
+      },
+    },
+  };
+
+  const cardAnimation = useAnimation();
+
+  useEffect(() => {
+    cardAnimation.start({
+      opacity: 0.2,
+    });
+  }, [cardAnimation]);
+
   return (
-    <div className="service-card rounded-xl hover:bg-yd-dark-blue hover:border-yd-dark-blue hover:text-yd-white transition-colors duration-500 border-2 group">
+    <motion.div
+      tabIndex={0}
+      className="service-card rounded-xl border-2 group"
+      variants={cardVariants}
+      initial={"inactive"}
+      whileHover={"active"}
+      whileFocus={"active"}
+      whileTap={"active"}
+      whileInView={"visible"}
+    >
       <div className="p-[25px] flex flex-row items-center gap-x-[32px]">
         <Image
           src={imageSrc}
@@ -25,9 +89,12 @@ export default function ServiceCard({
         />
         <p className="font-semibold text-lg pr-[20px]">{title}</p>
       </div>
-      <p className="px-[25px] overflow-hidden relative opacity-0 block max-h-0 group-hover:max-h-[900px] group-hover:py-[25px] border-t-2 group-hover:border-yd-orange group-hover:opacity-100 transition-all duration-500">
+      <motion.p
+        className="px-[25px] overflow-hidden relative"
+        variants={textVariants}
+      >
         {description}
-      </p>
-    </div>
+      </motion.p>
+    </motion.div>
   );
 }

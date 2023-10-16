@@ -163,7 +163,7 @@ export default function Home({
           </motion.a>
         </header>
 
-        <div className="mb-[280px] container px-[125px]">
+        <div className="mb-[200px] container px-[125px]">
           <div className="px-[125px] pt-[104px] container faded-bg rounded-[50px]">
             <h2
               id="services"
@@ -189,7 +189,7 @@ export default function Home({
                 />
               </div>
 
-              <div className="w-[50%] relative flex flex-col gap-y-[46px] justify-center my-[50px]">
+              <div className="w-[50%] relative flex flex-col gap-y-[46px] justify-start mt-[40px] mb-[80px]">
                 <ServiceCard
                   imageSrc={thumbBespokeDev}
                   imageAlt="a person sitting in front of a computer"
@@ -254,7 +254,7 @@ export default function Home({
           </div>
         </div>
 
-        <div id="work" className="my-[400px] container relative">
+        <div id="work" className="my-[300px] container relative">
           <Image
             src={blobOrange}
             alt=""
@@ -283,7 +283,7 @@ export default function Home({
           </div>
         </div>
 
-        <div className="my-[200px] container relative">
+        <div className="mt-[500px] mb-[200px] container relative">
           <Image
             src={arrowHappyClients}
             alt="Arrow with caption 'check out my recent work'"
@@ -341,11 +341,11 @@ export default function Home({
           </div>
         </div>
 
-        <div className="my-[200px] container relative flex flex-col max-w-[998px] items-center">
+        <div className=" my-[200px] container relative flex flex-col max-w-[998px] items-center">
           <h2 className="text-3xl text-yd-orange font-semibold text-center max-w-[627px]">
             What those I&apos;ve worked with have to say...
           </h2>
-          <div className="my-[60px] max-w-[900px] w-full overflow-hidden">
+          <div className="mt-[60px] max-w-[900px] w-full overflow-hidden">
             <TestimonialSlider>
               <Testimonial
                 author="Dan Dalton"
@@ -375,7 +375,7 @@ export default function Home({
           </div>
         </div>
 
-        <div className="my-[300px] container relative">
+        <div className="my-[200px] container relative">
           <div className="max-w-[1012px] p-[54px] flex flex-col items-center justify-center mx-auto bg-yd-light-grey rounded-2xl relative overflow-hidden">
             <Image
               src={bgOrangeWave}
