@@ -362,7 +362,7 @@ export default function Home({
               <Testimonial
                 author="Torsten Koller"
                 authorImageSrc={testAverbis}
-                position="Developer @ Averbis GmbH Digital"
+                position="Developer @ Averbis GmbH"
                 body="Within our expected timeline, Aaron was successfully able to provide us with a working prototype of our desired application. We perceived him as reliable and diligent and would be happy to work with him again in a future project."
               />
               <Testimonial
