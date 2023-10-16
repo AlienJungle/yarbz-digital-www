@@ -20,6 +20,7 @@ const config: Config = {
         "yd-orange": "#FC9E11",
         "yd-white": "#FAFAFA",
         "yd-dark-blue": "#050533",
+        "yd-grey": "#D9D9D9",
       },
     },
     fontSize: {

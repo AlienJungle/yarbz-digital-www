@@ -14,12 +14,14 @@ import workNSFGroup from "../../public/work-nsfgroup.png";
 import blobOrange from "../../public/blob-orange.svg";
 import blobBlue from "../../public/blob-blue.svg";
 
-import Flickity from "react-flickity-component";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import RebrandBanner from "@/components/rebrand-banner";
+import WorkSlider from "@/components/work-slider";
+import WorkImage from "@/components/work-image";
+import ServiceCard from "@/components/service-card";
 
 export default function Home() {
-  const showRebrandBanner = useSearchParams().get("rebrandNotice") === "true";
+  const showRebrandBanner = useSearchParams()?.get("rebrandNotice") === "true";
 
   return (
     <>
@@ -112,79 +114,13 @@ export default function Home() {
             alt=""
             className="absolute left-[150px] -bottom-[150px] -z-10"
           />
-          <WorkSlider />
+          <WorkSlider>
+            <WorkImage imageSrc={workFFF} imageAlt="" />
+            <WorkImage imageSrc={workSportank} imageAlt="" />
+            <WorkImage imageSrc={workNSFGroup} imageAlt="" />
+          </WorkSlider>
         </div>
       </main>
     </>
-  );
-}
-
-interface ServiceCardProps {
-  imageSrc: StaticImageData;
-  imageAlt: string;
-  title: JSX.Element;
-  description: JSX.Element;
-}
-
-function ServiceCard({
-  imageSrc,
-  imageAlt,
-  title,
-  description,
-}: ServiceCardProps) {
-  return (
-    <div className="bg-[#1C1C4F] p-[25px] rounded-[20px] flex flex-row items-center gap-x-[32px] drop-shadow-md border-yd-dark-blue">
-      <Image
-        src={imageSrc}
-        className="rounded-[20px] flex-shrink-0"
-        alt={imageAlt}
-        height={115}
-        width={115}
-      />
-      <p className="text-yd-white font-semibold text-[22.5px] pr-[20px]">
-        {title}
-      </p>
-    </div>
-  );
-}
-
-interface WorkImageProps {
-  imageSrc: StaticImageData;
-  imageAlt: string;
-}
-
-function WorkSlider(): JSX.Element {
-  "use client";
-
-  return (
-    <div className="max-w-[1022px] mx-auto overflow-x-hidden">
-      <Flickity
-        elementType={"div"}
-        className="w-full"
-        options={{
-          wrapAround: true,
-          autoPlay: 2500,
-          pauseAutoPlayOnHover: true,
-          pageDots: true,
-          prevNextButtons: true,
-          cellAlign: "left",
-        }}
-      >
-        <WorkImage imageSrc={workFFF} imageAlt="" />
-        <WorkImage imageSrc={workSportank} imageAlt="" />
-        <WorkImage imageSrc={workNSFGroup} imageAlt="" />
-      </Flickity>
-    </div>
-  );
-}
-
-function WorkImage({ imageSrc, imageAlt }: WorkImageProps) {
-  return (
-    <Image
-      src={imageSrc}
-      alt={imageAlt}
-      className="rounded-[40px] mx-[30px]"
-      loading="eager"
-    />
   );
 }
