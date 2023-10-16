@@ -4,7 +4,7 @@
 
 @layer base {
   html {
-    @apply text-yd-dark-blue text-[18px];
+    @apply text-yd-dark-blue text-[18px] overflow-x-hidden;
   }
 }
 

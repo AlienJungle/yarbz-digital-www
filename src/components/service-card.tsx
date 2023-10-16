@@ -14,10 +14,10 @@ export default function ServiceCard({
   description,
 }: ServiceCardProps) {
   return (
-    <div className="bg-[#1C1C4F] p-[25px] rounded-[20px] flex flex-row items-center gap-x-[32px] drop-shadow-md border-yd-dark-blue">
+    <div className="bg-[#1C1C4F] p-[25px] rounded-xl flex flex-row items-center gap-x-[32px] drop-shadow-md border-yd-dark-blue">
       <Image
         src={imageSrc}
-        className="rounded-[20px] flex-shrink-0"
+        className="flex-shrink-0"
         alt={imageAlt}
         height={115}
         width={115}

@@ -7,13 +7,13 @@ export default function WorkSlider({
   const sliderRef = useRef();
 
   return (
-    <div className="max-w-[1022px] mx-auto overflow-x-hidden relative">
+    <div className="overflow-x-hidden">
       <Flickity
         elementType={"div"}
         className="w-full"
         reloadOnUpdate={true}
         options={{
-          wrapAround: true,
+          wrapAround: false,
           autoPlay: 2500,
           pauseAutoPlayOnHover: false,
           pageDots: true,

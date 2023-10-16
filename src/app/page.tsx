@@ -13,6 +13,11 @@ import workSportank from "../../public/work-sportank.png";
 import workNSFGroup from "../../public/work-nsfgroup.png";
 import blobOrange from "../../public/blob-orange.svg";
 import blobBlue from "../../public/blob-blue.svg";
+import arrowRecentWork from "../../public/arrow-recent-work@2x.png";
+import clientAverbis from "../../public/client-averbis@2x.png";
+import clientHippo from "../../public/client-hippo@2x.png";
+import clientSportank from "../../public/client-sportank@2x.png";
+import clientFFF from "../../public/client-fff@2x.png";
 
 import { useSearchParams } from "next/navigation";
 import RebrandBanner from "@/components/rebrand-banner";
@@ -112,13 +117,62 @@ export default function Home() {
           <Image
             src={blobBlue}
             alt=""
-            className="absolute left-[150px] -bottom-[150px] -z-10"
+            className="absolute left-[50px] -bottom-[150px] -z-10"
           />
-          <WorkSlider>
-            <WorkImage imageSrc={workFFF} imageAlt="" />
-            <WorkImage imageSrc={workSportank} imageAlt="" />
-            <WorkImage imageSrc={workNSFGroup} imageAlt="" />
-          </WorkSlider>
+
+          <div className="max-w-[70%] mx-auto relative">
+            <WorkSlider>
+              <WorkImage imageSrc={workFFF} imageAlt="" />
+              <WorkImage imageSrc={workSportank} imageAlt="" />
+              <WorkImage imageSrc={workNSFGroup} imageAlt="" />
+            </WorkSlider>
+
+            <Image
+              src={arrowRecentWork}
+              alt="Arrow with caption 'check out my recent work'"
+              className="absolute -right-[250px] -bottom-[150px]"
+              width={303}
+              height={293}
+            />
+          </div>
+        </div>
+
+        <div className="my-[200px] container relative">
+          <div className="grid grid-cols-4 gap-x-[50px] items-center px-[10%]">
+            <div className="flex flex-row items-center justify-center">
+              <Image
+                src={clientSportank}
+                alt="sportank logo"
+                width={328}
+                height={38.11}
+              ></Image>
+            </div>
+            <div className="flex flex-row items-center justify-center">
+              <Image
+                src={clientAverbis}
+                alt="averbis GmbH logo"
+                width={200}
+                height={66}
+              ></Image>
+            </div>
+            <div className="flex flex-row items-center justify-center">
+              <Image
+                src={clientHippo}
+                alt="hippo digital logo"
+                width={192.13}
+                height={57.39}
+              ></Image>
+            </div>
+
+            <div className="flex flex-row items-center justify-center">
+              <Image
+                src={clientFFF}
+                alt="Fifty Five and Five logo"
+                width={301}
+                height={45}
+              ></Image>
+            </div>
+          </div>
         </div>
       </main>
     </>
