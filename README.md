@@ -16,6 +16,12 @@ Next.js auto updates the web page when changes are made to the source code. To g
 
 When making a commit, the pre-commit hook both lints and formats your code. If any linting errors are found, the build will fail. Formatting changes are applied automatically without throwing an error.
 
+The following tasks are executed as part of the pre-commit hook whenever a commit is made:
+
+- TS/JS files will be linted, and an error thrown if the lint fails at any stage
+- prettier format will be run on all staged files to ensure all code follows the same format/styling
+- prettier automatically tidies TS/JS imports/exports using the `prettier-plugin-organize-imports` plugin (see `.prettierrc file`)
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
