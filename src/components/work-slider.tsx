@@ -1,7 +1,7 @@
 "use client";
 
+import { PropsWithChildren } from "react";
 import Flickity from "react-flickity-component";
-import { PropsWithChildren, useRef } from "react";
 
 export default function WorkSlider({
   children,

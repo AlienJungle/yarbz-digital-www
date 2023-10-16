@@ -4,6 +4,7 @@ import Image from "next/image";
 import aaron from "../../public/aaron@2x.png";
 import arrowHappyClients from "../../public/arrow-happy-clients@2x.png";
 import arrowRecentWork from "../../public/arrow-recent-work@2x.png";
+import bgOrangeWave from "../../public/bg-orange-wave.svg";
 import bgWave from "../../public/bg-wave.png";
 import blobBlue from "../../public/blob-blue.svg";
 import blobOrange from "../../public/blob-orange.svg";
@@ -17,7 +18,6 @@ import thumbHosting from "../../public/thumb-hosting.png";
 import workFFF from "../../public/work-fff.png";
 import workNSFGroup from "../../public/work-nsfgroup.png";
 import workSportank from "../../public/work-sportank.png";
-import bgOrangeWave from "../../public/bg-orange-wave.svg";
 
 import RebrandBanner from "@/components/rebrand-banner";
 import ServiceCard from "@/components/service-card";

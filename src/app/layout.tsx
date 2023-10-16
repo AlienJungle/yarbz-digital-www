@@ -1,6 +1,6 @@
 import HeaderNav from "@/components/header-nav";
-import "./globals.css";
 import type { Metadata } from "next";
+import "./globals.css";
 
 import { Poppins } from "next/font/google";
 
