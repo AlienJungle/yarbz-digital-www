@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 
 // Images
@@ -23,12 +25,48 @@ import RebrandBanner from "@/components/rebrand-banner";
 import ServiceCard from "@/components/service-card";
 import WorkImage from "@/components/work-image";
 import WorkSlider from "@/components/work-slider";
+import { Variants, motion } from "framer-motion";
 
 export default function Home({
   searchParams,
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
+  const headingVariants: Variants = {
+    hidden: {
+      y: "-100px",
+      opacity: 0,
+      scale: 0,
+    },
+    visible: {
+      y: "0px",
+      opacity: 1,
+      scale: 1,
+    },
+  };
+
+  const headingCaption =
+    "With over a decade of expertise, I transform businesses and their clients into digital success stories by crafting elegant, efficient, and cost-effective web and mobile solutions.";
+
+  const captionVariants: Variants = {
+    hidden: {},
+    visible: {
+      transition: {
+        delayChildren: 1,
+        staggerChildren: 0.005,
+      },
+    },
+  };
+
+  const captionCharacterVariants: Variants = {
+    hidden: {
+      opacity: 0,
+    },
+    visible: {
+      opacity: 1,
+    },
+  };
+
   return (
     <>
       {searchParams.rebrandNotice === "true" && <RebrandBanner />}
@@ -43,21 +81,63 @@ export default function Home({
             }}
             className="pointer-events-none"
           />
-          <h1 className="font-semibold text-3xl">Aaron Yarborough</h1>
-          <p className="font-semibold text-xl text-yd-orange">
+          <motion.h1
+            className="font-semibold text-3xl"
+            variants={headingVariants}
+            initial={"hidden"}
+            animate={"visible"}
+            transition={{
+              delay: 0.5,
+            }}
+          >
+            Aaron Yarborough
+          </motion.h1>
+          <motion.p
+            className="font-semibold text-xl text-yd-orange"
+            variants={headingVariants}
+            initial={"hidden"}
+            animate={"visible"}
+            transition={{
+              delay: 0.8,
+            }}
+          >
             Software Consultant
-          </p>
-          <p className="max-w-[418px] text-center mt-[40px]">
-            With over a decade of expertise, I transform businesses and their
+          </motion.p>
+          <motion.p
+            className="max-w-[418px] text-center mt-[40px]"
+            variants={captionVariants}
+            initial={"hidden"}
+            animate={"visible"}
+          >
+            {/* With over a decade of expertise, I transform businesses and their
             clients into digital success stories by crafting elegant, efficient,
-            and cost-effective web and mobile solutions.
-          </p>
-          <a
+            and cost-effective web and mobile solutions. */}
+            {headingCaption.split("").map((char, i) => (
+              <motion.span key={i} variants={captionCharacterVariants}>
+                {char}
+              </motion.span>
+            ))}
+          </motion.p>
+          <motion.a
             href="#"
             className="btn bg-yd-dark-blue text-yd-white mt-[50px] !px-[30px]"
+            initial={{
+              y: "50px",
+              opacity: 0,
+              scale: 0.8,
+            }}
+            animate={{
+              y: "0px",
+              opacity: 1,
+              scale: 1,
+            }}
+            transition={{
+              delay: 2.1,
+              duration: 1,
+            }}
           >
             Hire me!
-          </a>
+          </motion.a>
         </header>
 
         <div className="mb-[280px] container px-[125px]">
