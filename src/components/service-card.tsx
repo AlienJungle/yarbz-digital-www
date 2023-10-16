@@ -14,7 +14,7 @@ export default function ServiceCard({
   description,
 }: ServiceCardProps) {
   return (
-    <div className="service-card rounded-xl hover:bg-yd-dark-blue hover:border-yd-dark-blue hover:text-yd-white transition-colors duration-500 cursor-pointer border-2 group">
+    <div className="service-card rounded-xl hover:bg-yd-dark-blue hover:border-yd-dark-blue hover:text-yd-white transition-colors duration-500 border-2 group">
       <div className="p-[25px] flex flex-row items-center gap-x-[32px]">
         <Image
           src={imageSrc}

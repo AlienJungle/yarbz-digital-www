@@ -20,6 +20,7 @@ export default function WorkSlider({
           pageDots: true,
           prevNextButtons: false,
           cellAlign: "left",
+          resize: true,
         }}
       >
         {children}

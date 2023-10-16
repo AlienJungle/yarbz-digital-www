@@ -14,6 +14,10 @@ import clientAverbis from "../../public/client-averbis@2x.png";
 import clientFFF from "../../public/client-fff@2x.png";
 import clientHippo from "../../public/client-hippo@2x.png";
 import clientSportank from "../../public/client-sportank@2x.png";
+import testAverbis from "../../public/test-averbis.webp";
+import testDanD from "../../public/test-dan-d.jpg";
+import testMert from "../../public/test-mert.webp";
+import testPhilS from "../../public/test-phil-s.jpg";
 import thumbAccessibility from "../../public/thumb-accessibility.png";
 import thumbBespokeDev from "../../public/thumb-bespoke-dev.png";
 import thumbHosting from "../../public/thumb-hosting.png";
@@ -24,6 +28,8 @@ import workSportank from "../../public/work-sportank.png";
 import { hoverVariant, tapVariant } from "@/animations";
 import RebrandBanner from "@/components/rebrand-banner";
 import ServiceCard from "@/components/service-card";
+import Testimonial from "@/components/testimonial";
+import TestimonialSlider from "@/components/testimonial-slider";
 import WorkImage from "@/components/work-image";
 import WorkSlider from "@/components/work-slider";
 import { statics } from "@/static";
@@ -339,7 +345,34 @@ export default function Home({
           <h2 className="text-3xl text-yd-orange font-semibold text-center max-w-[627px]">
             What those I&apos;ve worked with have to say...
           </h2>
-          <p className="my-[60px]">[reviews]</p>
+          <div className="my-[60px] max-w-[900px] w-full overflow-hidden">
+            <TestimonialSlider>
+              <Testimonial
+                author="Dan Dalton"
+                authorImageSrc={testDanD}
+                position="Head of Product @ Flock"
+                body="Aaron is a passionate, driven and exceptionally talented individual. Not only in his ability as a developer, but in his leadership, accountability and focus. I had the pleasure of woking with Aaron across several projects in our time at Orange Bus. In this time Aaron proved to be a invaluable part of each project team he operated in, from mobile app builds to re-platforming initiatives. Never shying from a challenge, persisting through often pressurised and difficult circumstance and motivating others to follow his example."
+              />
+              <Testimonial
+                author="Phil Smith"
+                authorImageSrc={testPhilS}
+                position="CTO @ NorthLink Digital"
+                body="Aaron is by far one of the most talented and passionate developers I know. Even at the start of his career he had continually outperformed developers many years his senior, and once I had moved away from the company we were both working at, I had to take him with me! Very outgoing & outspoken, able to take a joke, always up for a laugh, and forever working hard to be the best developer possible."
+              />
+              <Testimonial
+                author="Torsten Koller"
+                authorImageSrc={testAverbis}
+                position="Developer @ Averbis GmbH Digital"
+                body="Within our expected timeline, Aaron was successfully able to provide us with a working prototype of our desired application. We perceived him as reliable and diligent and would be happy to work with him again in a future project."
+              />
+              <Testimonial
+                author="Mert Özgül"
+                authorImageSrc={testMert}
+                position="English Language Teacher"
+                body="I hired Aaron to help build our company's image through our website. He has done an immaculate job. He is very easy to work with and cooperative. It was an amazing experience."
+              />
+            </TestimonialSlider>
+          </div>
         </div>
 
         <div className="my-[300px] container relative">

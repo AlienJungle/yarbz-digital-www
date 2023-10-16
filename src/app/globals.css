@@ -25,7 +25,7 @@
 }
 
 .flickity-page-dots .dot {
-  @apply w-[64px] h-[10px] rounded-full bg-yd-grey opacity-100 block cursor-pointer;
+  @apply w-[45px] h-[10px] rounded-full bg-yd-grey opacity-100 block cursor-pointer;
 }
 
 .flickity-page-dots .dot.is-selected {
