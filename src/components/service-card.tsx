@@ -23,14 +23,12 @@ export default function ServiceCard({ imageSrc, imageAlt, title, description }: 
       background: "rgba(0,0,0,0)",
     },
     active: {
-      border: "2px solid var(--yd-dark-blue)",
+      border: "2px solid rgba(0,0,0,0)",
       color: "var(--yd-white)",
       background: "var(--yd-dark-blue)",
       transition: {
-        duration: 0.5,
-        type: "spring",
-        stiffness: 170,
-        damping: 20,
+        duration: 0.3,
+        ease: "easeOut",
       },
     },
   };
@@ -47,10 +45,8 @@ export default function ServiceCard({ imageSrc, imageAlt, title, description }: 
       borderTop: "2px solid var(--yd-orange)",
       opacity: 1,
       transition: {
-        duration: 0.5,
-        type: "spring",
-        stiffness: 170,
-        damping: 20,
+        duration: 0.3,
+        ease: "easeOut",
       },
     },
   };

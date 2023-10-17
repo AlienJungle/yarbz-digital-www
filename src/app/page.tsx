@@ -26,6 +26,7 @@ import workNSFGroup from "../../public/work-nsfgroup.png";
 import workSportank from "../../public/work-sportank.png";
 
 import { hoverVariant, tapVariant } from "@/animations";
+import TypedTextAnimation from "@/components/animation/typed-text-animation";
 import RebrandBanner from "@/components/rebrand-banner";
 import ServiceCard from "@/components/service-card";
 import Testimonial from "@/components/testimonial";
@@ -63,27 +64,6 @@ function HeaderSection(): JSX.Element {
       y: "0px",
       opacity: 1,
       scale: 1,
-    },
-  };
-
-  const headingCaption = "With over a decade of expertise, I transform businesses and their clients into digital success stories by crafting elegant, efficient, and cost-effective web and mobile solutions.";
-
-  const captionVariants: Variants = {
-    hidden: {},
-    visible: {
-      transition: {
-        delayChildren: 1,
-        staggerChildren: 0.005,
-      },
-    },
-  };
-
-  const captionCharacterVariants: Variants = {
-    hidden: {
-      opacity: 0,
-    },
-    visible: {
-      opacity: 1,
     },
   };
 
@@ -143,13 +123,17 @@ function HeaderSection(): JSX.Element {
       >
         Software Consultant
       </motion.p>
-      <motion.p className="max-w-[418px] text-center mt-[40px]" variants={captionVariants} initial={"hidden"} animate={"visible"}>
-        {headingCaption.split("").map((char, i) => (
-          <motion.span key={i} variants={captionCharacterVariants}>
-            {char}
-          </motion.span>
-        ))}
-      </motion.p>
+      <div className="max-w-[418px] text-center mt-[40px]">
+        <TypedTextAnimation
+          text={"With over a decade of expertise, I transform businesses and their clients into digital success stories by crafting elegant, efficient, and cost-effective web and mobile solutions."}
+          animationVariant={{
+            transition: {
+              delayChildren: 1,
+              staggerChildren: 0.005,
+            },
+          }}
+        />
+      </div>
       <motion.a href={statics.bookingURL} target="_blank" rel="nofollow noopener" className="btn bg-yd-dark-blue text-yd-white mt-[50px] !px-[30px]" variants={hireMeVariants} initial={"hidden"} animate={hireMeControls} whileTap={tapVariant} whileHover={hoverVariant}>
         Hire me!
       </motion.a>
@@ -165,7 +149,9 @@ function ServicesSection(): JSX.Element {
         </h2>
         <div className="flex flex-row gap-x-[77px] items-stretch">
           <div className="w-[50%] flex flex-col justify-between">
-            <p className="mx-[50px] leading-[30px] mt-[40px]">Dive into a decade of software experience with a seasoned freelance engineer. Crafting robust solutions since 2010. Let&apos;s turn your ideas into digital marvels together. Explore my services to find out what I can offer!</p>
+            <div className="mx-[50px] leading-[30px] mt-[40px]">
+              <TypedTextAnimation text="Dive into a decade of software experience with a seasoned freelance engineer. Crafting robust solutions since 2010. Let's turn your ideas into digital marvels together. Explore my services to find out what I can offer!" />
+            </div>
             <Image
               src={aaron}
               alt="Headshot of Aaron"
