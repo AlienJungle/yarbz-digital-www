@@ -9,12 +9,7 @@ interface ServiceCardProps {
   description: JSX.Element;
 }
 
-export default function ServiceCard({
-  imageSrc,
-  imageAlt,
-  title,
-  description,
-}: ServiceCardProps) {
+export default function ServiceCard({ imageSrc, imageAlt, title, description }: ServiceCardProps) {
   const cardVariants: Variants = {
     hidden: {
       opacity: 0,
@@ -69,30 +64,12 @@ export default function ServiceCard({
   }, [cardAnimation]);
 
   return (
-    <motion.div
-      tabIndex={0}
-      className="service-card rounded-xl border-2 group"
-      variants={cardVariants}
-      initial={"inactive"}
-      whileHover={"active"}
-      whileFocus={"active"}
-      whileTap={"active"}
-      whileInView={"visible"}
-    >
+    <motion.div tabIndex={0} className="service-card rounded-xl border-2 group" variants={cardVariants} initial={"inactive"} whileHover={"active"} whileFocus={"active"} whileTap={"active"} whileInView={"visible"}>
       <div className="p-[25px] flex flex-row items-center gap-x-[32px]">
-        <Image
-          src={imageSrc}
-          className="flex-shrink-0"
-          alt={imageAlt}
-          height={115}
-          width={115}
-        />
+        <Image src={imageSrc} className="flex-shrink-0" alt={imageAlt} height={115} width={115} />
         <p className="font-semibold text-lg pr-[20px]">{title}</p>
       </div>
-      <motion.p
-        className="px-[25px] overflow-hidden relative"
-        variants={textVariants}
-      >
+      <motion.p className="px-[25px] overflow-hidden relative" variants={textVariants}>
         {description}
       </motion.p>
     </motion.div>
