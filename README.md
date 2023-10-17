@@ -1,5 +1,7 @@
 This is the site source for https://www.yarbz.digital! The site is built using Next.js + TypeScript.
 
+![Screenshot 2023-10-16 at 23-38-28 Aaron Yarborough - Freelance Software Consultant Yarbz Digital](https://github.com/AlienJungle/yarbz-digital-www/assets/3855819/a297766b-a41e-4063-a9b5-28c9c6af8ed7)
+
 ## Getting started
 
 To get set up locally, follow the steps below:
