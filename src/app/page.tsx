@@ -236,32 +236,54 @@ function WorkSection(): JSX.Element {
 }
 
 function ClientsSection(): JSX.Element {
+  const variants: Variants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.3,
+      },
+    },
+  };
+
+  const item: Variants = {
+    hidden: {
+      opacity: 0,
+      y: "-50px",
+      scale: 0,
+    },
+    visible: {
+      opacity: 1,
+      y: "0px",
+      scale: 1,
+    },
+  };
+
   return (
     <div className="mt-[500px] mb-[200px] container relative">
       <Image src={arrowHappyClients} alt="Arrow with caption 'check out my recent work'" className="absolute left-[550px] -top-[200px] pointer-events-none" width={303} height={293} />
 
-      <div className="grid grid-cols-4 gap-x-[50px] items-center px-[10%]">
-        <motion.div className="flex flex-row items-center justify-center" whileHover={hoverVariant}>
+      <motion.div className="grid grid-cols-4 gap-x-[50px] items-center px-[10%]" variants={variants} initial={"hidden"} whileInView={"visible"} viewport={{ once: true }}>
+        <motion.div className="flex flex-row items-center justify-center" whileHover={hoverVariant} variants={item}>
           <Image src={clientSportank} alt="sportank logo" width={328} height={38.11}></Image>
         </motion.div>
-        <motion.div className="flex flex-row items-center justify-center" whileHover={hoverVariant}>
+        <motion.div className="flex flex-row items-center justify-center" whileHover={hoverVariant} variants={item}>
           <Image src={clientAverbis} alt="averbis GmbH logo" width={200} height={66}></Image>
         </motion.div>
-        <motion.div className="flex flex-row items-center justify-center" whileHover={hoverVariant}>
+        <motion.div className="flex flex-row items-center justify-center" whileHover={hoverVariant} variants={item}>
           <Image src={clientHippo} alt="hippo digital logo" width={192.13} height={57.39}></Image>
         </motion.div>
 
-        <motion.div className="flex flex-row items-center justify-center" whileHover={hoverVariant}>
+        <motion.div className="flex flex-row items-center justify-center" whileHover={hoverVariant} variants={item}>
           <Image src={clientFFF} alt="Fifty Five and Five logo" width={301} height={45}></Image>
         </motion.div>
-      </div>
+      </motion.div>
     </div>
   );
 }
 
 function ReviewsSection(): JSX.Element {
   return (
-    <div className=" my-[200px] container relative flex flex-col max-w-[998px] items-center">
+    <div id="testimonials" className="my-[200px] container relative flex flex-col max-w-[998px] items-center">
       <h2 className="text-3xl text-yd-orange font-semibold text-center max-w-[627px]">What those I&apos;ve worked with have to say...</h2>
       <div className="mt-[60px] max-w-[900px] w-full overflow-hidden">
         <TestimonialSlider>
@@ -283,7 +305,7 @@ function EndOfPageCTA(): JSX.Element {
         <h2 className="text-2xl font-semibold text-yd-dark-blue">Ready to take it to the next level?</h2>
         <p className="mt-[29px] mb-[48px] max-w-[578px]">Book a free call with me to get started. If you&apos;d rather, you can contact me by email at aaron AT alienjungle DOT digital.</p>
         <motion.a href={statics.bookingURL} className="btn text-yd-white bg-yd-dark-blue" target="_blank" rel="nofollow noopener" whileHover={hoverVariant} whileTap={tapVariant}>
-          Get in touch
+          Book a call
         </motion.a>
       </div>
     </div>

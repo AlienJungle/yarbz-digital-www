@@ -10,14 +10,6 @@ export default function Footer(): JSX.Element {
             Privacy Policy
           </Link>
         </li>
-        <li>
-          <span>·</span>
-        </li>
-        <li>
-          <Link href="/cookie-policy" tabIndex={0}>
-            Cookie Policy
-          </Link>
-        </li>
       </ul>
       <div className="text-right">
         <a href="#" tabIndex={0}>
