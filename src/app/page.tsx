@@ -25,7 +25,7 @@ import workFFF from "../../public/work-fff.png";
 import workNSFGroup from "../../public/work-nsfgroup.png";
 import workSportank from "../../public/work-sportank.png";
 
-import { hoverVariant, tapVariant } from "@/animations";
+import { hoverVariant, introVariants, tapVariant } from "@/animations";
 import TypedTextAnimation from "@/components/animation/typed-text-animation";
 import RebrandBanner from "@/components/rebrand-banner";
 import ServiceCard from "@/components/service-card";
@@ -144,9 +144,9 @@ function ServicesSection(): JSX.Element {
   return (
     <div className="mb-[200px] container px-[125px]">
       <div className="px-[125px] pt-[104px] container faded-bg rounded-[50px]">
-        <h2 id="services" className="text-[43.95px] font-semibold text-yd-orange">
+        <motion.h2 id="services" className="text-[43.95px] font-semibold text-yd-orange" variants={introVariants} initial={"hidden"} whileInView={"visible"} viewport={{ once: true }}>
           Services I offer
-        </h2>
+        </motion.h2>
         <div className="flex flex-row gap-x-[77px] items-stretch">
           <div className="w-[50%] flex flex-col justify-between">
             <div className="mx-[50px] leading-[30px] mt-[40px]">
@@ -270,7 +270,9 @@ function ClientsSection(): JSX.Element {
 function ReviewsSection(): JSX.Element {
   return (
     <div id="testimonials" className="my-[200px] container relative flex flex-col max-w-[998px] items-center">
-      <h2 className="text-3xl text-yd-orange font-semibold text-center max-w-[627px]">What those I&apos;ve worked with have to say...</h2>
+      <motion.h2 className="text-3xl text-yd-orange font-semibold text-center max-w-[627px]" variants={introVariants} initial={"hidden"} whileInView={"visible"} viewport={{ once: true }}>
+        What those I&apos;ve worked with have to say...
+      </motion.h2>
       <div className="mt-[60px] max-w-[900px] w-full overflow-hidden">
         <TestimonialSlider>
           <Testimonial author="Dan Dalton" authorImageSrc={testDanD} position="Head of Product @ Flock" body="Aaron is a passionate, driven and exceptionally talented individual. Not only in his ability as a developer, but in his leadership, accountability and focus. I had the pleasure of woking with Aaron across several projects in our time at Orange Bus. In this time Aaron proved to be a invaluable part of each project team he operated in, from mobile app builds to re-platforming initiatives. Never shying from a challenge, persisting through often pressurised and difficult circumstance and motivating others to follow his example." />

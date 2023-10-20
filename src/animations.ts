@@ -20,5 +20,8 @@ export const introVariants: Variants = {
   visible: {
     y: "0px",
     opacity: 1,
+    transition: {
+      delay: 0.4,
+    },
   },
 };

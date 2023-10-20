@@ -5,12 +5,12 @@ import Flickity from "react-flickity-component";
 
 export default function WorkSlider({ children }: PropsWithChildren): JSX.Element {
   return (
-    <div className="overflow-x-hidden">
+    <div className="overflow-x-hidden overflow-y-hidden">
       <Flickity
         elementType={"div"}
         className="w-full"
         reloadOnUpdate={true}
-        static={false}
+        static={true}
         options={{
           wrapAround: false,
           autoPlay: 3000,
