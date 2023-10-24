@@ -6,7 +6,7 @@ import Footer from "@/components/footer";
 import { Poppins } from "next/font/google";
 
 export const metadata: Metadata = {
-  title: "Aaron Yarborough - Freelance Software Consultant | Yarbz Digital",
+  title: "👨🏻‍💻 Aaron Yarborough - Freelance Software Consultant | Yarbz Digital",
   description: "With over a decade of expertise, I transform businesses and their clients into digital success stories by crafting elegant, efficient, and cost-effective web and mobile solutions.",
 };
 

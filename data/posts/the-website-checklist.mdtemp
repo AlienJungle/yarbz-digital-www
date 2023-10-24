@@ -1,0 +1,171 @@
+---
+title: "The Website Checklist"
+type: blog
+image: /blog-images/blog-the-website-checklist.jpg
+date: Thu Dec 01 2022 13:14:09 GMT+0000 (Greenwich Mean Time)
+excerpt: "Super-charge your site's performance and make sure your site looks its best by following these simple best practices."
+author: aaron
+---
+
+## Performance
+
+### Lazy-loading images 
+
+Lazy-loaded images are images that aren't loaded until they are needed (i.e. visible on screen)
+
+By offsetting the point at which these images are loaded, the browser has to download fewer elements when it first loads the page, and can therefore load what it needs to quicker.
+
+Lazy-loading images is also helpful for cutting down unnecessary data usage for mobile visitors. By ensuring only the images the user can see are downloaded, you will reduce the amount of data mobile users need while browsing your site while improving your site's performance, and therefore their user experience.
+
+CONTINUE
+Some web frameworks (e.g. Next.js) have built-in lazy-loading functionality, though it's possible to 
+
+### Minification
+
+Ensuring your assets (CSS, JS, HTML) are minimised is a great way to speed up page load times. Minification involves removing unnecessary characters and shortening content to reduce the overall size. The smaller the content size, the quicker the browser can download it.
+
+For example, minification takes your JS from this:
+
+```
+/**
+ * Gets an unsorted array of programming languages.
+ * @returns An array of languages.
+ */
+function getLanguages() {
+    return ['C#', 'Java', 'JavaScript']
+}
+
+/**
+ * Gets an unsorted array of operating systems.
+ * @returns An array of operating systems.
+ */
+function getOperatingSystems() {
+    return ['Windows', 'MacOS', 'Linux']
+}
+
+const langs = getLanguages();
+const operatingSystems = getOperatingSystems();
+
+const message = `My favourite operating systems are ${langs.join(', ')}, and my favourite languages are ${operatingSystems.join(', ')}`.trimEnd();
+
+
+console.log(message);
+```
+(590 characters)
+
+to this:
+
+```
+function getLanguages(){return["C#","Java","JavaScript"]}function getOperatingSystems(){return["Windows","MacOS","Linux"]}const langs=getLanguages(),operatingSystems=getOperatingSystems(),message=`My favourite operating systems are ${langs.join(", ")}, and my favourite languages are ${operatingSystems.join(", ")}`.trimEnd();
+```
+(326 characters)
+
+That's a 55.25% decrease in file size!
+
+_While the unminified code snippet is human readable, the browser doesn't need the code to be pretty and formatted in order to run it._
+
+Some CMSs automatically minify your files (e.g. Umbraco), but WordPress does not. A great way to start minifying your assets on WordPress is installing and enabling the [Autoptimize plugin](https://wordpress.org/plugins/autoptimize/)
+
+
+## SEO
+
+### OpenGraph support
+
+The OpenGraph protocol defines how your site is represented across a handful of mediums, such as Facebook previews, Twitter cards, Discord embeds, and more. In order to make sure your site looks the best wherever it is shared, you need to ensure a handful of meta tags are present on your website.
+
+If you're not sure if your website has these tags, you can run a specific page URL through a tool like [opengraph.dev](https://opengraph.dev/) to get a quick overview of what's missing.
+
+![An image of a social card embed](https://ik.imagekit.io/alienjungle/alienjungle_digital/Posts/The_Website_Checklist/social-embed_57q6awLt3.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1669903924921)
+
+### Twitter
+
+**twitter:card**
+
+Defines the type of card Twitter will render when displaying your site (note: not necessary if og:type, og:title and og:description are present; these will be used to render a card with a title and description)
+
+**twitter:site**
+
+@twitter handle for the website
+
+Example:
+
+```
+<meta property="twitter:site" content="@alienjungleltd" />
+```
+
+**twitter:creator**
+
+@twitter handle for the creator of the content (website owner, article author, designer, etc.)
+
+Example:
+
+```
+<meta property="twitter:site" content="@alienjungleltd" />
+```
+
+**twitter:description**
+
+The description to be shown alongside the title on the Twitter card.
+
+Note: not necessary if `og:description` is provided
+
+Example:
+
+```
+<meta property="twitter:description" content="This is a description of my webpage." />
+```
+
+
+**twitter:title**
+
+The title to be shown on the Twitter card.
+
+Note: not necessary if `og:title` is provided.
+
+**twitter:image**
+
+The image to be shown on the Twitter card.
+
+Note: not necessary if `og:image` is provided.
+
+
+**twitter:image:alt**
+
+Alternative text for the `twitter:image` image (note: not necessary if `og:image:alt` is provided)
+
+### Article
+
+Article meta tags are used for adding article-specific attributes to your pages. These should only be added to article pages (blogs, articles, anything written by a specific author)
+
+**article:author**
+
+The name of the article's author
+
+Example:
+
+```
+<meta property="article:author" content="Alien Jungle" />
+<meta property="article:author" content="Aaron Yarborough" />
+```
+
+(note: it is possible to have multiple `article:author` tags if more than one person wrote the article)
+
+**article:published_time**
+
+The date (following [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601)) the article was published.
+
+Example: 
+
+```
+<meta property="article:published_time" content="2022-12-01" />
+```
+
+**article:modified_time**
+
+The date (following [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601)) that the article was last modified.
+
+Example: 
+
+```
+<meta property="article:modified_time" content="2022-12-01" />
+```

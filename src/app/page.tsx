@@ -22,6 +22,7 @@ import thumbBespokeDev from "../../public/thumb-bespoke-dev.png";
 import thumbHosting from "../../public/thumb-hosting.png";
 import workFFF from "../../public/work-fff.png";
 import workNSFGroup from "../../public/work-nsfgroup.png";
+import workRehomeDog from "../../public/work-rehome-dog.png";
 import workSportank from "../../public/work-sportank.png";
 
 import { hoverVariant, introVariants, tapVariant } from "@/animations";
@@ -211,9 +212,10 @@ function WorkSection(): JSX.Element {
 
       <div className="max-w-[70%] mx-auto relative">
         <WorkSlider>
-          <WorkImage imageSrc={workFFF} imageAlt="" />
-          <WorkImage imageSrc={workSportank} imageAlt="" />
-          <WorkImage imageSrc={workNSFGroup} imageAlt="" />
+          <WorkImage imageSrc={workFFF} imageAlt="Fifty Five and Five's site redesign, showing a blog page titled how to boost your b2b marketing during a recession." />
+          <WorkImage imageSrc={workSportank} imageAlt="Sportank's homepage, showing a collection widgets that offer sign up functionality, as well as fixtures, leagues, and news items." />
+          <WorkImage imageSrc={workRehomeDog} imageAlt="NSF Group's sign-in page." />
+          <WorkImage imageSrc={workNSFGroup} imageAlt="Newcastle Dog and Cat shelter's re-home a dog page." />
         </WorkSlider>
 
         {/* <Image src={arrowRecentWork} alt="Arrow with caption 'check out my recent work'" className="absolute -right-[250px] -bottom-[150px] pointer-events-none" width={303} height={293} /> */}
