@@ -1,4 +1,5 @@
-import { Variant, Variants, motion } from "framer-motion";
+import { Variant, Variants } from "framer-motion";
+import * as motion from "../../lib/motion";
 
 interface TypedTextAnimationProps {
   text: string;

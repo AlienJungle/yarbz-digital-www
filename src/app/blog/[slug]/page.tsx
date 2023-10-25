@@ -1,21 +1,46 @@
 import Post, { getPostBySlug, getPostSlugs, markdownToHtml } from "@/services/post-service";
+import { statics } from "@/static";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-export function generateStaticParams(): { slug: string }[] {
-  return getPostSlugs().map((slug: string) => {
-    return {
-      slug,
-    };
-  });
+type Props = {
+  params: Params;
+};
+
+type Params = {
+  slug: string;
+};
+
+export async function generateStaticParams(): Promise<Params[]> {
+  return getPostSlugs().map((slug: string) => ({
+    slug,
+  }));
 }
 
-export default async function PostSingle({
-  params,
-}: {
-  params: {
-    slug: string;
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = params;
+  const post: Post = getPostBySlug(slug);
+
+  return {
+    title: `${post.title}`,
+    authors: {
+      name: "Aaron Yarborough",
+      url: statics.siteURL,
+    },
+    openGraph: {
+      images: [
+        {
+          url: `${statics.siteURL}${post.image}`.toLowerCase(),
+        },
+      ],
+      type: "article",
+      url: `${statics.siteURL}/blog/${post.slug}`.toLowerCase(),
+      publishedTime: post.date.toString(),
+    },
   };
-}) {
+}
+
+export default async function PostSingle({ params }: Props) {
   const { slug } = params;
 
   try {

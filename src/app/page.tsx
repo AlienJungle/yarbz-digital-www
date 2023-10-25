@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 
 // Images
@@ -27,6 +25,7 @@ import workSportank from "../../public/work-sportank.png";
 
 import { hoverVariant, introVariants, tapVariant } from "@/animations";
 import TypedTextAnimation from "@/components/animation/typed-text-animation";
+import HireMeBtn from "@/components/hide-me-btn";
 import RebrandBanner from "@/components/rebrand-banner";
 import ServiceCard from "@/components/service-card";
 import Testimonial from "@/components/testimonial";
@@ -34,8 +33,13 @@ import TestimonialSlider from "@/components/testimonial-slider";
 import WorkImage from "@/components/work-image";
 import WorkSlider from "@/components/work-slider";
 import { statics } from "@/static";
-import { Variants, motion, useAnimationControls } from "framer-motion";
-import { useEffect } from "react";
+import { Variants } from "framer-motion";
+import { Metadata } from "next";
+import * as motion from "../lib/motion";
+
+export const metadata: Metadata = {
+  title: "test",
+};
 
 export default function Home({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
   return (
@@ -66,29 +70,6 @@ function HeaderSection(): JSX.Element {
       scale: 1,
     },
   };
-
-  const hireMeVariants: Variants = {
-    hidden: {
-      y: "20px",
-      opacity: 0,
-    },
-    visible: {
-      y: "0px",
-      opacity: 1,
-      transition: {
-        delay: 1.6,
-      },
-    },
-  };
-
-  // Using useAnimationControls() to work around motion bug
-  // where setting duration/delay messes up animation after
-  // leaving the whenHover={} or whenTap={} state
-  const hireMeControls = useAnimationControls();
-
-  useEffect(() => {
-    hireMeControls.start("visible");
-  }, [hireMeControls]);
 
   return (
     <header className="h-[calc(100vh-142px)] min-h-[700px] flex flex-col items-center relative w-full justify-center">
@@ -136,9 +117,7 @@ function HeaderSection(): JSX.Element {
           }}
         />
       </div>
-      <motion.a href={statics.bookingURL} target="_blank" rel="nofollow noopener" className="btn bg-yd-dark-blue text-yd-white mt-[50px] !px-[30px]" variants={hireMeVariants} initial={"hidden"} animate={hireMeControls} whileTap={tapVariant} whileHover={hoverVariant}>
-        Hire me!
-      </motion.a>
+      <HireMeBtn />
     </header>
   );
 }
