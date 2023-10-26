@@ -3,7 +3,6 @@ import Image from "next/image";
 // Images
 import aaron from "../../public/aaron@2x.png";
 import arrowHappyClients from "../../public/arrow-happy-clients@2x.png";
-import bgOrangeWave from "../../public/bg-orange-wave.svg";
 import bgWave from "../../public/bg-wave.png";
 import blobBlue from "../../public/blob-blue.svg";
 import blobOrange from "../../public/blob-orange.svg";
@@ -23,23 +22,20 @@ import workNSFGroup from "../../public/work-nsfgroup.png";
 import workRehomeDog from "../../public/work-rehome-dog.png";
 import workSportank from "../../public/work-sportank.png";
 
-import { hoverVariant, introVariants, tapVariant } from "@/animations";
+import { introVariants } from "@/animations";
 import TypedTextAnimation from "@/components/animation/typed-text-animation";
-import HireMeBtn from "@/components/hide-me-btn";
+import HireMeButton from "@/components/hire-me-button";
 import RebrandBanner from "@/components/rebrand-banner";
 import ServiceCard from "@/components/service-card";
 import Testimonial from "@/components/testimonial";
 import TestimonialSlider from "@/components/testimonial-slider";
 import WorkImage from "@/components/work-image";
 import WorkSlider from "@/components/work-slider";
-import { statics } from "@/static";
 import { Variants } from "framer-motion";
 import { Metadata } from "next";
 import * as motion from "../lib/motion";
 
-export const metadata: Metadata = {
-  title: "test",
-};
+export const metadata: Metadata = {};
 
 export default function Home({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
   return (
@@ -51,7 +47,6 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
         <WorkSection />
         <ClientsSection />
         <ReviewsSection />
-        <EndOfPageCTA />
       </main>
     </>
   );
@@ -117,7 +112,7 @@ function HeaderSection(): JSX.Element {
           }}
         />
       </div>
-      <HireMeBtn />
+      <HireMeButton />
     </header>
   );
 }
@@ -272,21 +267,6 @@ function ReviewsSection(): JSX.Element {
           <Testimonial author="Mert Özgül" authorImageSrc={testMert} position="English Language Teacher" body="I hired Aaron to help build our company's image through our website. He has done an immaculate job. He is very easy to work with and cooperative. It was an amazing experience." />
         </TestimonialSlider>
       </motion.div>
-    </div>
-  );
-}
-
-function EndOfPageCTA(): JSX.Element {
-  return (
-    <div className="my-[200px] container relative">
-      <div className="max-w-[1012px] p-[54px] flex flex-col items-center justify-center mx-auto bg-yd-light-grey rounded-2xl relative overflow-hidden">
-        <Image src={bgOrangeWave} alt="" className="absolute bottom-0 pointer-events-none min-w-[1104px]" />
-        <h2 className="text-2xl font-semibold text-yd-dark-blue">Ready to take it to the next level?</h2>
-        <p className="mt-[29px] mb-[48px] max-w-[578px]">Book a free call with me to get started. If you&apos;d rather, you can contact me by email at aaron AT alienjungle DOT digital.</p>
-        <motion.a href={statics.bookingURL} className="btn text-yd-white bg-yd-dark-blue" target="_blank" rel="nofollow noopener" whileHover={hoverVariant} whileTap={tapVariant}>
-          Book a call
-        </motion.a>
-      </div>
     </div>
   );
 }

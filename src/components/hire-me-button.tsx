@@ -5,7 +5,7 @@ import { statics } from "@/static";
 import { Variants, motion, useAnimationControls } from "framer-motion";
 import { useEffect } from "react";
 
-export default function HireMeBtn(): JSX.Element {
+export default function HireMeButton(): JSX.Element {
   const hireMeVariants: Variants = {
     hidden: {
       y: "20px",

@@ -1,5 +1,5 @@
 const statics = {
-  bookingURL: "https://meetings-eu1.hubspot.com/ayarborough",
+  bookingURL: "https://calendar.google.com/calendar/u/0/appointments/AcZssZ1ZPkUU44B0LkdmDl-CGCYbUubeGbSifgF4mTA=",
   siteURL: "https://www.yarbz.digital",
 };
 

@@ -30,11 +30,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       images: [
         {
-          url: `${statics.siteURL}${post.image}`.toLowerCase(),
+          url: `/${post.image}`.toLowerCase(),
         },
       ],
       type: "article",
-      url: `${statics.siteURL}/blog/${post.slug}`.toLowerCase(),
+      url: `/blog/${post.slug}`.toLowerCase(),
       publishedTime: post.date.toString(),
     },
   };

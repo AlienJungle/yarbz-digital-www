@@ -1,8 +1,11 @@
-"use client";
-
 import { introVariants } from "@/animations";
+import * as motion from "@/lib/motion";
 import { statics } from "@/static";
-import { motion } from "framer-motion";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+};
 
 export default function PrivacyPolicy() {
   return (
