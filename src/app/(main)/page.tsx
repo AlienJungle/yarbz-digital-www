@@ -1,26 +1,26 @@
 import Image from "next/image";
 
 // Images
-import aaron from "../../public/aaron@2x.png";
-import arrowHappyClients from "../../public/arrow-happy-clients@2x.png";
-import bgWave from "../../public/bg-wave.png";
-import blobBlue from "../../public/blob-blue.svg";
-import blobOrange from "../../public/blob-orange.svg";
-import clientAverbis from "../../public/client-averbis@2x.png";
-import clientFFF from "../../public/client-fff@2x.png";
-import clientHippo from "../../public/client-hippo@2x.png";
-import clientSportank from "../../public/client-sportank@2x.png";
-import testAverbis from "../../public/test-averbis.webp";
-import testDanD from "../../public/test-dan-d.jpg";
-import testMert from "../../public/test-mert.webp";
-import testPhilS from "../../public/test-phil-s.jpg";
-import thumbAccessibility from "../../public/thumb-accessibility.png";
-import thumbBespokeDev from "../../public/thumb-bespoke-dev.png";
-import thumbHosting from "../../public/thumb-hosting.png";
-import workFFF from "../../public/work-fff.png";
-import workNSFGroup from "../../public/work-nsfgroup.png";
-import workRehomeDog from "../../public/work-rehome-dog.png";
-import workSportank from "../../public/work-sportank.png";
+import aaron from "@/../public/aaron@2x.png";
+import arrowHappyClients from "@/../public/arrow-happy-clients@2x.png";
+import bgWave from "@/../public/bg-wave.png";
+import blobBlue from "@/../public/blob-blue.svg";
+import blobOrange from "@/../public/blob-orange.svg";
+import clientAverbis from "@/../public/client-averbis@2x.png";
+import clientFFF from "@/../public/client-fff@2x.png";
+import clientHippo from "@/../public/client-hippo@2x.png";
+import clientSportank from "@/../public/client-sportank@2x.png";
+import testAverbis from "@/../public/test-averbis.webp";
+import testDanD from "@/../public/test-dan-d.jpg";
+import testMert from "@/../public/test-mert.webp";
+import testPhilS from "@/../public/test-phil-s.jpg";
+import thumbAccessibility from "@/../public/thumb-accessibility.png";
+import thumbBespokeDev from "@/../public/thumb-bespoke-dev.png";
+import thumbHosting from "@/../public/thumb-hosting.png";
+import workFFF from "@/../public/work-fff.png";
+import workNSFGroup from "@/../public/work-nsfgroup.png";
+import workRehomeDog from "@/../public/work-rehome-dog.png";
+import workSportank from "@/../public/work-sportank.png";
 
 import { introVariants } from "@/animations";
 import TypedTextAnimation from "@/components/animation/typed-text-animation";
@@ -31,9 +31,9 @@ import Testimonial from "@/components/testimonial";
 import TestimonialSlider from "@/components/testimonial-slider";
 import WorkImage from "@/components/work-image";
 import WorkSlider from "@/components/work-slider";
+import * as motion from "@/lib/motion";
 import { Variants } from "framer-motion";
 import { Metadata } from "next";
-import * as motion from "../lib/motion";
 
 export const metadata: Metadata = {};
 
