@@ -10,15 +10,15 @@ import logo from "../../public/logo.svg";
 export default function HeaderNav() {
   const links: { href: string; text: string }[] = [
     {
-      href: "#services",
+      href: "/#services",
       text: "Services",
     },
     {
-      href: "#work",
+      href: "/#work",
       text: "Work",
     },
     {
-      href: "#testimonials",
+      href: "/#testimonials",
       text: "Testimonials",
     },
   ];

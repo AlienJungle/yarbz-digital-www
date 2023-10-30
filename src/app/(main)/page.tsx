@@ -3,6 +3,7 @@ import Image from "next/image";
 // Images
 import aaron from "@/../public/aaron@2x.png";
 import arrowHappyClients from "@/../public/arrow-happy-clients@2x.png";
+import arrowRecentWork from "@/../public/arrow-recent-work@2x.png";
 import bgWave from "@/../public/bg-wave.png";
 import blobBlue from "@/../public/blob-blue.svg";
 import blobOrange from "@/../public/blob-orange.svg";
@@ -192,7 +193,7 @@ function WorkSection(): JSX.Element {
           <WorkImage imageSrc={workNSFGroup} imageAlt="Newcastle Dog and Cat shelter's re-home a dog page." />
         </WorkSlider>
 
-        {/* <Image src={arrowRecentWork} alt="Arrow with caption 'check out my recent work'" className="absolute -right-[250px] -bottom-[150px] pointer-events-none" width={303} height={293} /> */}
+        <Image src={arrowRecentWork} alt="Arrow with caption 'check out my recent work'" className="absolute -right-[50px] -bottom-[250px] pointer-events-none" width={303} height={293} />
       </div>
     </div>
   );
