@@ -2,13 +2,18 @@
   "name": "yarbz-digital-www",
   "version": "0.1.0",
   "private": true,
+  "main": "firebaseFunctions.js",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "prettify": "prettier . --write",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "serve": "npm run build && firebase emulators:start --only functions,hosting",
+    "shell": "npm run build && firebase functions:shell",
+    "deploy": "firebase deploy --only functions,hosting",
+    "logs": "firebase functions:log"
   },
   "dependencies": {
     "flickity": "^2.3.0",
@@ -18,7 +23,9 @@
     "react": "^18",
     "react-dom": "^18",
     "react-flickity-component": "^4.0.7",
-    "sharp": "^0.32.6"
+    "sharp": "^0.32.6",
+    "firebase-admin": "^9.4.2",
+    "firebase-functions": "^3.13.1"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.10",
@@ -38,7 +45,9 @@
     "remark": "^15.0.1",
     "remark-html": "^16.0.1",
     "tailwindcss": "^3",
-    "typescript": "^5"
+    "typescript": "^5",
+    "firebase-functions-test": "^0.2.3",
+    "firebase-tools": "^9.3.0"
   },
   "lint-staged": {
     "**/*": "prettier . --write --ignore-unknown"
