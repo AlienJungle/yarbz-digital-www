@@ -6,7 +6,7 @@ import { hoverVariant, tapVariant } from "@/animations";
 import { statics } from "@/static";
 import { Variants, motion } from "framer-motion";
 
-import logo from "../../public/logo.svg";
+import logo from "@/../public/tutoring/logo.svg";
 
 export default function HeaderNav() {
   const links: { href: string; text: string }[] = [
@@ -41,7 +41,7 @@ export default function HeaderNav() {
   return (
     <nav className="flex flex-row justify-between items-center gap-[47px] px-[45px] py-[25px]">
       <motion.a variants={item} initial="hidden" animate="visible" href="/" whileTap={tapVariant} whileHover={hoverVariant}>
-        <Image src={logo} alt="yarbz.digital logo" />
+        <Image src={logo} alt="yarbz tutoring logo" />
       </motion.a>
 
       <motion.div className="flex flex-row gap-[47px] justify-end items-center font-semibold" variants={variants} initial="hidden" animate="visible">
