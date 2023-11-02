@@ -1,7 +1,5 @@
 "use client";
 
-import "firebaseui/dist/firebaseui.css";
-
 import iconEmail from "@/../public/icon-email.svg";
 import iconGitHub from "@/../public/icon-github.svg";
 import iconGoogle from "@/../public/icon-google.svg";

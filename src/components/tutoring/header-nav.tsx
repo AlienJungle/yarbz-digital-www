@@ -75,7 +75,7 @@ export default function HeaderNav(props: HeaderNavProps) {
     fbContext.auth
       .signOut()
       .then(() => {
-        router.push("/tutoring");
+        router.push("/tutoring/login");
       })
       .catch((err) => {
         alert("Something went wrong: " + err);
