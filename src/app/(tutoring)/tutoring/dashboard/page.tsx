@@ -1,15 +1,28 @@
+"use client";
+
 import iconExternal from "@/../public/icon-external.svg";
 import Button, { THEME_CLASSNAME_BLACK } from "@/components/tutoring/button";
 import Card from "@/components/tutoring/card";
+import { useAuth } from "@/lib/useAuth";
 import { statics } from "@/static";
 import classNames from "classnames";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function DashboardPage() {
+  const [currUser] = useAuth();
+
   return (
     <main>
       <div className="container mx-auto my-20">
-        <h1 className="text-3xl font-semibold my-10">Dashboard</h1>
+        <div className="flex flex-row justify-between items-center">
+          <h1 className="text-3xl font-semibold my-10">Dashboard</h1>
+          {currUser && (
+            <span className="text-base opacity-50 font-semibold">
+              logged in as {currUser!.displayName} ({currUser!.email})
+            </span>
+          )}
+        </div>
 
         <div className="grid grid-cols-6 gap-[50px]">
           <div className="col-span-2">
@@ -17,7 +30,7 @@ export default function DashboardPage() {
           </div>
 
           <div className="col-span-2">
-            <BillindCard />
+            <BillingCard />
           </div>
 
           <div className="col-span-2">
@@ -38,6 +51,8 @@ export default function DashboardPage() {
 }
 
 function SessionsCard() {
+  const router = useRouter();
+
   return (
     <Card title="Sessions" className="h-full flex flex-col">
       <p className="flex-grow block">
@@ -45,14 +60,16 @@ function SessionsCard() {
       </p>
 
       <div className="flex flex-col gap-y-[10px]">
-        <Button theme="green">Book a session</Button>
+        <Button theme="green" onClick={() => router.push("/tutoring/dashboard/book-session")}>
+          Book a session
+        </Button>
         <Button theme="black">Buy more sessions</Button>
       </div>
     </Card>
   );
 }
 
-function BillindCard() {
+function BillingCard() {
   return (
     <Card title="Billing & Subscription" className="h-full">
       <p className="mt-4 mb-6">Your billing account and subscription (if applicable) are managed via Stripe. Click the button below to access your Stripe dashboard to manage billing.</p>

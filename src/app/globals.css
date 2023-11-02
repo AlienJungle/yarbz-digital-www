@@ -12,6 +12,10 @@
   html {
     @apply text-yd-dark-blue text-[18px] overflow-x-hidden scroll-smooth;
   }
+
+  body.tutoring {
+    @apply leading-[32px];
+  }
 }
 
 .btn {
@@ -74,10 +78,15 @@
   @apply bg-yd-tut-white p-[28px] rounded-[8px];
 }
 
-input.tut-form-control {
-  @apply bg-yd-tut-white text-yd-tut-black px-[12px] py-[6px] rounded-[5px] block w-full;
+input.tut-form-control,
+select.tut-form-control {
+  @apply bg-yd-tut-white text-yd-tut-black px-[15px] py-[6px] rounded-[5px] block w-full;
 }
 
 .yd-form-error {
   @apply text-red-500 text-sm;
+}
+
+.prose-tut li::marker {
+  @apply text-yd-tut-green;
 }

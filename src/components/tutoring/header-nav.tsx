@@ -8,11 +8,11 @@ import { Variants } from "framer-motion";
 
 import logo from "@/../public/tutoring/logo.svg";
 import * as fbContext from "@/firebase";
+import { useAuth } from "@/lib/useAuth";
 import classNames from "classnames";
 import { User } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 import Button, { THEME_CLASSNAME_GREEN } from "./button";
 
 interface HeaderNavProps {
@@ -60,13 +60,7 @@ export default function HeaderNav(props: HeaderNavProps) {
     visible: { opacity: 1, y: 0 },
   };
 
-  const [currUser, setCurrUser] = useState<User | null>(fbContext.auth.currentUser);
-
-  useEffect(() => {
-    fbContext.auth.onAuthStateChanged((user) => {
-      setCurrUser(user);
-    });
-  }, []);
+  const [currUser] = useAuth();
 
   const router = useRouter();
 

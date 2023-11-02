@@ -21,7 +21,7 @@ const poppins = Poppins({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={poppins.className}>
-      <body>
+      <body className="tutoring">
         <>
           <HeaderNav />
           {children}

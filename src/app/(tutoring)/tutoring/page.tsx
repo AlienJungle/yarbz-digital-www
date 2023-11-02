@@ -1,9 +1,16 @@
 import Button from "@/components/tutoring/button";
 import Image, { StaticImageData } from "next/image";
 
+import arrow from "@/../public/tutoring/arrow.svg";
+import check from "@/../public/tutoring/check.svg";
 import heroshot from "@/../public/tutoring/heroshot@2x.png";
 import iconThumb from "@/../public/tutoring/icon-thumb.svg";
 import iconTutoring from "@/../public/tutoring/icon-tutoring.svg";
+import pairProgramming from "@/../public/tutoring/pair-programming@2x.jpg";
+import reviewAron from "@/../public/tutoring/review-aron@2x.png";
+import reviewArsen from "@/../public/tutoring/review-arsen@2x.png";
+
+import ReviewCard from "@/components/tutoring/review-card";
 
 export default function Home() {
   return (
@@ -13,6 +20,10 @@ export default function Home() {
           <HeroSection />
           <ServicesSection />
           <AboutMeSection />
+          <ReviewsSection />
+          <ConsiderTutoringSection />
+          <HowItWorksSection />
+          <PricingSection />
         </div>
       </div>
     </main>
@@ -105,12 +116,12 @@ function AboutMeSection() {
             Thanks for thinking about learning with me, and I&apos;m looking forward to hearing from you soon!
           </p>
         </div>
-        <div className="col-span-5">
-          <div>
+        <div className="col-span-5 relative">
+          <div className="sticky top-[50px]">
             <iframe className="rounded-xl" width="500" height="333" src="https://www.youtube.com/embed/JDs9tFBFif0?si=u70at-f3dnBS8xXc" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
 
             <h2 className="text-xl font-semibold leading-[65px] mt-[35px]">Technologies I work with</h2>
-            <div className="prose">
+            <div className="prose prose-tut">
               <ul>
                 <li>
                   <span>
@@ -137,9 +148,8 @@ function AboutMeSection() {
                   </span>
                 </li>
                 <li>
-                  <span>n</span>
                   <span>
-                    odejs, Python
+                    nodejs, Python
                     <br />
                   </span>
                 </li>
@@ -168,6 +178,88 @@ function AboutMeSection() {
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  );
+}
+
+function ReviewsSection() {
+  return (
+    <div className="my-32">
+      <h1 className="text-3xl font-semibold leading-[60px] mb-[74px] text-center">What my students have to say!</h1>
+      <div className="grid grid-cols-2 grid-rows-2 gap-[20px]">
+        <div className="col-span-1 row-span-1">
+          <ReviewCard title="Arsen" body="Aaron is a fantastic teacher, demonstrating both depth of knowledge and making content very engaging. Would highly recommend him to anyone diving into web development." imageSrc={reviewArsen} />
+        </div>
+        <div className="col-span-1 row-span-2">
+          <ReviewCard title="Aron" body="Aaron is currently helping me to catch up with a full-stack web-developer bootcamp, that was well above my level of knowledge when I started it. But now thankfully to the help, at last I can kind of see the light at the end of the tunnel; I managed to familiarize myself with a lot of the complex concepts involved in programming and I can see that I will eventually get through the challenges involved in starting a career in this field. Aaron is maximally friendly, patient, tries to accommodate the needs of the student and very well versed in the profession of coding. I am very satisfied, absolutely recommended." imageSrc={reviewAron} />
+        </div>
+        <div className="col-span-1"></div>
+      </div>
+    </div>
+  );
+}
+
+function ConsiderTutoringSection() {
+  const points = ["Increase your value in digital work environments by understanding the technical aspects of your product or service", "Develop valuable technical problem-solving skills ", "Open doors to new career opportunities by learning from an experienced professional who has done the hard work for you!"];
+
+  return (
+    <div className="my-32">
+      <div className="flex flex-row items-center gap-x-[57px]">
+        <div>
+          <Image src={pairProgramming} alt="Image of a pair of programmers working together." width={601} />
+        </div>
+        <div className="max-w-[473px]">
+          <h1 className="text-3xl font-semibold leading-[60px] mb-[13px]">Why should I consider tutoring?</h1>
+          <p className="mb-[25px] leading-[30px]">Tutoring is a great way to get fast, quality advice from experts efficiently without developing bad habits or wasting your time on unnecessary things, as well as:</p>
+          <div className="flex flex-col gap-y-[17px]">
+            {points.map((point, i) => (
+              <div key={i} className="flex flex-row gap-x-[9px] items-start">
+                <Image src={check} alt="" className="mt-[6px]" />
+                <p>{point}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function HowItWorksSection() {
+  return (
+    <div className="my-32">
+      <h1 className="text-3xl font-semibold leading-[60px] mb-[62px]">How it works</h1>
+      <div className="flex flex-row gap-x-[66px] items-center">
+        <div className="max-w-[260px]">
+          <h2 className="text-lg font-semibold mb-[27px]">Step 1</h2>
+          <p className="text-2xl font-semibold leading-[50px]">Buy individual lessons or start a subscription</p>
+        </div>
+
+        <Image src={arrow} alt="" />
+
+        <div className="max-w-[260px]">
+          <h2 className="text-lg font-semibold mb-[27px]">Step 2</h2>
+          <p className="text-2xl font-semibold leading-[50px]">Book your sessions into my calendar</p>
+        </div>
+
+        <Image src={arrow} alt="" />
+
+        <div className="max-w-[260px]">
+          <h2 className="text-lg font-semibold mb-[27px]">Step 3</h2>
+          <p className="text-2xl font-semibold leading-[50px]">Attend the session and learn!</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function PricingSection() {
+  return (
+    <div className="my-32">
+      <h1 className="text-3xl font-semibold leading-[60px] mb-[62px]">Pricing</h1>
+      <div className="grid grid-cols-3 gap-x-[76px]">
+        <div></div>
       </div>
     </div>
   );
