@@ -3,6 +3,7 @@
 import "firebaseui/dist/firebaseui.css";
 
 import iconEmail from "@/../public/icon-email.svg";
+import iconGitHub from "@/../public/icon-github.svg";
 import iconGoogle from "@/../public/icon-google.svg";
 
 import Image from "next/image";
@@ -10,30 +11,25 @@ import Link from "next/link";
 
 import Button, { THEME_CLASSNAME_BLACK } from "@/components/tutoring/button";
 import * as fbContext from "@/firebase";
-import { GoogleAuthProvider, UserCredential, signInWithPopup } from "firebase/auth";
+import { FirebaseError } from "firebase-admin";
+import { Auth, GithubAuthProvider, GoogleAuthProvider, UserCredential, signInWithPopup } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
-  const authContainerID = "auth-container";
-
   const router = useRouter();
 
-  const handleGoogleSignupClick = () => {
-    const provider = new GoogleAuthProvider();
+  const redirectToDashboard = () => {
+    router.push("/tutoring/dashboard");
+  };
 
-    signInWithPopup(fbContext.auth, provider)
-      .then((result: UserCredential) => {
-        const user = result.user;
-        if (user) {
-          router.push("/tutoring/dashboard");
-        } else {
-          throw "User was not returned.";
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        alert("Something went wrong: " + err.message ?? err);
-      });
+  const handleGoogleLoginClick = () => {
+    const provider = new GoogleAuthProvider();
+    handleProviderLogin(fbContext.auth, provider).then(() => redirectToDashboard());
+  };
+
+  const handleGitHubLoginClick = () => {
+    const provider = new GithubAuthProvider();
+    handleProviderLogin(fbContext.auth, provider).then(() => redirectToDashboard());
   };
 
   return (
@@ -43,9 +39,14 @@ export default function LoginPage() {
           <h1 className="text-3xl font-semibold mt-20 mb-10">Student login</h1>
 
           <div className="flex flex-col gap-y-[20px]">
-            <Button theme="grey" onClick={handleGoogleSignupClick} className="flex flex-row items-center justify-center gap-x-[10px]">
-              <Image src={iconGoogle} alt="" />
+            <Button theme="grey" onClick={handleGoogleLoginClick} className="flex flex-row items-center justify-center gap-x-[10px]">
+              <Image src={iconGoogle} alt="" width={25} />
               Sign in with Google
+            </Button>
+
+            <Button theme="grey" onClick={handleGitHubLoginClick} className="flex flex-row items-center justify-center gap-x-[10px]">
+              <Image src={iconGitHub} alt="" width={30} />
+              Sign in with GitHub
             </Button>
 
             <Button
@@ -70,4 +71,35 @@ export default function LoginPage() {
       </div>
     </main>
   );
+}
+type SupportedProvider = GoogleAuthProvider | GithubAuthProvider;
+
+function handleProviderLogin(auth: Auth, provider: SupportedProvider): Promise<UserCredential> {
+  return new Promise((resolve, reject) => {
+    signInWithPopup(auth, provider)
+      .then((result: UserCredential) => {
+        const user = result.user;
+        if (user) {
+          resolve(result);
+        } else {
+          throw "User was not returned.";
+        }
+      })
+      .catch((error) => {
+        console.error("Error occurred while logging in: " + JSON.stringify(error));
+
+        const fbError = error as FirebaseError;
+        switch (fbError.code) {
+          case "auth/account-exists-with-different-credential":
+            alert("An account already exists with us for the email associated with your third-party account.");
+            break;
+
+          default:
+            alert("Something went wrong: " + error.message ?? error);
+            break;
+        }
+
+        reject(error);
+      });
+  });
 }

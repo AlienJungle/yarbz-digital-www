@@ -1,5 +1,6 @@
 "use client";
 
+import BackButton from "@/components/back-button";
 import * as fbContext from "@/firebase";
 import { FirebaseError } from "firebase/app";
 import { UserCredential, createUserWithEmailAndPassword } from "firebase/auth";
@@ -50,9 +51,7 @@ export default function Signup() {
     <main>
       <div className="container relative mx-auto">
         <div className="max-w-[600px] mx-auto relative my-20">
-          <Link href={"/tutoring/login"} className="block mb-3">
-            &lt; Back to login
-          </Link>
+          <BackButton text="Back to login" href={"/tutoring/login"} />
           <h1 className="text-3xl font-semibold">Sign up</h1>
           <p className="leading-[32px] my-[20px]">To get started, create an account by filling in the details below. You&apos;ll be able to use this account to view your upcoming lessons, manage your billing, and book new lessons with me.</p>
           <p className="leading-[32px] my-[20px]">

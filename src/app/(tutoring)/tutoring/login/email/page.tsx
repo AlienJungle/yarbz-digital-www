@@ -1,10 +1,13 @@
 "use client";
 
-import Button from "@/components/tutoring/button";
+import BackButton from "@/components/back-button";
+import Button, { THEME_CLASSNAME_BLACK } from "@/components/tutoring/button";
 import * as fbContext from "@/firebase";
+import classNames from "classnames";
 import { FirebaseError } from "firebase/app";
 import { UserCredential, signInWithEmailAndPassword } from "firebase/auth";
 import { Formik, FormikHelpers } from "formik";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 interface LoginEmailValues {
@@ -31,6 +34,9 @@ export default function LoginEmail() {
         switch (fbError.code) {
           case "auth/invalid-login-credentials":
             alert("The given credentials were invalid. Please ensure you're using the correct username and password, and try again.");
+
+            helpers.resetForm();
+
             break;
           default:
             alert("Something went wrong: " + fbError.message ?? error);
@@ -45,14 +51,16 @@ export default function LoginEmail() {
   return (
     <main>
       <div className="container mx-auto">
-        <div className="max-w-[600px] mx-auto relative">
-          <h1 className="text-3xl font-semibold mt-20 mb-10">Login with email & password</h1>
+        <div className="max-w-[600px] mx-auto relative my-20">
+          <BackButton text="Back to login" href={"/tutoring/login"} />
+          <h1 className="text-3xl font-semibold mb-10">Student login</h1>
 
           <Formik<LoginEmailValues>
             initialValues={{
               email: "",
               password: "",
             }}
+            validate={(values) => {}}
             onSubmit={handleLoginSubmit}
           >
             {({ handleSubmit, values, errors, isSubmitting, isValid, handleChange, handleBlur }) => {
@@ -60,20 +68,20 @@ export default function LoginEmail() {
                 <form onSubmit={handleSubmit} className="flex flex-col gap-y-[30px] my-[40px]">
                   <div>
                     <label htmlFor="email">Email</label>
-                    <input type="email" name="email" id="email" className="tut-form-control" placeholder="john.smith@gmail.com" onChange={handleChange} onBlur={handleBlur} value={values.email} />
+                    <input type="email" name="email" id="email" className="tut-form-control" placeholder="john.smith@gmail.com" onChange={handleChange} onBlur={handleBlur} value={values.email} required />
                   </div>
                   <div>
                     <label htmlFor="password">Password</label>
-                    <input type="password" name="password" id="password" className="tut-form-control" onChange={handleChange} onBlur={handleBlur} value={values.password} />
+                    <input type="password" name="password" id="password" className="tut-form-control" onChange={handleChange} onBlur={handleBlur} value={values.password} required />
                   </div>
 
                   <div className="flex flex-row gap-x-[20px] justify-end">
                     <Button theme={"green"} type="submit" disabled={isSubmitting || !isValid}>
                       Login
                     </Button>
-                    <Button theme={"black"} type="button">
-                      Reset password
-                    </Button>
+                    <Link href={"/tutoring/forgot-password"} className={classNames("btn-tut", THEME_CLASSNAME_BLACK)}>
+                      Forgot password
+                    </Link>
                   </div>
                 </form>
               );
