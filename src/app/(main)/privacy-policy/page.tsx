@@ -1,4 +1,4 @@
-import { introVariants } from "@/animations";
+import { introVariants } from "@/lib/animations";
 import * as motion from "@/lib/motion";
 import { statics } from "@/static";
 import { Metadata } from "next";

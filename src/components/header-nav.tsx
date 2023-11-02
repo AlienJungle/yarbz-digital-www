@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 
-import { hoverVariant, tapVariant } from "@/animations";
+import { hoverVariant, tapVariant } from "@/lib/animations";
 import { statics } from "@/static";
 import { Variants, motion } from "framer-motion";
 

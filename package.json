@@ -11,7 +11,12 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "classnames": "^2.3.2",
+    "firebase": "^10.5.2",
+    "firebase-admin": "^11.11.0",
+    "firebaseui": "^6.1.0",
     "flickity": "^2.3.0",
+    "formik": "^2.4.5",
     "framer-motion": "^10.16.4",
     "gray-matter": "^4.0.3",
     "next": "13.5.4",

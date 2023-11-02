@@ -1,6 +1,6 @@
 "use client";
 
-import { introVariants } from "@/animations";
+import { introVariants } from "@/lib/animations";
 import * as motion from "@/lib/motion";
 import Link from "next/link";
 

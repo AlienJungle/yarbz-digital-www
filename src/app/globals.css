@@ -19,7 +19,7 @@
 }
 
 .container {
-  @apply relative mx-auto max-w-[1728px];
+  @apply relative mx-auto max-w-[1728px] lg:px-[45px];
 }
 
 .faded-bg {
@@ -60,4 +60,24 @@
 .prose h5,
 .prose h6 {
   @apply text-yd-orange;
+}
+
+.btn-tut {
+  @apply rounded-[5px] px-[15px] py-[8px] font-medium;
+}
+
+.btn-tut:disabled {
+  @apply opacity-50;
+}
+
+.card-tut {
+  @apply bg-yd-tut-white p-[28px] rounded-[8px];
+}
+
+input.tut-form-control {
+  @apply bg-yd-tut-white text-yd-tut-black px-[12px] py-[6px] rounded-[5px] block w-full;
+}
+
+.yd-form-error {
+  @apply text-red-500 text-sm;
 }

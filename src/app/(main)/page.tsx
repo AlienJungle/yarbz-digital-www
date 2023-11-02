@@ -23,7 +23,6 @@ import workNSFGroup from "@/../public/work-nsfgroup.png";
 import workRehomeDog from "@/../public/work-rehome-dog.png";
 import workSportank from "@/../public/work-sportank.png";
 
-import { introVariants } from "@/animations";
 import TypedTextAnimation from "@/components/animation/typed-text-animation";
 import HireMeButton from "@/components/hire-me-button";
 import RebrandBanner from "@/components/rebrand-banner";
@@ -32,6 +31,7 @@ import Testimonial from "@/components/testimonial";
 import TestimonialSlider from "@/components/testimonial-slider";
 import WorkImage from "@/components/work-image";
 import WorkSlider from "@/components/work-slider";
+import { introVariants } from "@/lib/animations";
 import * as motion from "@/lib/motion";
 import { Variants } from "framer-motion";
 import { Metadata } from "next";

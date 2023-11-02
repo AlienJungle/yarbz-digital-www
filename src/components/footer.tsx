@@ -1,4 +1,4 @@
-import { hoverVariant, tapVariant } from "@/animations";
+import { hoverVariant, tapVariant } from "@/lib/animations";
 import * as motion from "@/lib/motion";
 import Link from "next/link";
 import BookCallCTABlock from "./book-call-cta-block";

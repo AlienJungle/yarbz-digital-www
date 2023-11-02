@@ -1,4 +1,4 @@
-import { hoverVariant, tapVariant } from "@/animations";
+import { hoverVariant, tapVariant } from "@/lib/animations";
 import * as motion from "@/lib/motion";
 import { statics } from "@/static";
 import Image from "next/image";

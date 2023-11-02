@@ -1,6 +1,6 @@
 "use client";
 
-import { hoverVariant, tapVariant } from "@/animations";
+import { hoverVariant, tapVariant } from "@/lib/animations";
 import { statics } from "@/static";
 import { Variants, motion, useAnimationControls } from "framer-motion";
 import { useEffect } from "react";
