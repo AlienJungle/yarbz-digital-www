@@ -9,8 +9,6 @@ export const THEME_CLASSNAME_BLACK = "bg-yd-tut-black text-yd-tut-white";
 export const THEME_CLASSNAME_GREY = "bg-gray-100 text-yd-tut-black";
 
 export default function Button(props: ButtonProps) {
-  console.log(props.className);
-
   return (
     <button
       {...props}

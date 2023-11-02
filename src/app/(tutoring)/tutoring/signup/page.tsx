@@ -18,8 +18,6 @@ export default function Signup() {
   const router = useRouter();
 
   const handleFormSubmit = (values: SignupValues, helpers: FormikHelpers<SignupValues>) => {
-    console.log(values, helpers);
-
     createUserWithEmailAndPassword(fbContext.auth, values.email, values.password)
       .then((userCredential: UserCredential) => {
         const user = userCredential.user;
@@ -30,7 +28,7 @@ export default function Signup() {
         }
       })
       .catch((error) => {
-        console.log(JSON.stringify(error));
+        console.error(JSON.stringify(error));
 
         const fbError = error as FirebaseError;
         switch (fbError.code) {

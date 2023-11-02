@@ -60,11 +60,10 @@ export default function HeaderNav(props: HeaderNavProps) {
     visible: { opacity: 1, y: 0 },
   };
 
-  const [currUser, setCurrUser] = useState<User | null>(null);
+  const [currUser, setCurrUser] = useState<User | null>(fbContext.auth.currentUser);
 
   useEffect(() => {
     fbContext.auth.onAuthStateChanged((user) => {
-      console.log(user);
       setCurrUser(user);
     });
   }, []);

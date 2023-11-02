@@ -63,7 +63,7 @@
 }
 
 .btn-tut {
-  @apply rounded-[5px] px-[15px] py-[8px] font-medium;
+  @apply rounded-[5px] px-[20px] py-[8px] font-medium;
 }
 
 .btn-tut:disabled {
