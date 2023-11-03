@@ -2,7 +2,7 @@
 
 import BackButton from "@/components/back-button";
 import CustomLink from "@/components/custom-link";
-import * as fbContext from "@/firebase";
+import * as fbContext from "@/lib/firebase";
 import { useCustomRouter } from "@/lib/useCustomRouter";
 import { FirebaseError } from "firebase/app";
 import { UserCredential, createUserWithEmailAndPassword } from "firebase/auth";

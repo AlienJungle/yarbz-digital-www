@@ -7,7 +7,7 @@ import iconGoogle from "@/../public/icon-google.svg";
 import Image from "next/image";
 
 import Button from "@/components/tutoring/button";
-import * as fbContext from "@/firebase";
+import * as fbContext from "@/lib/firebase";
 import { useCustomRouter } from "@/lib/useCustomRouter";
 import { FirebaseError } from "firebase-admin";
 import { Auth, GithubAuthProvider, GoogleAuthProvider, UserCredential, signInWithPopup } from "firebase/auth";

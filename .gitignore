@@ -35,4 +35,5 @@ yarn-error.log*
 next-env.d.ts
 .firebase
 firebase-serviceaccount.json
-gcloud-serviceaccount.json
+google_client_secret.json
+google_auth_token.json

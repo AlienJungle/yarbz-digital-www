@@ -1,4 +1,4 @@
-import * as fbContext from "@/firebase";
+import * as fbContext from "@/lib/firebase";
 import { User } from "firebase/auth";
 import { useEffect, useState } from "react";
 

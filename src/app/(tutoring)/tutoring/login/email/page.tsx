@@ -3,7 +3,7 @@
 import BackButton from "@/components/back-button";
 import CustomLink from "@/components/custom-link";
 import Button, { THEME_CLASSNAME_BLACK } from "@/components/tutoring/button";
-import * as fbContext from "@/firebase";
+import * as fbContext from "@/lib/firebase";
 import { useCustomRouter } from "@/lib/useCustomRouter";
 import classNames from "classnames";
 import { FirebaseError } from "firebase/app";

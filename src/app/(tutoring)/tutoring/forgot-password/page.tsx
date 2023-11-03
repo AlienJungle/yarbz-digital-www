@@ -1,7 +1,7 @@
 "use client";
 
 import BackButton from "@/components/back-button";
-import * as fbContext from "@/firebase";
+import * as fbContext from "@/lib/firebase";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { Formik, FormikHelpers } from "formik";
 

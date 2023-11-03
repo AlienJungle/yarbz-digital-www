@@ -7,7 +7,7 @@ import * as motion from "@/lib/motion";
 import { Variants } from "framer-motion";
 
 import logo from "@/../public/tutoring/logo.svg";
-import * as fbContext from "@/firebase";
+import * as fbContext from "@/lib/firebase";
 import { useAuth } from "@/lib/useAuth";
 import classNames from "classnames";
 import { User } from "firebase/auth";
