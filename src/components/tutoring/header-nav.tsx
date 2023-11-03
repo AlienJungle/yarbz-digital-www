@@ -60,7 +60,7 @@ export default function HeaderNav(props: HeaderNavProps) {
     visible: { opacity: 1, y: 0 },
   };
 
-  const [currUser] = useAuth();
+  const { currUser } = useAuth();
 
   const router = useRouter();
 

@@ -5,7 +5,7 @@ import { statics } from "@/static";
 import PricingCard from "../pricing-card";
 
 export default function PricingSection() {
-  const [currUser] = useAuth();
+  const { currUser } = useAuth();
 
   const redirectIfNotAuthed = (url: string) => {
     const destinationHref = !currUser ? `/tutoring/login?redirect=${url}` : url;

@@ -11,5 +11,5 @@ export function useAuth() {
     });
   });
 
-  return [currUser];
+  return { currUser };
 }

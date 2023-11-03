@@ -15,8 +15,10 @@ export default function CustomLink(props: CustomLinkProps) {
     return false;
   };
 
+  const { preserveQuery, ...linkProps } = props;
+
   return (
-    <Link {...props} onClick={handleClick}>
+    <Link {...linkProps} onClick={handleClick}>
       {props.children}
     </Link>
   );

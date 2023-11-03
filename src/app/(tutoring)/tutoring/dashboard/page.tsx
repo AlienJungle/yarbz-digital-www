@@ -5,15 +5,29 @@ import Alert from "@/components/alert";
 import Button, { THEME_CLASSNAME_BLACK } from "@/components/tutoring/button";
 import Card from "@/components/tutoring/card";
 import { useAuth } from "@/lib/useAuth";
+import useUser, { DBUser } from "@/lib/useUser";
 import { statics } from "@/static";
 import classNames from "classnames";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function DashboardPage() {
-  const [currUser] = useAuth();
+  const { currUser } = useAuth();
+  const { getUser } = useUser();
   const searchParams = useSearchParams();
+
+  const [currDbUser, setCurrDbUser] = useState<DBUser | null>(null);
+
+  useEffect(() => {
+    if (!currUser) return;
+
+    getUser(currUser.uid).then((dbUser) => {
+      setCurrDbUser(dbUser);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currUser]);
 
   return (
     <main>
@@ -31,7 +45,7 @@ export default function DashboardPage() {
 
         <div className="grid grid-cols-6 gap-[50px]">
           <div className="col-span-2">
-            <SessionsCard />
+            <SessionsCard availableSessions={currDbUser?.available_sessions ?? 0} />
           </div>
 
           <div className="col-span-2">
@@ -55,13 +69,17 @@ export default function DashboardPage() {
   );
 }
 
-function SessionsCard() {
+interface SessionsCardProps {
+  availableSessions: number;
+}
+
+function SessionsCard(props: SessionsCardProps) {
   const router = useRouter();
 
   return (
     <Card title="Sessions" className="h-full flex flex-col">
       <p className="flex-grow block">
-        You have <strong>0 sessions</strong> to use.
+        You have <strong>{props.availableSessions} sessions</strong> to use.
       </p>
 
       <div className="flex flex-col gap-y-[10px]">

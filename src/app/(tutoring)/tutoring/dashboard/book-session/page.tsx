@@ -2,6 +2,8 @@
 
 import BackButton from "@/components/back-button";
 import Button from "@/components/tutoring/button";
+import { useAuth } from "@/lib/useAuth";
+import useUser from "@/lib/useUser";
 import { add, format } from "date-fns";
 import { Formik, FormikHelpers } from "formik";
 import { ChangeEvent, useEffect, useState } from "react";
@@ -14,6 +16,9 @@ interface BookSessionValues {
 }
 
 export default function BookSessionPage() {
+  const { currUser } = useAuth();
+  const { currDbUser } = useUser();
+
   const [dates, setDates] = useState<Date[]>([]);
   const [times, setTimes] = useState<string[]>([]);
   const [durations, setDurations] = useState<string[]>([]);
@@ -37,7 +42,7 @@ export default function BookSessionPage() {
         <h1 className="text-3xl font-semibold my-10">Book a session</h1>
 
         <p className="my-6">
-          You have <strong>0 sessions</strong> left to book.
+          You have <strong>{currDbUser?.available_sessions ?? 0} sessions</strong> left to book.
         </p>
 
         <Formik<BookSessionValues>
@@ -110,7 +115,7 @@ export default function BookSessionPage() {
 
                 <div>
                   <label htmlFor="message">Message</label>
-                  <textarea id="message" name="message" className="w-full tut-form-control block" placeholder="This lesson, I want to focus on..." maxLength={1000} rows={5} />
+                  <textarea id="message" name="message" className="w-full tut-form-control block" placeholder="This session, I want to focus on..." maxLength={1000} rows={5} />
                 </div>
 
                 <div className="flex flex-row justify-end">
