@@ -11,27 +11,27 @@ export default function FAQSection() {
   const [questionsAndAnswers, setQuestionsAndAnswers] = useState<{ question: string; answer: JSX.Element; isOpen?: boolean }[]>([
     {
       question: "Do I need to know at least something before I start tutoring?",
-      answer: <>Everyone is welcome, regardless of your previous knowledge or experience. You don't have to know a thing about programming before joining a session with me. Together, we'll take things step by step, building a strong foundation, and have a great time doing it!</>,
+      answer: <>Everyone is welcome, regardless of your previous knowledge or experience. You don&apos;t have to know a thing about programming before joining a session with me. Together, we&apos;ll take things step by step, building a strong foundation, and have a great time doing it!</>,
     },
     {
       question: "Once I start, am I tied in to a contract?",
-      answer: <>You're never locked into a contract, and you're free to stop at any time. Please note that sessions purchased with me are non-refundable. If you're on a subscription plan, you can cancel it at any time without incurring any extra fees or hidden costs."</>,
+      answer: <>You&apos;re never locked into a contract, and you&apos;re free to stop at any time. Please note that sessions purchased with me are non-refundable. If you&apos;re on a subscription plan, you can cancel it at any time without incurring any extra fees or hidden costs.</>,
     },
     {
       question: "How short-notice can I book a session?",
-      answer: <>You have the flexibility to schedule a session up to 2 hours before your desired time, as long as I'm available.</>,
+      answer: <>You have the flexibility to schedule a session up to 2 hours before your desired time, as long as I&apos;m available.</>,
     },
     {
       question: "How far in advance can I book a session?",
       answer: <>You can book a session with me up to 2 weeks in advance.</>,
     },
     {
-      question: "I can't attend a booked lesson. What do I do?",
-      answer: <>If you find that you can't make a lesson, you have the option to either reschedule or cancel the lesson, as long as you give me at least 4 hours' notice. Unfortunately, lessons cannot be rescheduled or canceled within 4 hours of the scheduled start time. To reschedule or cancel your lesson, simply log in and visit your dashboard. You'll find the options to do so under 'Your upcoming lessons'.</>,
+      question: "I can&apos;t attend a booked lesson. What do I do?",
+      answer: <>If you find that you can&apos;t make a lesson, you have the option to either reschedule or cancel the lesson, as long as you give me at least 4 hours&apos; notice. Unfortunately, lessons cannot be rescheduled or canceled within 4 hours of the scheduled start time. To reschedule or cancel your lesson, simply log in and visit your dashboard. You&apos;ll find the options to do so under &apos;Your upcoming lessons&apos;.</>,
     },
     {
       question: "Can I purchase tutoring as a business?",
-      answer: <>Absolutely! If you're considering offering tutoring in your workplace through me, please don't hesitate to reach out using the 'I have a question' button below or book a trial lesson with me to explore this further. I'm more than happy to provide volume discounts if you're enrolling multiple individuals, and I can also provide VAT receipts for your convenience.</>,
+      answer: <>Absolutely! If you&apos;re considering offering tutoring in your workplace through me, please don&apos;t hesitate to reach out using the &apos;I have a question&apos; button below or book a trial lesson with me to explore this further. I&apos;m more than happy to provide volume discounts if you&apos;re enrolling multiple individuals, and I can also provide VAT receipts for your convenience.</>,
     },
   ]);
 

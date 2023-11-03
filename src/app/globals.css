@@ -79,8 +79,15 @@
 }
 
 input.tut-form-control,
-select.tut-form-control {
+select.tut-form-control,
+textarea.tut-form-control {
   @apply bg-yd-tut-white text-yd-tut-black px-[15px] py-[6px] rounded-[5px] block w-full;
+}
+
+input.tut-form-control:disabled,
+select.tut-form-control:disabled,
+textarea.tut-form-control:disabled {
+  @apply opacity-40;
 }
 
 .yd-form-error {

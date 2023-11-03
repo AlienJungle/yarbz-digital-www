@@ -14,7 +14,7 @@ export default function ReviewsSection() {
         </div>
         <div className="flex flex-col gap-[20px]">
           <ReviewCard title="Arsen" body="Aaron is a fantastic teacher, demonstrating both depth of knowledge and making content very engaging. Would highly recommend him to anyone diving into web development." imageSrc={reviewArsen} />
-          <ReviewCard title="Maurice" body="Aaron is a great tutor. He explains everything patiently in am easy way, giving examples that Actually makes sense. He has a Very calming personality and also helps me understand stuff when I struggle with my English" imageSrc={reviewMo} />
+          <ReviewCard title="Maurice" body="Aaron is a great tutor. He explains everything patiently in am easy way, giving examples that Actually makes sense. He has a Very calming personality and also helps me understand stuff when I struggle with my English." imageSrc={reviewMo} />
         </div>
       </div>
     </div>

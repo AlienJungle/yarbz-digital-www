@@ -6,6 +6,10 @@ const statics = {
   pricingURLs: {
     singleSession: "https://book.stripe.com/bIY2a88b5aPP94A5kr",
     subscriptionSession: "https://buy.stripe.com/8wM020771cXXa8EdQY",
+    test: {
+      singleSession: "https://buy.stripe.com/test_fZe01e5euf3dgCYeUU",
+      subscriptionSession: "https://buy.stripe.com/test_5kA8xKcGWcV55YkbIJ",
+    },
   },
   contactEmail: "aaron@yarbz.digital",
   socialURLs: {

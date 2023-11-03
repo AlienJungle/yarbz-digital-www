@@ -1,16 +1,19 @@
 "use client";
 
 import iconExternal from "@/../public/icon-external.svg";
+import Alert from "@/components/alert";
 import Button, { THEME_CLASSNAME_BLACK } from "@/components/tutoring/button";
 import Card from "@/components/tutoring/card";
 import { useAuth } from "@/lib/useAuth";
 import { statics } from "@/static";
 import classNames from "classnames";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function DashboardPage() {
   const [currUser] = useAuth();
+  const searchParams = useSearchParams();
 
   return (
     <main>
@@ -23,6 +26,8 @@ export default function DashboardPage() {
             </span>
           )}
         </div>
+
+        {searchParams.get("purchase") === "true" && <Alert className="mb-10">Your purchase was successful! You can now go ahead and book a lesson.</Alert>}
 
         <div className="grid grid-cols-6 gap-[50px]">
           <div className="col-span-2">
@@ -63,7 +68,9 @@ function SessionsCard() {
         <Button theme="green" onClick={() => router.push("/tutoring/dashboard/book-session")}>
           Book a session
         </Button>
-        <Button theme="black">Buy more sessions</Button>
+        <Link href={"/tutoring#pricing"} className={classNames("btn-tut text-center", THEME_CLASSNAME_BLACK)}>
+          Buy more sessions
+        </Link>
       </div>
     </Card>
   );

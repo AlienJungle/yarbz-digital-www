@@ -12,6 +12,9 @@ export default function PricingSection() {
     window.open(destinationHref, "_blank");
   };
 
+  const pricingURLSingle = process.env.NODE_ENV === "production" ? statics.pricingURLs.singleSession : statics.pricingURLs.test.singleSession;
+  const pricingURLSubscription = process.env.NODE_ENV === "production" ? statics.pricingURLs.subscriptionSession : statics.pricingURLs.test.subscriptionSession;
+
   return (
     <div className="my-32" id="pricing">
       <h1 className="text-3xl font-semibold leading-[60px] mb-[62px]">Pricing</h1>
@@ -35,7 +38,7 @@ export default function PricingSection() {
             title="Single session"
             ctaText="Purchase sessions"
             ctaAction={() => {
-              redirectIfNotAuthed(statics.pricingURLs.singleSession);
+              redirectIfNotAuthed(pricingURLSingle);
             }}
             price="£20/session"
           >
@@ -48,7 +51,7 @@ export default function PricingSection() {
             title="Subscription"
             ctaText="Purchase a subscription"
             ctaAction={() => {
-              redirectIfNotAuthed(statics.pricingURLs.subscriptionSession);
+              redirectIfNotAuthed(pricingURLSubscription);
             }}
             price="£17/session"
           >
