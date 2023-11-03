@@ -35,7 +35,7 @@ const config: Config = {
       "5xl": "3.815rem",
     },
     boxShadow: {
-      "yd-default": "box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.05)",
+      "yd-default": "0px 0px 20px 1px rgba(0, 0, 0, 0.05)",
     },
   },
   plugins: [require("@tailwindcss/typography")],
