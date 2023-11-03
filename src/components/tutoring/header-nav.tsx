@@ -77,42 +77,44 @@ export default function HeaderNav(props: HeaderNavProps) {
 
   return (
     <nav className="flex flex-row justify-between items-center gap-[47px] px-[45px] py-[25px]">
-      <motion.a variants={item} initial="hidden" animate="visible" href={baseHref} whileTap={tapVariant} whileHover={hoverVariant}>
-        <Image src={logo} alt="yarbz tutoring logo" />
-      </motion.a>
+      <div className="flex-1">
+        <motion.a href={baseHref} whileTap={tapVariant} className="inline-block">
+          <Image src={logo} alt="yarbz tutoring logo" />
+        </motion.a>
+      </div>
 
-      <motion.div className="flex flex-row gap-[47px] justify-end items-center font-semibold" variants={variants} initial="hidden" animate="visible">
+      <div className="flex-1 flex flex-row gap-[47px] items-center font-semibold justify-center">
         {!props.hideNavItems &&
           links.map((link) => {
             return (
-              <motion.a key={link.href} href={link.href} variants={item} whileTap={tapVariant} whileHover={hoverVariant}>
+              <motion.a key={link.href} href={link.href} whileTap={tapVariant} whileHover={hoverVariant}>
                 {link.text}
               </motion.a>
             );
           })}
+      </div>
 
-        <div className="flex flex-row items-center gap-x-[20px]">
-          {currUser && (
-            <>
-              <Link href={"/tutoring/dashboard"} className={classNames("btn-tut", THEME_CLASSNAME_GREEN)}>
-                Dashboard
-              </Link>
+      <div className="flex-1 flex flex-row items-center gap-x-[20px] justify-end">
+        {currUser && (
+          <>
+            <Link href={"/tutoring/dashboard"} className={classNames("btn-tut", THEME_CLASSNAME_GREEN)}>
+              Dashboard
+            </Link>
 
-              <Button theme="black" onClick={handleLogout}>
-                Logout
-              </Button>
-            </>
-          )}
+            <Button theme="black" onClick={handleLogout}>
+              Logout
+            </Button>
+          </>
+        )}
 
-          {!currUser && (
-            <>
-              <Link href={"/tutoring/login"} className={classNames("btn-tut", THEME_CLASSNAME_GREEN)}>
-                Student login
-              </Link>
-            </>
-          )}
-        </div>
-      </motion.div>
+        {!currUser && (
+          <>
+            <Link href={"/tutoring/login"} className={classNames("btn-tut", THEME_CLASSNAME_GREEN)}>
+              Student login
+            </Link>
+          </>
+        )}
+      </div>
     </nav>
   );
 }

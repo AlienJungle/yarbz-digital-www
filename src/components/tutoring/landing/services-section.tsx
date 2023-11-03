@@ -23,7 +23,7 @@ export default function ServicesSection() {
   ];
 
   return (
-    <div className="my-32">
+    <div className="my-32" id="services">
       <h1 className="text-3xl font-semibold leading-[64px] max-w-[381px]">What can I help with?</h1>
       <div className="mt-[90px] grid grid-cols-3 gap-x-[77px]">
         {cards.map((card) => (

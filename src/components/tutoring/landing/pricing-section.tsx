@@ -1,11 +1,19 @@
 "use client";
 
+import { useAuth } from "@/lib/useAuth";
 import { statics } from "@/static";
 import PricingCard from "../pricing-card";
 
 export default function PricingSection() {
+  const [currUser] = useAuth();
+
+  const redirectIfNotAuthed = (url: string) => {
+    const destinationHref = !currUser ? `/tutoring/login?redirect=${url}` : url;
+    window.open(destinationHref, "_blank");
+  };
+
   return (
-    <div className="my-32">
+    <div className="my-32" id="pricing">
       <h1 className="text-3xl font-semibold leading-[60px] mb-[62px]">Pricing</h1>
       <div className="grid grid-cols-3 gap-x-[76px]">
         <div>
@@ -27,7 +35,7 @@ export default function PricingSection() {
             title="Single session"
             ctaText="Purchase sessions"
             ctaAction={() => {
-              window.open(statics.pricingURLs.singleSession, "_blank");
+              redirectIfNotAuthed(statics.pricingURLs.singleSession);
             }}
             price="£20/session"
           >
@@ -40,7 +48,7 @@ export default function PricingSection() {
             title="Subscription"
             ctaText="Purchase a subscription"
             ctaAction={() => {
-              window.open(statics.pricingURLs.subscriptionSession, "_blank");
+              redirectIfNotAuthed(statics.pricingURLs.subscriptionSession);
             }}
             price="£17/session"
           >

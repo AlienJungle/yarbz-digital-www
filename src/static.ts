@@ -7,6 +7,11 @@ const statics = {
     singleSession: "https://book.stripe.com/bIY2a88b5aPP94A5kr",
     subscriptionSession: "https://buy.stripe.com/8wM020771cXXa8EdQY",
   },
+  contactEmail: "aaron@yarbz.digital",
+  socialURLs: {
+    linkedin: "https://www.linkedin.com/in/aaronjyarborough/",
+    gitHub: "https://github.com/AaronJY",
+  },
 };
 
 export { statics };

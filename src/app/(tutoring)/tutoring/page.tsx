@@ -1,5 +1,7 @@
 import AboutMeSection from "@/components/tutoring/landing/about-me-section";
 import ConsiderTutoringSection from "@/components/tutoring/landing/consider-tutoring-section";
+import CTASection from "@/components/tutoring/landing/cta-section";
+import FAQSection from "@/components/tutoring/landing/faq-section";
 import HeroSection from "@/components/tutoring/landing/hero-section";
 import HowItWorksSection from "@/components/tutoring/landing/how-it-works-section";
 import PricingSection from "@/components/tutoring/landing/pricing-section";
@@ -18,6 +20,8 @@ export default function Home() {
           <ConsiderTutoringSection />
           <HowItWorksSection />
           <PricingSection />
+          <FAQSection />
+          <CTASection />
         </div>
       </div>
     </main>

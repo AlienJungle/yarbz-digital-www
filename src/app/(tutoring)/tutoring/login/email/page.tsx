@@ -1,14 +1,14 @@
 "use client";
 
 import BackButton from "@/components/back-button";
+import CustomLink from "@/components/custom-link";
 import Button, { THEME_CLASSNAME_BLACK } from "@/components/tutoring/button";
 import * as fbContext from "@/firebase";
+import { useCustomRouter } from "@/lib/useCustomRouter";
 import classNames from "classnames";
 import { FirebaseError } from "firebase/app";
 import { UserCredential, signInWithEmailAndPassword } from "firebase/auth";
 import { Formik, FormikHelpers } from "formik";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 interface LoginEmailValues {
   email: string;
@@ -16,7 +16,7 @@ interface LoginEmailValues {
 }
 
 export default function LoginEmail() {
-  const router = useRouter();
+  const router = useCustomRouter();
 
   const handleLoginSubmit = (values: LoginEmailValues, helpers: FormikHelpers<LoginEmailValues>) => {
     signInWithEmailAndPassword(fbContext.auth, values.email, values.password)
@@ -53,7 +53,7 @@ export default function LoginEmail() {
       <div className="container mx-auto">
         <div className="max-w-[600px] mx-auto relative my-20">
           <BackButton text="Back to login" href={"/tutoring/login"} />
-          <h1 className="text-3xl font-semibold mb-10">Student login</h1>
+          <h1 className="text-3xl font-semibold my-[20px]">Student login</h1>
 
           <Formik<LoginEmailValues>
             initialValues={{
@@ -79,9 +79,9 @@ export default function LoginEmail() {
                     <Button theme={"green"} type="submit" disabled={isSubmitting || !isValid}>
                       Login
                     </Button>
-                    <Link href={"/tutoring/forgot-password"} className={classNames("btn-tut", THEME_CLASSNAME_BLACK)}>
+                    <CustomLink preserveQuery={true} href={"/tutoring/forgot-password"} className={classNames("btn-tut", THEME_CLASSNAME_BLACK)}>
                       Forgot password
-                    </Link>
+                    </CustomLink>
                   </div>
                 </form>
               );

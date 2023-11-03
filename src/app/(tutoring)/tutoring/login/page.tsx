@@ -5,29 +5,31 @@ import iconGitHub from "@/../public/icon-github.svg";
 import iconGoogle from "@/../public/icon-google.svg";
 
 import Image from "next/image";
-import Link from "next/link";
 
-import Button, { THEME_CLASSNAME_BLACK } from "@/components/tutoring/button";
+import Button from "@/components/tutoring/button";
 import * as fbContext from "@/firebase";
+import { useCustomRouter } from "@/lib/useCustomRouter";
 import { FirebaseError } from "firebase-admin";
 import { Auth, GithubAuthProvider, GoogleAuthProvider, UserCredential, signInWithPopup } from "firebase/auth";
-import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 export default function LoginPage() {
-  const router = useRouter();
+  const router = useCustomRouter();
+  const searchParams = useSearchParams();
 
-  const redirectToDashboard = () => {
-    router.push("/tutoring/dashboard");
+  const redirectAfterLogin = () => {
+    const redirect = searchParams.get("redirect");
+    router.push(redirect ?? "/tutoring/dashboard");
   };
 
   const handleGoogleLoginClick = () => {
     const provider = new GoogleAuthProvider();
-    handleProviderLogin(fbContext.auth, provider).then(() => redirectToDashboard());
+    handleProviderLogin(fbContext.auth, provider).then(() => redirectAfterLogin());
   };
 
   const handleGitHubLoginClick = () => {
     const provider = new GithubAuthProvider();
-    handleProviderLogin(fbContext.auth, provider).then(() => redirectToDashboard());
+    handleProviderLogin(fbContext.auth, provider).then(() => redirectAfterLogin());
   };
 
   return (
@@ -50,7 +52,9 @@ export default function LoginPage() {
             <Button
               theme="grey"
               onClick={() => {
-                router.push("/tutoring/login/email");
+                router.push("/tutoring/login/email", {
+                  preserveQuery: true,
+                });
               }}
               className="flex flex-row items-center justify-center gap-x-[10px]"
             >
@@ -61,9 +65,16 @@ export default function LoginPage() {
             <hr />
 
             <p>Don&apos;t have an account yet? You can sign up instantly using the &apos;Sign in with Google&apos; link above, or you can create an account with an email and password by following the below link.</p>
-            <Link href={"/tutoring/signup"} className={`btn-tut text-center ${THEME_CLASSNAME_BLACK}`}>
+            <Button
+              theme="black"
+              onClick={() => {
+                router.push("/tutoring/signup", {
+                  preserveQuery: true,
+                });
+              }}
+            >
               Sign up with email & password
-            </Link>
+            </Button>
           </div>
         </div>
       </div>

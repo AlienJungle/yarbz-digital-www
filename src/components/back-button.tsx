@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import Link from "next/link";
+import CustomLink from "./custom-link";
 
 interface BackButtonProps {
   text: string;
@@ -9,8 +9,8 @@ interface BackButtonProps {
 
 export default function BackButton({ text, className, href }: BackButtonProps) {
   return (
-    <Link href={href} className={classNames("block mb-3", className)}>
+    <CustomLink href={href} className={classNames("block mb-3", className)} preserveQuery={true}>
       &lt; {text}
-    </Link>
+    </CustomLink>
   );
 }

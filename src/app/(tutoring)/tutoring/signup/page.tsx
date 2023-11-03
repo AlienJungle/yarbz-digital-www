@@ -1,12 +1,13 @@
 "use client";
 
 import BackButton from "@/components/back-button";
+import CustomLink from "@/components/custom-link";
 import * as fbContext from "@/firebase";
+import { useCustomRouter } from "@/lib/useCustomRouter";
 import { FirebaseError } from "firebase/app";
 import { UserCredential, createUserWithEmailAndPassword } from "firebase/auth";
 import { Formik, FormikHelpers } from "formik";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 interface SignupValues {
   email: string;
@@ -15,14 +16,16 @@ interface SignupValues {
 }
 
 export default function Signup() {
-  const router = useRouter();
+  const router = useCustomRouter();
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirect");
 
   const handleFormSubmit = (values: SignupValues, helpers: FormikHelpers<SignupValues>) => {
     createUserWithEmailAndPassword(fbContext.auth, values.email, values.password)
       .then((userCredential: UserCredential) => {
         const user = userCredential.user;
         if (user) {
-          router.push("/tutoring/dashboard");
+          router.push(redirect ?? "/tutoring/dashboard");
         } else {
           throw "User was not returned in credential.";
         }
@@ -50,13 +53,13 @@ export default function Signup() {
       <div className="container relative mx-auto">
         <div className="max-w-[600px] mx-auto relative my-20">
           <BackButton text="Back to login" href={"/tutoring/login"} />
-          <h1 className="text-3xl font-semibold">Sign up</h1>
+          <h1 className="text-3xl font-semibold my-[40px]">Sign up</h1>
           <p className="leading-[32px] my-[20px]">To get started, create an account by filling in the details below. You&apos;ll be able to use this account to view your upcoming lessons, manage your billing, and book new lessons with me.</p>
           <p className="leading-[32px] my-[20px]">
             Already have an account?{" "}
-            <Link href="/tutoring/login" className="font-bold underline">
+            <CustomLink href="/tutoring/login" className="font-bold underline" preserveQuery={true}>
               Login here!
-            </Link>
+            </CustomLink>
           </p>
           <Formik<SignupValues>
             initialValues={{

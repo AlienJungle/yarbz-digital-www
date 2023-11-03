@@ -1,7 +1,10 @@
 import Image from "next/image";
-import Button from "../button";
+import { THEME_CLASSNAME_BLACK, THEME_CLASSNAME_GREEN } from "../button";
 
 import heroshot from "@/../public/tutoring/heroshot@2x.png";
+import { statics } from "@/static";
+import classNames from "classnames";
+import Link from "next/link";
 
 export default function HeroSection() {
   return (
@@ -13,8 +16,12 @@ export default function HeroSection() {
         <p className="leading-[30px] mb-[30px]">I help people learn software development, no matter where they&apos;re starting from. Whether you&apos;re totally new to it, have some experience, or just need a quick intro to a new tech or some code review, I&apos;ve got you covered!</p>
 
         <div className="flex flex-row gap-x-[21px] items-center">
-          <Button theme="green">Book a free trial lesson</Button>
-          <Button theme="black">Purchase sessions</Button>
+          <Link href={statics.trialLessonBookingURL} target="_blank" className={classNames("btn-tut", THEME_CLASSNAME_GREEN)}>
+            Book a free trial lesson
+          </Link>
+          <Link href="#pricing" className={classNames("btn-tut", THEME_CLASSNAME_BLACK)}>
+            Purchase sessions
+          </Link>
         </div>
       </div>
       <div>
