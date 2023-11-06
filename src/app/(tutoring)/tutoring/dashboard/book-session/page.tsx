@@ -3,8 +3,9 @@
 import BackButton from "@/components/back-button";
 import Button from "@/components/tutoring/button";
 import { useAuth } from "@/lib/useAuth";
+import useFreeBusy from "@/lib/useFreeBusy";
 import useUser from "@/lib/useUser";
-import { add, format } from "date-fns";
+import { add, areIntervalsOverlapping, format } from "date-fns";
 import { Formik, FormikHelpers } from "formik";
 import { ChangeEvent, useEffect, useState } from "react";
 
@@ -15,13 +16,34 @@ interface BookSessionValues {
   message: string | undefined;
 }
 
+interface SelectOption<T> {
+  label: string;
+  value: T;
+  disabled?: boolean;
+}
+
 export default function BookSessionPage() {
   const { currUser } = useAuth();
   const { currDbUser } = useUser();
+  const { getFreeBusyOnDate } = useFreeBusy();
 
   const [dates, setDates] = useState<Date[]>([]);
-  const [times, setTimes] = useState<string[]>([]);
-  const [durations, setDurations] = useState<string[]>([]);
+  const [times, setTimes] = useState<SelectOption<Date>[]>([]);
+  const [durations] = useState<SelectOption<number>[]>([
+    {
+      label: "30 minutes",
+      value: 30,
+    },
+    {
+      label: "60 minutes",
+      value: 60,
+    },
+    {
+      label: "90 minutes",
+      value: 90,
+    },
+  ]);
+  const [loadingTimes, setLoadingTimes] = useState<boolean>(false);
 
   useEffect(() => {
     const now = new Date();
@@ -54,8 +76,6 @@ export default function BookSessionPage() {
           }}
           onSubmit={handleBookingSubmit}
           validate={(values) => {
-            console.log(values);
-
             const errors = {} as BookSessionValues;
             if (!values.date) {
               errors.date = "You must select a date.";
@@ -65,18 +85,79 @@ export default function BookSessionPage() {
           }}
         >
           {({ values, handleSubmit, handleChange, handleBlur, isValid, errors, setFieldValue }) => {
-            const handleDateChange = (e: ChangeEvent<any>) => {
+            const handleDurationChange = async (e: ChangeEvent<HTMLSelectElement>) => {
               handleChange(e);
-
-              if (e.currentTarget.value) {
-                setTimes(["test"]);
-                setFieldValue("duration", undefined);
+              if (e.currentTarget.value && values.date) {
+                updateTimeSlots(parseInt(e.currentTarget.value), values.date);
               }
+            };
+
+            const handleDateChange = async (e: ChangeEvent<HTMLSelectElement>) => {
+              handleChange(e);
+              if (e.currentTarget.value && values.duration) {
+                updateTimeSlots(values.duration, e.currentTarget.value);
+              }
+            };
+
+            const updateTimeSlots = async (durationValue: number, dateValue: string) => {
+              const date = new Date(dateValue);
+
+              setTimes([]);
+              setLoadingTimes(true);
+              const busySlots = await getFreeBusyOnDate(dateValue);
+              setLoadingTimes(false);
+
+              const fromDateTime = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 9);
+              const toDateTime = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 22);
+
+              const timeSlots: SelectOption<Date>[] = [];
+
+              let startDate = fromDateTime;
+              while (startDate <= toDateTime) {
+                const endDate = add(startDate, { minutes: durationValue });
+                // Only add event to list if the end time doesn't exceed
+                // the end time specified
+                if (endDate <= toDateTime) {
+                  timeSlots.push({
+                    label: format(startDate, "p"),
+                    value: startDate,
+                    disabled: busySlots.some((bs) => {
+                      const bsStart = new Date(bs.start!);
+                      const bsEnd = new Date(bs.end!);
+
+                      return areIntervalsOverlapping(
+                        {
+                          start: bsStart,
+                          end: bsEnd,
+                        },
+                        {
+                          start: startDate,
+                          end: endDate,
+                        },
+                      );
+                    }),
+                  });
+                }
+                startDate = add(startDate, { minutes: 15 });
+              }
+
+              setTimes(timeSlots);
             };
 
             return (
               <form className="flex flex-col gap-y-[30px]" onSubmit={handleSubmit}>
                 <div className="flex flex-row gap-x-[30px]">
+                  <div className="flex-1">
+                    <label htmlFor="duration">Duration</label>
+                    <select id="duration" name="duration" required className="tut-form-control" onChange={handleDurationChange} onBlur={handleBlur}>
+                      <option value={undefined}>-- Select a duration --</option>
+                      {durations.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                   <div className="flex-1">
                     <label htmlFor="date">Date</label>
                     <select id="date" name="date" className="tut-form-control" onChange={handleDateChange} onBlur={handleBlur}>
@@ -91,22 +172,14 @@ export default function BookSessionPage() {
                   </div>
                   <div className="flex-1">
                     <label htmlFor="time">Time</label>
-                    <select id="time" name="time" required className="tut-form-control" onChange={handleChange} disabled={!values.date}>
-                      <option value={undefined}>-- Select a time --</option>
-                      {times.map((time) => (
-                        <option key={time} value={time}>
-                          {time}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="flex-1">
-                    <label htmlFor="duration">Duration</label>
-                    <select id="duration" name="duration" required className="tut-form-control" disabled={!values.time || !values.date} onChange={handleChange} onBlur={handleBlur}>
-                      <option value={undefined}>-- Select a duration --</option>
-                      {durations.map((duration) => (
-                        <option key={duration} value={duration}>
-                          {duration}
+                    <select id="time" name="time" required className="tut-form-control" onChange={handleChange} disabled={!values.date || loadingTimes}>
+                      <option value={undefined}>
+                        {loadingTimes && "Getting times..."}
+                        {!loadingTimes && "-- Select a time --"}
+                      </option>
+                      {times.map((option) => (
+                        <option key={option.value.toISOString()} value={option.value.toISOString()} disabled={option.disabled}>
+                          {option.label}
                         </option>
                       ))}
                     </select>

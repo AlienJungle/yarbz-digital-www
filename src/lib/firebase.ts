@@ -1,8 +1,9 @@
 // Import the functions you need from the SDKs you need
 
+import { DocumentData } from "firebase-admin/firestore";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 
 // https://firebase.google.com/docs/web/setup#available-libraries
 // Your web app's Firebase configuration
@@ -23,3 +24,14 @@ const app = initializeApp(firebaseConfig); // Initialize Firebase Authentication
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 export default app;
+
+export interface DBUser {
+  available_sessions: number;
+  is_admin: boolean;
+}
+
+export const getDbUser = async (uid: string): Promise<DocumentData | undefined> => {
+  const userDocRef = doc(db, "users", uid);
+  const userDoc = await getDoc(userDocRef);
+  return userDoc.data();
+};

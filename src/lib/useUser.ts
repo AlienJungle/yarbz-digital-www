@@ -1,11 +1,6 @@
-import { db } from "@/lib/firebase";
-import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { DBUser } from "./firebase";
 import { useAuth } from "./useAuth";
-
-export interface DBUser {
-  available_sessions: number;
-}
 
 export default function useUser() {
   const { currUser } = useAuth();
@@ -19,12 +14,8 @@ export default function useUser() {
   }, [currUser]);
 
   const getUser = async (uid: string): Promise<DBUser> => {
-    const userDocRef = doc(db, "users", uid);
-    const userDoc = await getDoc(userDocRef);
-
-    userDoc.data();
-
-    return userDoc.data() as DBUser;
+    const response = fetch(`/api/users/${uid}`);
+    return (await response).json();
   };
 
   return {

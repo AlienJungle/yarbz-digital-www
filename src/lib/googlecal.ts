@@ -1,8 +1,9 @@
 import fs from "fs";
 import { Credentials } from "google-auth-library";
-import { google } from "googleapis";
+import { calendar_v3, google } from "googleapis";
 
 import path from "path";
+import { ItemCache } from "./item-cache";
 
 const SCOPES = ["https://www.googleapis.com/auth/calendar.events", "https://www.googleapis.com/auth/calendar.readonly"];
 
@@ -10,10 +11,8 @@ const KEY_PATH = path.join(process.cwd(), "./google_client_secret.json");
 const TOKEN_PATH = path.join(process.cwd(), "./google_auth_token.json");
 
 let keys: any;
-if (fs.existsSync(KEY_PATH)) {
-  console.log("Loading keys from key path " + KEY_PATH);
+if (!keys && fs.existsSync(KEY_PATH)) {
   keys = JSON.parse(fs.readFileSync(KEY_PATH).toString()).web;
-  console.log("Successfully loaded keys for client ID " + keys.client_id);
 }
 
 const oauth2Client = new google.auth.OAuth2(keys.client_id, keys.client_secret, keys.redirect_uris);
@@ -21,7 +20,6 @@ const oauth2Client = new google.auth.OAuth2(keys.client_id, keys.client_secret, 
 const savedToken = loadTokenFromDisk();
 if (savedToken) {
   oauth2Client.setCredentials(savedToken);
-  console.log("Successfully loaded Google token from disk.");
 }
 
 google.options({ auth: oauth2Client });
@@ -55,3 +53,26 @@ function loadTokenFromDisk() {
 
   return JSON.parse(fs.readFileSync(TOKEN_PATH).toString());
 }
+
+export const cache = {
+  calendarlist: new ItemCache<calendar_v3.Schema$CalendarListEntry[] | null>(
+    null,
+    10,
+    async () => {
+      let calendars: calendar_v3.Schema$CalendarListEntry[] = [];
+      let nextPageToken: string | null = null;
+
+      do {
+        const gResponse = await googleCalendar.calendarList.list({ pageToken: nextPageToken! });
+        calendars = [...calendars, ...(gResponse.data.items ?? [])];
+      } while (nextPageToken);
+
+      return calendars;
+    },
+    "calendar-list",
+  ),
+};
+
+export const refreshSingleton = () => {};
+
+export const googleCalendar = google.calendar({ version: "v3", auth: googleClient });
