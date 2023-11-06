@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import "../globals.css";
 
+import UserProvider from "@/components/providers/user-provider";
 import Footer from "@/components/tutoring/footer";
 import HeaderNav from "@/components/tutoring/header-nav";
+import { useServerAuth } from "@/lib/useServerAuth";
 import { Poppins } from "next/font/google";
 
 export const metadata: Metadata = {
@@ -19,14 +21,19 @@ const poppins = Poppins({
   variable: "--font-poppins",
 });
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const { getCurrentUser } = useServerAuth();
+  const currentUser = await getCurrentUser();
+
   return (
     <html lang="en" className={poppins.className}>
       <body className="tutoring">
         <>
-          <HeaderNav />
-          {children}
-          <Footer />
+          <UserProvider currentUser={currentUser}>
+            <HeaderNav user={currentUser} />
+            {children}
+            <Footer />
+          </UserProvider>
         </>
       </body>
     </html>

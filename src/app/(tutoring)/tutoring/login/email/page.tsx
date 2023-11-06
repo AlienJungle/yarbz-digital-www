@@ -3,11 +3,9 @@
 import BackButton from "@/components/back-button";
 import CustomLink from "@/components/custom-link";
 import Button, { THEME_CLASSNAME_BLACK } from "@/components/tutoring/button";
-import * as fbContext from "@/lib/firebase";
+import { useAuth } from "@/lib/useAuth";
 import { useCustomRouter } from "@/lib/useCustomRouter";
 import classNames from "classnames";
-import { FirebaseError } from "firebase/app";
-import { UserCredential, signInWithEmailAndPassword } from "firebase/auth";
 import { Formik, FormikHelpers } from "formik";
 
 interface LoginEmailValues {
@@ -17,31 +15,15 @@ interface LoginEmailValues {
 
 export default function LoginEmail() {
   const router = useCustomRouter();
+  const { loginWithEmailAndPassword } = useAuth();
 
   const handleLoginSubmit = (values: LoginEmailValues, helpers: FormikHelpers<LoginEmailValues>) => {
-    signInWithEmailAndPassword(fbContext.auth, values.email, values.password)
-      .then((credential: UserCredential) => {
-        if (credential.user) {
-          router.push("/tutoring/dashboard");
-        } else {
-          throw "User was not returned in credential.";
-        }
+    loginWithEmailAndPassword(values.email, values.password)
+      .then(() => {
+        window.location.assign("/tutoring/dashboard");
       })
       .catch((error) => {
-        console.error(JSON.stringify(error));
-
-        const fbError = error as FirebaseError;
-        switch (fbError.code) {
-          case "auth/invalid-login-credentials":
-            alert("The given credentials were invalid. Please ensure you're using the correct username and password, and try again.");
-
-            helpers.resetForm();
-
-            break;
-          default:
-            alert("Something went wrong: " + fbError.message ?? error);
-            break;
-        }
+        alert(error);
       })
       .finally(() => {
         helpers.setSubmitting(false);

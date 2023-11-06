@@ -1,10 +1,8 @@
-"use client";
-
-import Image from "next/image";
-
 import { hoverVariant, tapVariant } from "@/lib/animations";
+import * as motion from "@/lib/motion";
 import { statics } from "@/static";
-import { Variants, motion } from "framer-motion";
+import { Variants } from "framer-motion";
+import Image from "next/image";
 
 import logo from "../../public/logo.svg";
 

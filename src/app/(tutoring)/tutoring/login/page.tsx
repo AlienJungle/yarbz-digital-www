@@ -7,29 +7,22 @@ import iconGoogle from "@/../public/icon-google.svg";
 import Image from "next/image";
 
 import Button from "@/components/tutoring/button";
-import * as fbContext from "@/lib/firebase";
+import { useAuth } from "@/lib/useAuth";
 import { useCustomRouter } from "@/lib/useCustomRouter";
-import { FirebaseError } from "firebase-admin";
-import { Auth, GithubAuthProvider, GoogleAuthProvider, UserCredential, signInWithPopup } from "firebase/auth";
+import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import { useSearchParams } from "next/navigation";
 
 export default function LoginPage() {
   const router = useCustomRouter();
   const searchParams = useSearchParams();
-
-  const redirectAfterLogin = () => {
-    const redirect = searchParams.get("redirect");
-    router.push(redirect ?? "/tutoring/dashboard");
-  };
+  const { loginWithProvider } = useAuth();
 
   const handleGoogleLoginClick = () => {
-    const provider = new GoogleAuthProvider();
-    handleProviderLogin(fbContext.auth, provider).then(() => redirectAfterLogin());
+    loginWithProvider(new GoogleAuthProvider()).catch((err) => alert(err));
   };
 
   const handleGitHubLoginClick = () => {
-    const provider = new GithubAuthProvider();
-    handleProviderLogin(fbContext.auth, provider).then(() => redirectAfterLogin());
+    loginWithProvider(new GithubAuthProvider()).catch((err) => alert(err));
   };
 
   return (
@@ -80,35 +73,4 @@ export default function LoginPage() {
       </div>
     </main>
   );
-}
-type SupportedProvider = GoogleAuthProvider | GithubAuthProvider;
-
-function handleProviderLogin(auth: Auth, provider: SupportedProvider): Promise<UserCredential> {
-  return new Promise((resolve, reject) => {
-    signInWithPopup(auth, provider)
-      .then((result: UserCredential) => {
-        const user = result.user;
-        if (user) {
-          resolve(result);
-        } else {
-          throw "User was not returned.";
-        }
-      })
-      .catch((error) => {
-        console.error("Error occurred while logging in: " + JSON.stringify(error));
-
-        const fbError = error as FirebaseError;
-        switch (fbError.code) {
-          case "auth/account-exists-with-different-credential":
-            alert("An account already exists with us for the email associated with your third-party account.");
-            break;
-
-          default:
-            alert("Something went wrong: " + error.message ?? error);
-            break;
-        }
-
-        reject(error);
-      });
-  });
 }

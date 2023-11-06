@@ -2,33 +2,21 @@
 
 import iconExternal from "@/../public/icon-external.svg";
 import Alert from "@/components/alert";
+import { UserContext } from "@/components/providers/user-provider";
 import Button, { THEME_CLASSNAME_BLACK } from "@/components/tutoring/button";
 import Card from "@/components/tutoring/card";
-import { DBUser } from "@/lib/firebase";
-import { useAuth } from "@/lib/useAuth";
-import useUser from "@/lib/useUser";
 import { statics } from "@/static";
 import classNames from "classnames";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 
 export default function DashboardPage() {
-  const { currUser } = useAuth();
-  const { getUser } = useUser();
   const searchParams = useSearchParams();
+  const userCtx = useContext(UserContext);
 
-  const [currDbUser, setCurrDbUser] = useState<DBUser | null>(null);
-
-  useEffect(() => {
-    if (!currUser) return;
-
-    getUser(currUser.uid).then((dbUser) => {
-      setCurrDbUser(dbUser);
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currUser]);
+  const currUser = userCtx.currentUser;
 
   return (
     <main>
@@ -36,8 +24,11 @@ export default function DashboardPage() {
         <div className="flex flex-row justify-between items-center">
           <h1 className="text-3xl font-semibold my-10">Dashboard</h1>
           {currUser && (
-            <span className="text-base opacity-50 font-semibold">
-              logged in as {currUser!.displayName} ({currUser!.email})
+            <span className="flex flex-row items-center gap-x-[10px]">
+              <span className="text-base opacity-50 font-semibold ">
+                logged in as {currUser.name} ({currUser!.email})
+              </span>
+              <Image src={currUser.picture!} width={30} height={30} alt={"Image of " + currUser.name} className="rounded-full" />
             </span>
           )}
         </div>
@@ -46,7 +37,7 @@ export default function DashboardPage() {
 
         <div className="grid grid-cols-6 gap-[50px]">
           <div className="col-span-2">
-            <SessionsCard availableSessions={currDbUser?.available_sessions ?? 0} />
+            <SessionsCard availableSessions={currUser?.available_sessions ?? 0} />
           </div>
 
           <div className="col-span-2">

@@ -2,25 +2,23 @@
 
 import Image from "next/image";
 
+import logo from "@/../public/tutoring/logo.svg";
+import { DecodedIdTokenUser } from "@/app/api/_models/user";
 import { hoverVariant, tapVariant } from "@/lib/animations";
 import * as motion from "@/lib/motion";
-import { Variants } from "framer-motion";
-
-import logo from "@/../public/tutoring/logo.svg";
-import * as fbContext from "@/lib/firebase";
 import { useAuth } from "@/lib/useAuth";
 import classNames from "classnames";
-import { User } from "firebase/auth";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import Button, { THEME_CLASSNAME_GREEN } from "./button";
 
 interface HeaderNavProps {
   hideNavItems?: boolean;
-  user?: User | null;
+  user?: DecodedIdTokenUser | null;
 }
 
 export default function HeaderNav(props: HeaderNavProps) {
+  const { logout } = useAuth();
+
   const baseHref = "/tutoring";
 
   const links: { href: string; text: string }[] = [
@@ -46,33 +44,8 @@ export default function HeaderNav(props: HeaderNavProps) {
     },
   ];
 
-  const variants: Variants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const item = {
-    hidden: { opacity: 0, y: -50 },
-    visible: { opacity: 1, y: 0 },
-  };
-
-  const { currUser } = useAuth();
-
-  const router = useRouter();
-
   const handleLogout = () => {
-    fbContext.auth
-      .signOut()
-      .then(() => {
-        router.push("/tutoring/login");
-      })
-      .catch((err) => {
-        alert("Something went wrong: " + err);
-      });
+    logout();
   };
 
   return (
@@ -95,19 +68,19 @@ export default function HeaderNav(props: HeaderNavProps) {
       </div>
 
       <div className="flex-1 flex flex-row items-center gap-x-[20px] justify-end">
-        {currUser && (
+        {props.user && (
           <>
             <Link href={"/tutoring/dashboard"} className={classNames("btn-tut", THEME_CLASSNAME_GREEN)}>
               Dashboard
             </Link>
 
-            <Button theme="black" onClick={handleLogout}>
+            <Button theme="black" onClick={() => handleLogout()}>
               Logout
             </Button>
           </>
         )}
 
-        {!currUser && (
+        {!props.user && (
           <>
             <Link href={"/tutoring/login"} className={classNames("btn-tut", THEME_CLASSNAME_GREEN)}>
               Student login
