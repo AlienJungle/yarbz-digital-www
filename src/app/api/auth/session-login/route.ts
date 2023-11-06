@@ -22,8 +22,6 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     sameSite: "strict",
   });
 
-  // console.log("Value", );
-
   const sessionCookie = cookies().get(process.env.SESSION_COOKIE_NAME)?.value ?? "";
   const claims = await auth.verifySessionCookie(sessionCookie, true);
 

@@ -4,8 +4,10 @@ import BackButton from "@/components/back-button";
 import { UserContext } from "@/components/providers/user-provider";
 import Button from "@/components/tutoring/button";
 import useFreeBusy from "@/lib/useFreeBusy";
+import useSessions from "@/lib/useSessions";
 import { add, areIntervalsOverlapping, format } from "date-fns";
 import { Formik, FormikHelpers } from "formik";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, useContext, useEffect, useState } from "react";
 
 interface BookSessionValues {
@@ -22,10 +24,12 @@ interface SelectOption<T> {
 }
 
 export default function BookSessionPage() {
-  const { getFreeBusyOnDate } = useFreeBusy();
-
   const userCtx = useContext(UserContext);
   const currentUser = userCtx.currentUser;
+
+  const router = useRouter();
+  const { getFreeBusyOnDate } = useFreeBusy();
+  const { bookSession } = useSessions(userCtx.currentUser!.uid);
 
   const [dates, setDates] = useState<Date[]>([]);
   const [times, setTimes] = useState<SelectOption<Date>[]>([]);
@@ -55,7 +59,20 @@ export default function BookSessionPage() {
     );
   }, []);
 
-  const handleBookingSubmit = (values: BookSessionValues, helpers: FormikHelpers<BookSessionValues>) => {};
+  const handleBookingSubmit = async (values: BookSessionValues, helpers: FormikHelpers<BookSessionValues>) => {
+    try {
+      await bookSession({
+        start_date: values.date!,
+        duration_minutes: values.duration!,
+        message: values.message ?? "",
+      });
+
+      router.push("/tutoring/dashboard?bookedsession=true");
+    } catch (error: any) {
+      console.error(error);
+      alert("An error occurred while booking your session: " + error?.message ?? error);
+    }
+  };
 
   return (
     <main>

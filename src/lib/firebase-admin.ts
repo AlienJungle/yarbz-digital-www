@@ -1,3 +1,4 @@
+import { Session } from "@/app/api/_models/session";
 import { User } from "@/app/api/_models/user";
 import * as admin from "firebase-admin";
 import { firebaseConfig } from "./firebase-config";
@@ -22,5 +23,13 @@ export const getDbUser = async (uid: string): Promise<admin.firestore.DocumentDa
 };
 
 export const createDbUser = async (uid: string, user: User) => {
-  return db.collection("users").doc(uid).set(user);
+  const doc = db.collection("users").doc(uid);
+  await doc.set(user);
+  return doc;
+};
+
+export const createSession = async (session: Session) => {
+  const doc = db.collection("sessions").doc();
+  await doc.set(session);
+  return doc;
 };
