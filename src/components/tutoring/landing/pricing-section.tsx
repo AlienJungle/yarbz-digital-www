@@ -20,7 +20,7 @@ export default function PricingSection() {
   return (
     <div className="my-32" id="pricing">
       <h1 className="text-3xl font-semibold leading-[60px] mb-[62px]">Pricing</h1>
-      <div className="grid grid-cols-3 gap-x-[76px]">
+      <div className="grid lg:grid-cols-3 gap-x-[76px] gap-y-[20px]">
         <div>
           <PricingCard
             title="Trial lesson"

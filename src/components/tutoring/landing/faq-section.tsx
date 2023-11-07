@@ -26,7 +26,7 @@ export default function FAQSection() {
       answer: <>You can book a session with me up to 2 weeks in advance.</>,
     },
     {
-      question: "I can&apos;t attend a booked lesson. What do I do?",
+      question: "I can't attend a booked lesson. What do I do?",
       answer: <>If you find that you can&apos;t make a lesson, you have the option to either reschedule or cancel the lesson, as long as you give me at least 4 hours&apos; notice. Unfortunately, lessons cannot be rescheduled or canceled within 4 hours of the scheduled start time. To reschedule or cancel your lesson, simply log in and visit your dashboard. You&apos;ll find the options to do so under &apos;Your upcoming lessons&apos;.</>,
     },
     {
@@ -47,9 +47,9 @@ export default function FAQSection() {
       <div className="flex flex-col gap-y-[30px]">
         {questionsAndAnswers.map((qna, i) => (
           <div key={qna.question} className="flex flex-col">
-            <div className="flex flex-row items-center justify-between cursor-pointer" onClick={() => handleRowToggle(i)} role="button">
+            <div className="flex flex-row lg:items-center justify-between cursor-pointer gap-x-[20px]" onClick={() => handleRowToggle(i)} role="button">
               <p className="flex-grow text-lg font-medium">{qna.question}</p>
-              <span>
+              <span className="flex-shrink-0 mt-[10px] lg:mt-0">
                 <Image
                   src={triangle}
                   alt=""

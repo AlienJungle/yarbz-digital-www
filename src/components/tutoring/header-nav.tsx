@@ -49,14 +49,14 @@ export default function HeaderNav(props: HeaderNavProps) {
   };
 
   return (
-    <nav className="flex flex-row justify-between items-center gap-[47px] px-[45px] py-[25px]">
+    <nav className="flex flex-row justify-between items-center gap-[47px] p-[25px] lg:px-[45px] lg:py-[25px]">
       <div className="flex-1">
         <motion.a href={baseHref} whileTap={tapVariant} className="inline-block">
-          <Image src={logo} alt="yarbz tutoring logo" />
+          <Image src={logo} alt="yarbz tutoring logo" className="w-[120px]" />
         </motion.a>
       </div>
 
-      <div className="flex-1 flex flex-row gap-[47px] items-center font-semibold justify-center">
+      <div className="hidden lg:flex flex-1 flex-row gap-[47px] items-center font-semibold justify-center">
         {!props.hideNavItems &&
           links.map((link) => {
             return (
@@ -67,7 +67,7 @@ export default function HeaderNav(props: HeaderNavProps) {
           })}
       </div>
 
-      <div className="flex-1 flex flex-row items-center gap-x-[20px] justify-end">
+      <div className="hidden flex-1 lg:flex flex-row items-center gap-x-[20px] justify-end">
         {props.user && (
           <>
             <Link href={"/tutoring/dashboard"} className={classNames("btn-tut", THEME_CLASSNAME_GREEN)}>
@@ -87,6 +87,14 @@ export default function HeaderNav(props: HeaderNavProps) {
             </Link>
           </>
         )}
+      </div>
+
+      <div>
+        <button>
+          <svg height="32" viewBox="0 0 32 32" width="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 10h24a2 2 0 0 0 0-4H4a2 2 0 0 0 0 4zm24 4H4a2 2 0 0 0 0 4h24a2 2 0 0 0 0-4zm0 8H4a2 2 0 0 0 0 4h24a2 2 0 0 0 0-4z" />
+          </svg>
+        </button>
       </div>
     </nav>
   );

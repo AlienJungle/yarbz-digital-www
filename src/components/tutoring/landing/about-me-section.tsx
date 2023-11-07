@@ -2,8 +2,8 @@ export default function AboutMeSection() {
   return (
     <div className="my-32" id="about">
       <h1 className="text-3xl font-semibold leading-[60px] mb-[74px]">A bit about me...</h1>
-      <div className="flex flex-row gap-x-[60px]">
-        <div className="col-span-7 prose">
+      <div className="flex flex-col lg:flex-row gap-x-[60px]">
+        <div className="lg:col-span-7 prose">
           <p>
             Hey there, I&apos;m Aaron!
             <br />

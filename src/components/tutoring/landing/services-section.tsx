@@ -25,7 +25,7 @@ export default function ServicesSection() {
   return (
     <div className="my-32" id="services">
       <h1 className="text-3xl font-semibold leading-[64px] max-w-[381px]">What can I help with?</h1>
-      <div className="mt-[90px] grid grid-cols-3 gap-x-[77px]">
+      <div className="mt-[90px] grid lg:grid-cols-3 gap-x-[77px] gap-y-[80px]">
         {cards.map((card) => (
           <div key={card.title} className="rounded-[8px] bg-yd-tut-lightgreen p-[32px] relative shadow-yd-default">
             <div className="absolute w-[65px] h-[65px] left-[32px] top-0 -translate-y-1/2 flex justify-center items-center bg-yd-tut-green rounded-[5px]">
