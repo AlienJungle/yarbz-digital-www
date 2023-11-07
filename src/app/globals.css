@@ -106,6 +106,6 @@ table th {
   @apply text-left;
 }
 
-.skeleton {
+.skeleton > * {
   @apply bg-yd-grey text-transparent rounded-lg animate-pulse overflow-hidden;
 }

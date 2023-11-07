@@ -26,43 +26,49 @@ export default function UpcomingSessionsCard() {
         </Alert>
       )}
 
-      {!sessions?.length && (
-        <div>
-          <p>Nothing to see here!</p>
-        </div>
-      )}
+      <div
+        className={classNames({
+          skeleton: isLoading,
+        })}
+      >
+        {!sessions?.length && (
+          <div>
+            <p>Nothing to see here!</p>
+          </div>
+        )}
 
-      {!!sessions?.length && (
-        <table
-          className={classNames("table-auto w-full", {
-            skeleton: isLoading,
-          })}
-        >
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Duration</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {sessions?.map((session, i) => {
-              const startDate = new Date(session.start_date);
-              return (
-                <tr key={i} className="items-center">
-                  <td>{format(startDate, statics.dateFormats.date)}</td>
-                  <td>{format(startDate, statics.dateFormats.time)}</td>
-                  <td>{session.duration_minutes} minutes</td>
-                  <td className="flex flex-row justify-end items-center">
-                    <UpcomingSessionButtons session={session} />
-                  </td>
-                </tr>
-              );
-            }) ?? []}
-          </tbody>
-        </table>
-      )}
+        {!!sessions?.length && (
+          <table
+            className={classNames("table-auto w-full", {
+              skeleton: isLoading,
+            })}
+          >
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Duration</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {sessions?.map((session, i) => {
+                const startDate = new Date(session.start_date);
+                return (
+                  <tr key={i} className="items-center">
+                    <td>{format(startDate, statics.dateFormats.date)}</td>
+                    <td>{format(startDate, statics.dateFormats.time)}</td>
+                    <td>{session.duration_minutes} minutes</td>
+                    <td className="flex flex-row justify-end items-center">
+                      <UpcomingSessionButtons session={session} />
+                    </td>
+                  </tr>
+                );
+              }) ?? []}
+            </tbody>
+          </table>
+        )}
+      </div>
     </div>
   );
 }

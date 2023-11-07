@@ -11,9 +11,9 @@ interface AlertProps extends PropsWithChildren {
 export default function Alert({ children, className, type }: AlertProps) {
   const [isVisible, setVisible] = useState<boolean>(true);
 
-  const classNameComputed = classNames("py-[12px] px-[20px] rounded-md bg-yd-tut-green text-yd-tut-black shadow-yd-default flex flex-row items-center gap-x-[10px]", className, {
+  const classNameComputed = classNames("py-[12px] px-[20px] rounded-md text-yd-tut-black shadow-yd-default flex flex-row items-center gap-x-[10px]", className, {
     "bg-yd-tut-green": !type || type === "info",
-    "bg-red-100": type === "error",
+    "bg-red-300": type === "error",
   });
 
   return (
