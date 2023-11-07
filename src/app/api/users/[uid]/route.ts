@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { getDbUser } from "@/lib/firebase";
+import { getDbUser } from "@/lib/firebase-admin";
 import { StatusCodes } from "http-status-codes";
 
 export interface DBUser {
@@ -13,6 +13,8 @@ interface GETParams {
 
 export async function GET(req: NextRequest, { params }: { params: GETParams }): Promise<Response> {
   const data = await getDbUser(params.uid);
+
+  console.log("DOES THIS WORK?");
 
   if (!data) {
     return Response.json(

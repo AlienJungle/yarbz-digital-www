@@ -8,5 +8,9 @@ export default function useSessions(uid: string) {
     });
   };
 
-  return { bookSession };
+  const getSessions = async () => {
+    return (await (await fetch(`/api/users/${uid}/sessions`)).json()) as Session[];
+  };
+
+  return { bookSession, getSessions };
 }

@@ -17,8 +17,6 @@ interface HeaderNavProps {
 }
 
 export default function HeaderNav(props: HeaderNavProps) {
-  const { logout } = useAuth();
-
   const baseHref = "/tutoring";
 
   const links: { href: string; text: string }[] = [
@@ -43,6 +41,8 @@ export default function HeaderNav(props: HeaderNavProps) {
       text: "FAQ",
     },
   ];
+
+  const { logout } = useAuth();
 
   const handleLogout = () => {
     logout();

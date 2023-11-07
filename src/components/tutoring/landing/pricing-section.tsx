@@ -1,14 +1,16 @@
 "use client";
 
-import { useAuth } from "@/lib/useAuth";
+import { UserContext } from "@/components/providers/user-provider";
 import { statics } from "@/static";
+import { useContext } from "react";
 import PricingCard from "../pricing-card";
 
 export default function PricingSection() {
-  const { currUser } = useAuth();
+  const userCtx = useContext(UserContext);
+  const currentUser = userCtx.currentUser;
 
   const redirectIfNotAuthed = (url: string) => {
-    const destinationHref = !currUser ? `/tutoring/login?redirect=${url}` : url;
+    const destinationHref = !currentUser ? `/tutoring/login?redirect=${url}` : url;
     window.open(destinationHref, "_blank");
   };
 

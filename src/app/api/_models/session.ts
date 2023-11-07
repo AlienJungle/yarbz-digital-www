@@ -1,6 +1,7 @@
 import { DocumentReference } from "firebase-admin/firestore";
 
 export interface Session {
+  create_date: string;
   start_date: string;
   duration_minutes: number;
   confirmation_status?: "cancelled" | "cancelled-refunded" | "no-show" | "complete";

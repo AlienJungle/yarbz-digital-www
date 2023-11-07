@@ -70,6 +70,10 @@
   @apply rounded-[5px] px-[18px] py-[8px] font-medium;
 }
 
+.btn-tut-small {
+  @apply px-[12px] py-[2px] text-sm;
+}
+
 .btn-tut:disabled {
   @apply opacity-50;
 }
@@ -96,4 +100,8 @@ textarea.tut-form-control:disabled {
 
 .prose-tut li::marker {
   @apply text-yd-tut-green;
+}
+
+table th {
+  @apply text-left;
 }

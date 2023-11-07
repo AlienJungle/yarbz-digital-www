@@ -33,3 +33,11 @@ export const createSession = async (session: Session) => {
   await doc.set(session);
   return doc;
 };
+
+export const getUserSessions = async (uid: string) => {
+  const userDoc = db.collection("users").doc(uid);
+  const query = db.collection("sessions").where("user", "==", userDoc).orderBy("start_date", "desc");
+
+  const docs = (await query.get()).docs;
+  return docs;
+};
