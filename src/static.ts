@@ -16,6 +16,13 @@ const statics = {
     linkedin: "https://www.linkedin.com/in/aaronjyarborough/",
     gitHub: "https://github.com/AaronJY",
   },
+  dateFormats: {
+    date: "PP",
+    time: "p",
+  },
+  bookingCalendarId: "c_de1caed0eb72f7ad4ca333a3e28b52365a6929e9637b5e5cfa3cdf5cf016b30f@group.calendar.google.com",
+  calendarInviteEmail: "aaronz@yarbz.digital",
+  calendarInviteDisplayName: "Aaron @ Yarbz Tutoring",
 };
 
 export { statics };

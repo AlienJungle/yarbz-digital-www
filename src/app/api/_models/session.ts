@@ -3,10 +3,12 @@ import { DocumentReference } from "firebase-admin/firestore";
 export interface Session {
   create_date: string;
   start_date: string;
+  timezone: string;
   duration_minutes: number;
   confirmation_status?: "cancelled" | "cancelled-refunded" | "no-show" | "complete";
   message: string;
   user: DocumentReference;
+  meeting_link?: string;
 }
 
 // cancelled - user has cancelled the lesson, but less than 4 hours before

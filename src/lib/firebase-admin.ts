@@ -34,6 +34,12 @@ export const createSession = async (session: Session) => {
   return doc;
 };
 
+export const updateSession = async (uid: string, session: Pick<Session, "meeting_link">) => {
+  return await db.collection("sessions").doc(uid).update({
+    meeting_link: session.meeting_link,
+  });
+};
+
 export const getUserSessions = async (uid: string) => {
   const userDoc = db.collection("users").doc(uid);
   const query = db.collection("sessions").where("user", "==", userDoc).orderBy("start_date", "desc");

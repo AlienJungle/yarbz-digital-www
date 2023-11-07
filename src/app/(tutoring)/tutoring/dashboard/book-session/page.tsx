@@ -13,7 +13,7 @@ import { ChangeEvent, useContext, useEffect, useState } from "react";
 interface BookSessionValues {
   date: string | undefined;
   time: string | undefined;
-  duration: 30 | 60 | 90 | undefined;
+  duration: string | undefined;
   message: string | undefined;
 }
 
@@ -62,9 +62,10 @@ export default function BookSessionPage() {
   const handleBookingSubmit = async (values: BookSessionValues, helpers: FormikHelpers<BookSessionValues>) => {
     try {
       await bookSession({
-        start_date: values.date!,
-        duration_minutes: values.duration!,
+        start_date: values.time!,
+        duration_minutes: parseInt(values.duration!),
         message: values.message ?? "",
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       });
 
       router.push("/tutoring/dashboard?bookedsession=true");
@@ -93,15 +94,23 @@ export default function BookSessionPage() {
           }}
           onSubmit={handleBookingSubmit}
           validate={(values) => {
-            const errors = {} as BookSessionValues;
+            const errors = {} as any;
             if (!values.date) {
               errors.date = "You must select a date.";
+            }
+
+            if (!values.time) {
+              errors.time = "You must select a time.";
+            }
+
+            if (!values.duration) {
+              errors.duration = "You must select a duration";
             }
 
             return errors;
           }}
         >
-          {({ values, handleSubmit, handleChange, handleBlur, isValid, errors, setFieldValue }) => {
+          {({ values, handleSubmit, handleChange, handleBlur, isValid, errors, setFieldValue, isSubmitting }) => {
             const handleDurationChange = async (e: ChangeEvent<HTMLSelectElement>) => {
               handleChange(e);
               if (e.currentTarget.value && values.date) {
@@ -112,7 +121,7 @@ export default function BookSessionPage() {
             const handleDateChange = async (e: ChangeEvent<HTMLSelectElement>) => {
               handleChange(e);
               if (e.currentTarget.value && values.duration) {
-                updateTimeSlots(values.duration, e.currentTarget.value);
+                updateTimeSlots(parseInt(values.duration), e.currentTarget.value);
               }
             };
 
@@ -121,7 +130,7 @@ export default function BookSessionPage() {
 
               setTimes([]);
               setLoadingTimes(true);
-              const busySlots = await getFreeBusyOnDate(dateValue);
+              const busySlots = await getFreeBusyOnDate(dateValue, Intl.DateTimeFormat().resolvedOptions().timeZone);
               setLoadingTimes(false);
 
               const fromDateTime = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 9);
@@ -174,6 +183,7 @@ export default function BookSessionPage() {
                         </option>
                       ))}
                     </select>
+                    {errors.duration && <span className="yd-form-error">{errors.duration}</span>}
                   </div>
                   <div className="flex-1">
                     <label htmlFor="date">Date</label>
@@ -200,16 +210,17 @@ export default function BookSessionPage() {
                         </option>
                       ))}
                     </select>
+                    {errors.time && <span className="yd-form-error">{errors.time}</span>}
                   </div>
                 </div>
 
                 <div>
                   <label htmlFor="message">Message</label>
-                  <textarea id="message" name="message" className="w-full tut-form-control block" placeholder="This session, I want to focus on..." maxLength={1000} rows={5} />
+                  <textarea id="message" name="message" className="w-full tut-form-control block" placeholder="This session, I want to focus on..." maxLength={1000} rows={5} value={values.message} onChange={handleChange} onBlur={handleBlur} />
                 </div>
 
                 <div className="flex flex-row justify-end">
-                  <Button theme="green" type="submit">
+                  <Button theme="green" type="submit" disabled={!isValid || isSubmitting}>
                     Book session
                   </Button>
                 </div>

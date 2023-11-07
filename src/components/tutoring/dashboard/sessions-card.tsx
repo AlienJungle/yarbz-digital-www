@@ -12,12 +12,12 @@ export default function SessionsCard(props: SessionsCardProps) {
   const router = useRouter();
 
   return (
-    <Card title="Sessions" className="h-full flex flex-col">
-      <p className="flex-grow block">
+    <Card title="Sessions" className="h-full flex flex-col gap-x-[20px]">
+      <p className="flex-grow block mb-[20px]">
         You have <strong>{props.availableSessions} sessions</strong> to use.
       </p>
 
-      <div className="flex flex-col gap-y-[10px]">
+      <div className="flex flex-col gap-y-[20px]">
         {props.availableSessions > 0 && (
           <Button theme="green" onClick={() => router.push("/tutoring/dashboard/book-session")}>
             Book a session
