@@ -1,12 +1,12 @@
-import { Variant, Variants } from "framer-motion";
+import { HTMLMotionProps, Variant, Variants } from "framer-motion";
 import * as motion from "../../lib/motion";
 
-interface TypedTextAnimationProps {
+interface TypedTextAnimationProps extends HTMLMotionProps<"p"> {
   text: string;
   animationVariant?: Variant;
 }
 
-export default function TypedTextAnimation({ text, animationVariant }: TypedTextAnimationProps): JSX.Element {
+export default function TypedTextAnimation({ text, animationVariant, ...props }: TypedTextAnimationProps): JSX.Element {
   const captionVariants: Variants = {
     visible: {
       transition: {
@@ -26,7 +26,7 @@ export default function TypedTextAnimation({ text, animationVariant }: TypedText
   };
 
   return (
-    <motion.p variants={captionVariants} initial={"hidden"} whileInView={"visible"} viewport={{ once: true }}>
+    <motion.p variants={captionVariants} initial={"hidden"} whileInView={"visible"} viewport={{ once: true }} {...props}>
       {text.split("").map((char, i) => (
         <motion.span key={i} variants={captionCharacterVariants}>
           {char}

@@ -4,9 +4,9 @@ import BackButton from "@/components/back-button";
 import CustomLink from "@/components/custom-link";
 import Button, { THEME_CLASSNAME_BLACK } from "@/components/tutoring/button";
 import { useAuth } from "@/lib/useAuth";
-import { useCustomRouter } from "@/lib/useCustomRouter";
 import classNames from "classnames";
 import { Formik, FormikHelpers } from "formik";
+import { useSearchParams } from "next/navigation";
 
 interface LoginEmailValues {
   email: string;
@@ -14,14 +14,12 @@ interface LoginEmailValues {
 }
 
 export default function LoginEmail() {
-  const router = useCustomRouter();
+  const searchParams = useSearchParams();
+
   const { loginWithEmailAndPassword } = useAuth();
 
   const handleLoginSubmit = (values: LoginEmailValues, helpers: FormikHelpers<LoginEmailValues>) => {
-    loginWithEmailAndPassword(values.email, values.password)
-      .then(() => {
-        window.location.assign("/tutoring/dashboard");
-      })
+    loginWithEmailAndPassword(values.email, values.password, searchParams.get("redirect") ?? undefined)
       .catch((error) => {
         alert(error);
       })

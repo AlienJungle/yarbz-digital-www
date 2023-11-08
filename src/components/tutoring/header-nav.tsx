@@ -21,23 +21,23 @@ export default function HeaderNav(props: HeaderNavProps) {
 
   const links: { href: string; text: string }[] = [
     {
-      href: "#services",
+      href: "/tutoring#services",
       text: "Services",
     },
     {
-      href: "#about",
+      href: "/tutoring#about",
       text: "About",
     },
     {
-      href: "#reviews",
+      href: "/tutoring#reviews",
       text: "Reviews",
     },
     {
-      href: "#pricing",
+      href: "/tutoring#pricing",
       text: "Pricing",
     },
     {
-      href: "#faq",
+      href: "/tutoring#faq",
       text: "FAQ",
     },
   ];

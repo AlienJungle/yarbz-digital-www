@@ -15,13 +15,13 @@ export function useAuth() {
     });
   }
 
-  const loginWithEmailAndPassword = async (email: string, password: string): Promise<void> => {
+  const loginWithEmailAndPassword = async (email: string, password: string, redirect?: string): Promise<void> => {
     try {
       const credential = await signInWithEmailAndPassword(auth, email, password);
       await loginWithIdToken(credential);
+      window.location.assign(redirect ?? "/tutoring/dashboard");
     } catch (error) {
       console.error(JSON.stringify(error));
-
       const fbError = error as FirebaseError;
       switch (fbError.code) {
         case "auth/invalid-login-credentials":
@@ -34,11 +34,11 @@ export function useAuth() {
     auth.signOut();
   };
 
-  const loginWithProvider = async (provider: GoogleAuthProvider | GithubAuthProvider) => {
+  const loginWithProvider = async (provider: GoogleAuthProvider | GithubAuthProvider, redirect?: string) => {
     try {
       const credential = await signInWithPopup(auth, provider);
       await loginWithIdToken(credential);
-      return window.location.assign("/tutoring/dashboard");
+      window.location.assign(redirect ?? "/tutoring/dashboard");
     } catch (error: any) {
       console.error("Error occurred while logging in: " + JSON.stringify(error));
 

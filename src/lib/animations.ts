@@ -25,3 +25,47 @@ export const introVariants: Variants = {
     },
   },
 };
+
+export const introBurstIn: Variants = {
+  hidden: {
+    opacity: 0,
+    scale: 0,
+  },
+  visible: {
+    opacity: 100,
+    scale: 1,
+    transition: {
+      type: "spring",
+      stiffness: "100",
+      duration: 0.5,
+    },
+  },
+};
+
+export const introSlideInFromRight: Variants = {
+  hidden: {
+    transform: "translateX(50vw)",
+  },
+  visible: {
+    transform: "translateX(0)",
+    transition: {
+      bounce: true,
+    },
+  },
+};
+
+export const hoverScale: Variant = {
+  scale: 1.12,
+  transition: {
+    type: "spring",
+    duration: 0.3,
+  },
+};
+
+export const tapScale: Variant = {
+  scale: 0.9,
+  transition: {
+    type: "spring",
+    duration: 0.3,
+  },
+};

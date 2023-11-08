@@ -6,7 +6,7 @@ export function middleware(request: NextRequest) {
   if (!request.cookies.get("session")) {
     const loginRedirect = authedUrlBase.some((x) => request.nextUrl.pathname.startsWith(x));
     if (loginRedirect) {
-      return NextResponse.redirect(process.env.NEXT_PUBLIC_SITE_URL + "/tutoring/login");
+      return NextResponse.redirect(process.env.NEXT_PUBLIC_SITE_URL + "/tutoring/login?redirect=" + request.nextUrl.pathname);
     }
   }
 }

@@ -10,17 +10,20 @@ import Button from "@/components/tutoring/button";
 import { useAuth } from "@/lib/useAuth";
 import { useCustomRouter } from "@/lib/useCustomRouter";
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
+import { useSearchParams } from "next/navigation";
 
 export default function LoginPage() {
   const router = useCustomRouter();
+  const searchParams = useSearchParams();
+
   const { loginWithProvider } = useAuth();
 
   const handleGoogleLoginClick = () => {
-    loginWithProvider(new GoogleAuthProvider()).catch((err) => alert(err));
+    loginWithProvider(new GoogleAuthProvider(), searchParams.get("redirect") ?? undefined).catch((err) => alert(err));
   };
 
   const handleGitHubLoginClick = () => {
-    loginWithProvider(new GithubAuthProvider()).catch((err) => alert(err));
+    loginWithProvider(new GithubAuthProvider(), searchParams.get("redirect") ?? undefined).catch((err) => alert(err));
   };
 
   return (

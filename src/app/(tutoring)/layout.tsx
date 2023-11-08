@@ -27,11 +27,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html lang="en" className={poppins.className}>
-      <body className="tutoring">
+      <body className="tutoring flex flex-col min-h-[100vh]">
         <>
           <UserProvider currentUser={currentUser}>
             <HeaderNav user={currentUser} />
-            {children}
+            <div className="flex flex-col flex-grow">{children}</div>
             <Footer />
           </UserProvider>
         </>
