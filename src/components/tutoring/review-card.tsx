@@ -1,6 +1,6 @@
 import Image, { StaticImageData } from "next/image";
 
-interface ReviewCardProps {
+export interface ReviewCardProps {
   imageSrc: StaticImageData;
   title: string;
   body: string;

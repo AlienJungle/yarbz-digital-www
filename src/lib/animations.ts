@@ -48,9 +48,6 @@ export const introSlideInFromRight: Variants = {
   },
   visible: {
     transform: "translateX(0)",
-    transition: {
-      bounce: true,
-    },
   },
 };
 

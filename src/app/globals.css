@@ -14,7 +14,7 @@
   }
 
   body.tutoring {
-    @apply leading-[32px];
+    @apply leading-relaxed;
   }
 }
 
@@ -108,4 +108,37 @@ table th {
 
 .skeleton > * {
   @apply bg-yd-grey text-transparent rounded-lg animate-pulse overflow-hidden;
+}
+
+.landing-section {
+  @apply my-[52px] lg:my-32;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  @apply font-semibold;
+}
+
+h1,
+h2 {
+  @apply text-2xl lg:text-3xl;
+}
+
+h3 {
+  @apply text-xl lg:text-2xl font-semibold;
+}
+
+.hiw-arrow {
+  @apply rotate-90 lg:rotate-0 my-[40px] lg:my-0 w-[50px] lg:w-auto self-center;
+}
+
+.hiw-step {
+  @apply text-lg font-semibold mb-[27px];
+}
+
+.hiw-section {
+  @apply lg:max-w-[260px] flex flex-col justify-between w-full md:w-auto;
 }

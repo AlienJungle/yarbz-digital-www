@@ -1,6 +1,9 @@
 "use client";
 
 import triangle from "@/../public/tutoring/triangle.svg";
+import TypedTextAnimation from "@/components/animation/typed-text-animation";
+import { introBurstIn } from "@/lib/animations";
+import * as motion from "@/lib/motion";
 import { statics } from "@/static";
 import classNames from "classnames";
 import Image from "next/image";
@@ -42,13 +45,26 @@ export default function FAQSection() {
   };
 
   return (
-    <div className="my-32" id="faq">
-      <h1 className="text-3xl font-semibold leading-[64px] max-w-[381px] mb-[48px]">FAQ</h1>
-      <div className="flex flex-col gap-y-[30px]">
+    <div className="landing-section" id="faq">
+      <h2 className="my-[30px] lg:max-w-[381px] lg:mb-[48px]">
+        <TypedTextAnimation text="FAQ" />
+      </h2>
+      <motion.div
+        className="flex flex-col gap-y-[30px]"
+        initial="hidden"
+        whileInView={"visible"}
+        variants={{
+          visible: {
+            transition: {
+              staggerChildren: 0.1,
+            },
+          },
+        }}
+      >
         {questionsAndAnswers.map((qna, i) => (
-          <div key={qna.question} className="flex flex-col">
+          <motion.div key={qna.question} className="flex flex-col" variants={introBurstIn}>
             <div className="flex flex-row lg:items-center justify-between cursor-pointer gap-x-[20px]" onClick={() => handleRowToggle(i)} role="button">
-              <p className="flex-grow text-lg font-medium">{qna.question}</p>
+              <p className="flex-grow lg:text-lg font-medium">{qna.question}</p>
               <span className="flex-shrink-0 mt-[10px] lg:mt-0">
                 <Image
                   src={triangle}
@@ -60,13 +76,13 @@ export default function FAQSection() {
               </span>
             </div>
             {qna.isOpen && <div className="mt-[10px]">{qna.answer}</div>}
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
-      <a href={`mailto:${statics.contactEmail}`} className={classNames("inline-block btn-tut py-2 mt-[42px]", THEME_CLASSNAME_GREEN)}>
+      <motion.a href={`mailto:${statics.contactEmail}`} className={classNames("inline-block btn-tut py-2 mt-[42px]", THEME_CLASSNAME_GREEN)} initial="hidden" whileInView={"visible"} variants={introBurstIn}>
         I have a question!
-      </a>
+      </motion.a>
     </div>
   );
 }

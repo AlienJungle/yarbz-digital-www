@@ -5,13 +5,13 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="p-[40px]">
-      <div className="flex flex-row items-center justify-between">
+    <footer className="mb-[40px] lg:p-[40px]">
+      <div className="flex flex-col lg:flex-row items-center justify-between gap-y-[25px]">
         <div className="flex-1">
           <span>2023 Yarbz Digital Ltd</span>
         </div>
-        <div className="flex-1 flex flex-row items-center justify-center">
-          <ul className="flex flex-row gap-x-[20px]">
+        <div className="flex-1 flex flex-col lg:flex-row items-center justify-center">
+          <ul className="flex flex-col lg:flex-row gap-x-[20px] gap-y-[25px] items-center lg:items-start">
             <ul>Privacy policy</ul>
             <li>Terms of service</li>
             <li>Back to top</li>

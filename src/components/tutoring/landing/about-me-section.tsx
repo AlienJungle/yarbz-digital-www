@@ -1,9 +1,15 @@
+import TypedTextAnimation from "@/components/animation/typed-text-animation";
+import { introBurstIn, introSlideInFromRight } from "@/lib/animations";
+import * as motion from "@/lib/motion";
+
 export default function AboutMeSection() {
   return (
-    <div className="my-32" id="about">
-      <h1 className="text-3xl font-semibold leading-[60px] mb-[74px]">A bit about me...</h1>
-      <div className="flex flex-col lg:flex-row gap-x-[60px]">
-        <div className="lg:col-span-7 prose">
+    <div className="landing-section" id="about">
+      <h1 className="mb-[25px] lg:mb-[74px]">
+        <TypedTextAnimation text="A bit about me..." />
+      </h1>
+      <motion.div className="flex flex-col lg:flex-row gap-x-[60px]" initial="hidden" whileInView={"visible"} viewport={{ once: true }}>
+        <motion.div className="lg:col-span-7 prose" variants={introBurstIn}>
           <p>
             Hey there, I&apos;m Aaron!
             <br />
@@ -24,10 +30,10 @@ export default function AboutMeSection() {
             <br />
             Thanks for thinking about learning with me, and I&apos;m looking forward to hearing from you soon!
           </p>
-        </div>
-        <div className="col-span-5 relative">
-          <div className="sticky top-[50px]">
-            <iframe className="rounded-xl" width="500" height="333" src="https://www.youtube.com/embed/JDs9tFBFif0?si=u70at-f3dnBS8xXc" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+        </motion.div>
+        <motion.div className="col-span-5 relative mt-[52px] lg:mt-0" variants={introSlideInFromRight}>
+          <motion.div className="sticky top-[50px]">
+            <iframe className="rounded-xl w-full h-[55vw] lg:w-[500px] lg:h-[333px]" width="500" height="333" src="https://www.youtube.com/embed/JDs9tFBFif0?si=u70at-f3dnBS8xXc" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
 
             <h2 className="text-xl font-semibold leading-[65px] mt-[35px]">Technologies I work with</h2>
             <div className="prose prose-tut">
@@ -85,9 +91,9 @@ export default function AboutMeSection() {
                 </li>
               </ul>
             </div>
-          </div>
-        </div>
-      </div>
+          </motion.div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }
