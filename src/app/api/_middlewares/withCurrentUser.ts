@@ -6,6 +6,7 @@ import { DecodedIdTokenUser, User } from "../_models/user";
 
 export default async function withCurrentUser(req: NextRequest, callback: (decodedIdTokenUser: DecodedIdTokenUser) => Promise<NextResponse>): Promise<NextResponse> {
   const sessionCookie = req.cookies.get(process.env.SESSION_COOKIE_NAME)?.value ?? "";
+
   try {
     const claims = await auth.verifySessionCookie(sessionCookie, true);
 

@@ -23,8 +23,8 @@ const poppins = Poppins({
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { getCurrentUser } = useServerAuth();
-  const currentUser = await getCurrentUser();
 
+  const currentUser = await getCurrentUser();
   return (
     <html lang="en" className={poppins.className}>
       <body className="tutoring flex flex-col min-h-[100vh]">

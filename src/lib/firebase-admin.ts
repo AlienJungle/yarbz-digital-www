@@ -1,6 +1,7 @@
 import { Session } from "@/app/api/_models/session";
 import { User } from "@/app/api/_models/user";
 import * as admin from "firebase-admin";
+import { defineString } from "firebase-functions/params";
 import { firebaseConfig } from "./firebase-config";
 
 const serviceAccount = require("../../firebase-serviceaccount.json");
@@ -46,4 +47,13 @@ export const getUserSessions = async (uid: string) => {
 
   const docs = (await query.get()).docs;
   return docs;
+};
+
+export const environment = {
+  nextPublicSiteUrl: defineString("NEXT_PUBLIC_SITE_URL", {
+    default: "https://yarbz-digital.web.app",
+  }).value(),
+  sessionCookieName: defineString("SESSION_COOKIE_NAME", {
+    default: "session",
+  }).value(),
 };

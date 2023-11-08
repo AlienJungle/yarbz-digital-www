@@ -9,8 +9,6 @@ export default async function PricingSection() {
     rates = (await resp.json()).conversion_rates;
   }
 
-  console.log(rates);
-
   return (
     <div className="landing-section" id="pricing">
       <h1 className="my-[52px] lg:mb-[62px] flex flex-row items-center justify-between">

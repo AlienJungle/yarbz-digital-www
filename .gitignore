@@ -37,4 +37,4 @@ next-env.d.ts
 firebase-serviceaccount.json
 google_client_secret.json
 google_auth_token.json
-.env
+*.log
