@@ -1,25 +1,21 @@
-import { auth, getDbUser } from "@/lib/firebase-admin";
+import { useServerAuth } from "@/lib/useServerAuth";
 import { FirebaseError } from "firebase-admin";
 import { StatusCodes } from "http-status-codes";
 import { NextRequest, NextResponse } from "next/server";
-import { DecodedIdTokenUser, User } from "../_models/user";
+import { DecodedIdTokenUser } from "../_models/user";
 
 export default async function withCurrentUser(req: NextRequest, callback: (decodedIdTokenUser: DecodedIdTokenUser) => Promise<NextResponse>): Promise<NextResponse> {
-  const sessionCookie = req.cookies.get(process.env.SESSION_COOKIE_NAME)?.value ?? "";
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { getCurrentUser } = useServerAuth();
 
   try {
-    const claims = await auth.verifySessionCookie(sessionCookie, true);
-
-    const currDbUser = await getDbUser(claims.uid);
-    if (!currDbUser) {
-      throw "Could not find user record";
+    // TODO: Move getCurrentUser logic to firebase-admin.ts
+    const decodedIdTokenUser: DecodedIdTokenUser | null = await getCurrentUser();
+    if (!decodedIdTokenUser) {
+      return new NextResponse("UNAUTHORIZED", {
+        status: StatusCodes.UNAUTHORIZED,
+      });
     }
-
-    const decodedIdTokenUser: DecodedIdTokenUser = {
-      ...claims,
-      ...(currDbUser as User),
-    };
-
     return await callback(decodedIdTokenUser);
   } catch (error) {
     const firebaseError = error as FirebaseError;

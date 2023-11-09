@@ -18,10 +18,6 @@ import testPhilS from "@/../public/test-phil-s.jpg";
 import thumbAccessibility from "@/../public/thumb-accessibility.png";
 import thumbBespokeDev from "@/../public/thumb-bespoke-dev.png";
 import thumbHosting from "@/../public/thumb-hosting.png";
-import workFFF from "@/../public/work-fff.png";
-import workNSFGroup from "@/../public/work-nsfgroup.png";
-import workRehomeDog from "@/../public/work-rehome-dog.png";
-import workSportank from "@/../public/work-sportank.png";
 
 import TypedTextAnimation from "@/components/animation/typed-text-animation";
 import HireMeButton from "@/components/hire-me-button";
@@ -29,8 +25,6 @@ import RebrandBanner from "@/components/rebrand-banner";
 import ServiceCard from "@/components/service-card";
 import Testimonial from "@/components/testimonial";
 import TestimonialSlider from "@/components/testimonial-slider";
-import WorkImage from "@/components/work-image";
-import WorkSlider from "@/components/work-slider";
 import { introVariants } from "@/lib/animations";
 import * as motion from "@/lib/motion";
 import { Variants } from "framer-motion";
@@ -186,12 +180,12 @@ function WorkSection(): JSX.Element {
       <Image src={blobBlue} alt="" className="absolute left-[50px] -bottom-[150px] -z-10" />
 
       <div className="max-w-[70%] mx-auto relative">
-        <WorkSlider>
+        {/* <WorkSlider>
           <WorkImage imageSrc={workFFF} imageAlt="Fifty Five and Five's site redesign, showing a blog page titled how to boost your b2b marketing during a recession." />
           <WorkImage imageSrc={workSportank} imageAlt="Sportank's homepage, showing a collection widgets that offer sign up functionality, as well as fixtures, leagues, and news items." />
           <WorkImage imageSrc={workRehomeDog} imageAlt="NSF Group's sign-in page." />
           <WorkImage imageSrc={workNSFGroup} imageAlt="Newcastle Dog and Cat shelter's re-home a dog page." />
-        </WorkSlider>
+        </WorkSlider> */}
 
         <Image src={arrowRecentWork} alt="Arrow with caption 'check out my recent work'" className="absolute -right-[50px] -bottom-[250px] pointer-events-none" width={303} height={293} />
       </div>

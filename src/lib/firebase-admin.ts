@@ -1,23 +1,42 @@
 import { Session } from "@/app/api/_models/session";
 import { User } from "@/app/api/_models/user";
-import * as admin from "firebase-admin";
-import { defineString } from "firebase-functions/params";
+
 import { firebaseConfig } from "./firebase-config";
+
+import { App, cert, getApp, initializeApp } from "firebase-admin/app";
+import { getAuth } from "firebase-admin/auth";
+import { DocumentData, getFirestore } from "firebase-admin/firestore";
+import { FirebaseError } from "firebase/app";
 
 const serviceAccount = require("../../firebase-serviceaccount.json");
 
-const app = admin.apps.length
-  ? admin.app()
-  : admin.initializeApp({
-      ...firebaseConfig,
-      credential: admin.credential.cert(serviceAccount),
-    });
+const app: App = (() => {
+  try {
+    return getApp();
+  } catch (error) {
+    const firebaseError = error as FirebaseError;
+
+    switch (firebaseError.code) {
+      case "app/no-app":
+        console.log("Initializing firebase app...");
+        return initializeApp({
+          ...firebaseConfig,
+          // No need to import credential in firebase production environment
+          credential: cert(serviceAccount),
+        });
+
+      default:
+        throw error;
+    }
+  }
+})();
+
 export default app;
 
-export const auth = app.auth();
-export const db = app.firestore();
+export const auth = getAuth();
+export const db = getFirestore();
 
-export const getDbUser = async (uid: string): Promise<admin.firestore.DocumentData | null> => {
+export const getDbUser = async (uid: string): Promise<DocumentData | null> => {
   const userRef = db.collection("users").doc(uid);
   const doc = await userRef.get();
   return doc.exists ? doc.data()! : null;
@@ -47,13 +66,4 @@ export const getUserSessions = async (uid: string) => {
 
   const docs = (await query.get()).docs;
   return docs;
-};
-
-export const environment = {
-  nextPublicSiteUrl: defineString("NEXT_PUBLIC_SITE_URL", {
-    default: "https://yarbz-digital.web.app",
-  }).value(),
-  sessionCookieName: defineString("SESSION_COOKIE_NAME", {
-    default: "session",
-  }).value(),
 };

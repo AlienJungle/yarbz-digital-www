@@ -1,25 +1,33 @@
-import { DecodedIdTokenUser } from "@/app/api/_models/user";
-import { getURLFromRequestContext } from "@/server-helpers";
+import { DecodedIdTokenUser, User } from "@/app/api/_models/user";
+import { FirebaseError } from "firebase-admin";
 import { cookies } from "next/headers";
-import { fetchLogged } from "./fetch";
+import { auth, getDbUser } from "./firebase-admin";
 
 export function useServerAuth() {
   const getCurrentUser = async (): Promise<DecodedIdTokenUser | null> => {
-    const url = getURLFromRequestContext();
     const sessionCookie = cookies().get(process.env.SESSION_COOKIE_NAME)?.value ?? "";
+    if (!sessionCookie) return null;
 
-    const res = await fetchLogged(url.origin + "/api/auth/me", {
-      credentials: "include",
-      headers: {
-        Cookie: sessionCookie ? `${process.env.SESSION_COOKIE_NAME}=${sessionCookie}` : "",
-      },
-    });
+    try {
+      // TODO: Move getCurrentUser logic to firebase-admin.ts
+      const claims = await auth.verifySessionCookie(sessionCookie, true);
 
-    if (res.ok) {
-      return res.json();
+      const currDbUser = await getDbUser(claims.uid);
+      if (!currDbUser) {
+        throw "Could not find user record";
+      }
+
+      const decodedIdTokenUser: DecodedIdTokenUser = {
+        ...claims,
+        ...(currDbUser as User),
+      };
+
+      return decodedIdTokenUser;
+    } catch (error) {
+      const firebaseError = error as FirebaseError;
+      console.error("Could not get current user", JSON.stringify(firebaseError));
+      return null;
     }
-
-    return null;
   };
 
   return { getCurrentUser };

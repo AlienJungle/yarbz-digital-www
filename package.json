@@ -10,7 +10,8 @@
     "prettify": "prettier . --write",
     "prepare": "husky install",
     "deploy": "firebase deploy --only functions,hosting",
-    "emulate": "firebase emulators:start"
+    "emulate": "firebase emulators:start",
+    "test": "jest"
   },
   "dependencies": {
     "@google-cloud/local-auth": "^2.1.0",
@@ -21,21 +22,24 @@
     "firebase-admin": "^11.11.0",
     "firebase-functions": "^4.5.0",
     "firebaseui": "^6.1.0",
-    "flickity": "^2.3.0",
     "formik": "^2.4.5",
     "framer-motion": "^10.16.4",
     "googleapis": "^105.0.0",
     "gray-matter": "^4.0.3",
     "js-cookie": "^3.0.5",
-    "next": "13.5.4",
+    "next": "^14.0.2",
     "react": "^18",
     "react-dom": "^18",
     "react-flickity-component": "^4.0.7",
     "sharp": "^0.32.6",
+    "stream": "^0.0.2",
     "swr": "^2.2.4"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.10",
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^14.1.0",
+    "@types/jest": "^29.5.8",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -46,6 +50,8 @@
     "eslint-config-next": "13.5.4",
     "http-status-codes": "^2.3.0",
     "husky": "^8.0.3",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "lint-staged": "^14.0.1",
     "postcss": "^8",
     "prettier": "^3.0.3",
@@ -53,6 +59,7 @@
     "remark": "^15.0.1",
     "remark-html": "^16.0.1",
     "tailwindcss": "^3",
+    "ts-jest": "^29.1.1",
     "typescript": "^5"
   },
   "lint-staged": {
