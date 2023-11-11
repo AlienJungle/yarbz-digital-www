@@ -15,7 +15,12 @@ function loadServiceAccount() {
   if (process.env.GOOGLE_SERVICEACCOUNT) {
     return JSON.parse(process.env.GOOGLE_SERVICEACCOUNT);
   } else {
-    return require("../../firebase-serviceaccount.json");
+    try {
+      return require("../../firebase-serviceaccount.json");
+    } catch (error) {
+      console.warn("Could not load firebase-serviceaccount.json");
+      return null;
+    }
   }
 }
 
