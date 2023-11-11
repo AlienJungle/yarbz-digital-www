@@ -3,15 +3,21 @@ import { DecodedIdTokenUser, User } from "@/app/api/_models/user";
 
 import { firebaseConfig } from "./firebase-config";
 
-import express from "express";
 import { App, cert, getApp, initializeApp } from "firebase-admin/app";
 import { getAuth } from "firebase-admin/auth";
 import { DocumentData, getFirestore } from "firebase-admin/firestore";
-import { onRequest } from "firebase-functions/v2/https";
 import { FirebaseError } from "firebase/app";
 import { cookies } from "next/headers";
 
-const serviceAccount = require("../../firebase-serviceaccount.json");
+const serviceAccount = loadServiceAccount();
+
+function loadServiceAccount() {
+  if (process.env.GOOGLE_SERVICEACCOUNT) {
+    return JSON.parse(process.env.GOOGLE_SERVICEACCOUNT);
+  } else {
+    return require("../../firebase-serviceaccount.json");
+  }
+}
 
 const app: App = (() => {
   try {
@@ -95,11 +101,3 @@ export const getCurrentUserFromSession = async () => {
     return null;
   }
 };
-
-const api = express();
-
-api.post("/test/", (req, res) => {
-  res.json({ success: true });
-});
-
-export const funcApi = onRequest(api);
