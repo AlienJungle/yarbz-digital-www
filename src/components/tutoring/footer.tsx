@@ -2,19 +2,26 @@ import iconGitHub from "@/../public/icon-github.svg";
 import iconLinkedin from "@/../public/icon-linkedin.svg";
 import { statics } from "@/static";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="mb-[40px] lg:p-[40px]">
+    <footer className="mb-[40px] lg:p-[40px] lg:mb-0">
       <div className="flex flex-col lg:flex-row items-center justify-between gap-y-[25px]">
         <div className="flex-1">
           <span>2023 Yarbz Digital Ltd</span>
         </div>
         <div className="flex-1 flex flex-col lg:flex-row items-center justify-center">
           <ul className="flex flex-col lg:flex-row gap-x-[20px] gap-y-[25px] items-center lg:items-start">
-            <ul>Privacy policy</ul>
-            <li>Terms of service</li>
-            <li>Back to top</li>
+            <ul>
+              <Link href="/privacy-policy">Privacy policy</Link>
+            </ul>
+            <li>
+              <Link href="/terms-of-service">Terms of service</Link>
+            </li>
+            <li>
+              <a href="#">Back to top</a>
+            </li>
           </ul>
         </div>
         <div className="flex-1 flex flex-row items-center justify-end">

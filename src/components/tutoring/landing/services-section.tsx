@@ -1,7 +1,9 @@
 import Image, { StaticImageData } from "next/image";
 
 import iconThumb from "@/../public/tutoring/icon-thumb.svg";
+import iconTie from "@/../public/tutoring/icon-tie.svg";
 import iconTutoring from "@/../public/tutoring/icon-tutoring.svg";
+
 import TypedTextAnimation from "@/components/animation/typed-text-animation";
 
 import { introBurstIn } from "@/lib/animations";
@@ -20,7 +22,7 @@ export default function ServicesSection() {
       description: "Send me your code, and receive an expert code review with live feedback over a call.",
     },
     {
-      imageSrc: iconThumb,
+      imageSrc: iconTie,
       title: "Interview prep. and practice",
       description: "Prepare for your big interview the right way by letting me share my experience in both interviewing and hiring.",
     },

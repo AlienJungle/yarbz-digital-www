@@ -2,7 +2,7 @@
 
 import triangle from "@/../public/tutoring/triangle.svg";
 import TypedTextAnimation from "@/components/animation/typed-text-animation";
-import { introBurstIn } from "@/lib/animations";
+import { hoverVariant, introBurstIn, tapVariant } from "@/lib/animations";
 import * as motion from "@/lib/motion";
 import { statics } from "@/static";
 import classNames from "classnames";
@@ -53,6 +53,7 @@ export default function FAQSection() {
         className="flex flex-col gap-y-[30px]"
         initial="hidden"
         whileInView={"visible"}
+        viewport={{ once: true }}
         variants={{
           visible: {
             transition: {
@@ -80,7 +81,7 @@ export default function FAQSection() {
         ))}
       </motion.div>
 
-      <motion.a href={`mailto:${statics.contactEmail}`} className={classNames("inline-block btn-tut py-2 mt-[42px]", THEME_CLASSNAME_GREEN)} initial="hidden" whileInView={"visible"} variants={introBurstIn}>
+      <motion.a href={`mailto:${statics.contactEmail}`} className={classNames("inline-block btn-tut py-2 mt-[42px]", THEME_CLASSNAME_GREEN)} initial="hidden" whileInView={"visible"} variants={introBurstIn} viewport={{ once: true }} whileTap={tapVariant} whileHover={hoverVariant}>
         I have a question!
       </motion.a>
     </div>

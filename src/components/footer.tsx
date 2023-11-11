@@ -25,6 +25,13 @@ export default function Footer(): JSX.Element {
               </motion.span>
             </Link>
           </li>
+          <li>
+            <Link href="/terms-of-service" tabIndex={0} className="font-semibold">
+              <motion.span className="inline-block" whileHover={hoverVariant} whileTap={tapVariant}>
+                Terms of service
+              </motion.span>
+            </Link>
+          </li>
         </ul>
         <div className="text-center">© 2024 Yarbz Digital Ltd</div>
 

@@ -4,6 +4,7 @@ import "../globals.css";
 
 import Footer from "@/components/footer";
 import { Poppins } from "next/font/google";
+import { RedirectType, redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: {
@@ -20,6 +21,11 @@ const poppins = Poppins({
 });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  if (process.env.NODE_ENV !== "production") {
+    redirect("/coming-soon", RedirectType.push);
+    return;
+  }
+
   return (
     <html lang="en" className={poppins.className}>
       <body>

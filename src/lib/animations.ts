@@ -5,11 +5,11 @@ import { TargetAndTransition, VariantLabels, Variants } from "framer-motion";
 type Variant = TargetAndTransition | VariantLabels | undefined;
 
 export const tapVariant: Variant = {
-  scale: 0.8,
+  scale: 0.95,
 };
 
 export const hoverVariant: Variant = {
-  scale: 1.1,
+  scale: 1.075,
 };
 
 export const introVariants: Variants = {
@@ -38,6 +38,7 @@ export const introBurstIn: Variants = {
       type: "spring",
       stiffness: "100",
       duration: 0.5,
+      mass: 0.2,
     },
   },
 };
@@ -60,7 +61,7 @@ export const hoverScale: Variant = {
 };
 
 export const tapScale: Variant = {
-  scale: 0.9,
+  scale: 0.95,
   transition: {
     type: "spring",
     duration: 0.3,

@@ -1,3 +1,5 @@
+import { hoverVariant, tapVariant } from "@/lib/animations";
+import * as motion from "@/lib/motion";
 import classNames from "classnames";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -11,16 +13,18 @@ export const THEME_CLASSNAME_GREY = "bg-gray-100 text-yd-tut-black";
 
 export default function Button(props: ButtonProps) {
   return (
-    <button
-      {...props}
-      className={classNames("btn-tut", props.className, {
-        [THEME_CLASSNAME_GREEN]: props.theme === "green",
-        [THEME_CLASSNAME_BLACK]: props.theme === "black",
-        [THEME_CLASSNAME_GREY]: props.theme === "grey",
-        "btn-tut-small": props.size === "small",
-      })}
-    >
-      {props.children}
-    </button>
+    <motion.span whileHover={hoverVariant} whileTap={tapVariant}>
+      <button
+        {...props}
+        className={classNames("btn-tut w-full", props.className, {
+          [THEME_CLASSNAME_GREEN]: props.theme === "green",
+          [THEME_CLASSNAME_BLACK]: props.theme === "black",
+          [THEME_CLASSNAME_GREY]: props.theme === "grey",
+          "btn-tut-small": props.size === "small",
+        })}
+      >
+        {props.children}
+      </button>
+    </motion.span>
   );
 }

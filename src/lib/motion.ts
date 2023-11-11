@@ -11,3 +11,4 @@ export const h2 = motion.h2;
 export const h3 = motion.h3;
 export const p = motion.p;
 export const main = motion.main;
+export const button = motion.button;
