@@ -10,9 +10,17 @@ const SCOPES = ["https://www.googleapis.com/auth/calendar.events", "https://www.
 const KEY_PATH = path.join(process.cwd(), "./google_client_secret.json");
 const TOKEN_PATH = path.join(process.cwd(), "./google_auth_token.json");
 
-let keys: any;
-if (!keys && fs.existsSync(KEY_PATH)) {
-  keys = JSON.parse(fs.readFileSync(KEY_PATH).toString()).web;
+let keys = loadKeys();
+
+function loadKeys() {
+  if (process.env.GOOGLE_CLIENT_SECRET) {
+    const secret = JSON.parse(process.env.GOOGLE_CLIENT_SECRET);
+    return secret.web;
+  }
+
+  if (fs.existsSync(KEY_PATH)) {
+    keys = JSON.parse(fs.readFileSync(KEY_PATH).toString()).web;
+  }
 }
 
 const oauth2Client = new google.auth.OAuth2(keys.client_id, keys.client_secret, keys.redirect_uris);
