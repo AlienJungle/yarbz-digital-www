@@ -18,7 +18,7 @@ interface SignupValues {
 export default function Signup() {
   const router = useCustomRouter();
   const searchParams = useSearchParams();
-  const redirect = searchParams.get("redirect");
+  const redirect = searchParams?.get("redirect");
 
   const handleFormSubmit = (values: SignupValues, helpers: FormikHelpers<SignupValues>) => {
     createUserWithEmailAndPassword(fbContext.auth, values.email, values.password)

@@ -19,7 +19,7 @@ export default function LoginEmail() {
   const { loginWithEmailAndPassword } = useAuth();
 
   const handleLoginSubmit = (values: LoginEmailValues, helpers: FormikHelpers<LoginEmailValues>) => {
-    loginWithEmailAndPassword(values.email, values.password, searchParams.get("redirect") ?? undefined)
+    loginWithEmailAndPassword(values.email, values.password, searchParams?.get("redirect") ?? undefined)
       .catch((error) => {
         alert(error);
       })

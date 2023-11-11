@@ -19,11 +19,11 @@ export default function LoginPage() {
   const { loginWithProvider } = useAuth();
 
   const handleGoogleLoginClick = () => {
-    loginWithProvider(new GoogleAuthProvider(), searchParams.get("redirect") ?? undefined).catch((err) => alert(err));
+    loginWithProvider(new GoogleAuthProvider(), searchParams?.get("redirect") ?? undefined).catch((err) => alert(err));
   };
 
   const handleGitHubLoginClick = () => {
-    loginWithProvider(new GithubAuthProvider(), searchParams.get("redirect") ?? undefined).catch((err) => alert(err));
+    loginWithProvider(new GithubAuthProvider(), searchParams?.get("redirect") ?? undefined).catch((err) => alert(err));
   };
 
   return (

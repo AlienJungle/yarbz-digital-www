@@ -6,11 +6,12 @@ export function middleware(request: NextRequest) {
   requestHeaders.set("x-url", request.url);
 
   const authedUrlBase = ["/tutoring/dashboard"];
+  const url = new URL(request.url);
 
   if (!request.cookies.get("session")) {
     const loginRedirect = authedUrlBase.some((x) => request.nextUrl.pathname.startsWith(x));
     if (loginRedirect) {
-      return NextResponse.redirect(process.env.NEXT_PUBLIC_SITE_URL + "/tutoring/login?redirect=" + request.nextUrl.pathname, {
+      return NextResponse.redirect(`${url.origin}/tutoring/login?redirect=${request.nextUrl.pathname}`, {
         headers: requestHeaders,
       });
     }

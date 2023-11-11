@@ -48,9 +48,9 @@ export default function DashboardPage() {
           )}
         </div>
 
-        {searchParams.get("purchase") === "true" && <Alert className="mb-10">Your purchase was successful! You can now go ahead and book a lesson.</Alert>}
+        {searchParams?.get("purchase") === "true" && <Alert className="mb-10">Your purchase was successful! You can now go ahead and book a lesson.</Alert>}
 
-        {searchParams.get("bookedsession") === "true" && <Alert className="mb-10">Your session was booked successfully!</Alert>}
+        {searchParams?.get("bookedsession") === "true" && <Alert className="mb-10">Your session was booked successfully!</Alert>}
 
         <div className="grid lg:grid-cols-4 xl:grid-cols-6 gap-[30px] lg:gap-[50px]">
           <div className="lg:col-span-2 xl:col-span-2">

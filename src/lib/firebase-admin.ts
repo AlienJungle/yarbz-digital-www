@@ -1,12 +1,15 @@
 import { Session } from "@/app/api/_models/session";
-import { User } from "@/app/api/_models/user";
+import { DecodedIdTokenUser, User } from "@/app/api/_models/user";
 
 import { firebaseConfig } from "./firebase-config";
 
+import express from "express";
 import { App, cert, getApp, initializeApp } from "firebase-admin/app";
 import { getAuth } from "firebase-admin/auth";
 import { DocumentData, getFirestore } from "firebase-admin/firestore";
+import { onRequest } from "firebase-functions/v2/https";
 import { FirebaseError } from "firebase/app";
+import { cookies } from "next/headers";
 
 const serviceAccount = require("../../firebase-serviceaccount.json");
 
@@ -18,7 +21,6 @@ const app: App = (() => {
 
     switch (firebaseError.code) {
       case "app/no-app":
-        console.log("Initializing firebase app...");
         return initializeApp({
           ...firebaseConfig,
           // No need to import credential in firebase production environment
@@ -67,3 +69,37 @@ export const getUserSessions = async (uid: string) => {
   const docs = (await query.get()).docs;
   return docs;
 };
+
+export const getCurrentUserFromSession = async () => {
+  const sessionCookie = cookies().get(process.env.SESSION_COOKIE_NAME)?.value ?? "";
+
+  if (!sessionCookie) return null;
+
+  try {
+    const claims = await auth.verifySessionCookie(sessionCookie, true);
+
+    const currDbUser = await getDbUser(claims.uid);
+    if (!currDbUser) {
+      throw "Could not find user record";
+    }
+
+    const decodedIdTokenUser: DecodedIdTokenUser = {
+      ...claims,
+      ...(currDbUser as User),
+    };
+
+    return decodedIdTokenUser;
+  } catch (error) {
+    const firebaseError = error as FirebaseError;
+    console.error("Could not get current user", JSON.stringify(firebaseError));
+    return null;
+  }
+};
+
+const api = express();
+
+api.post("/test/", (req, res) => {
+  res.json({ success: true });
+});
+
+export const funcApi = onRequest(api);

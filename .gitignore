@@ -38,3 +38,8 @@ firebase-serviceaccount.json
 google_client_secret.json
 google_auth_token.json
 *.log
+
+# Local Netlify folder
+.netlify
+
+.swc

@@ -4,7 +4,13 @@
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**", ".env.local", "**/.github/**", "**/.husky/**", "**/src/**", "**/.vscode/**", "*.log", "**/.git/**"],
     "frameworksBackend": {
       "region": "europe-west1"
-    }
+    },
+    "rewrites": [
+      {
+        "source": "/testapi/**",
+        "function": "testFunc"
+      }
+    ]
   },
   "emulators": {
     "auth": {
