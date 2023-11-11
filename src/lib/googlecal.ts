@@ -71,8 +71,12 @@ export const cache = {
       let nextPageToken: string | null = null;
 
       do {
-        const gResponse = await googleCalendar.calendarList.list({ pageToken: nextPageToken! });
-        calendars = [...calendars, ...(gResponse.data.items ?? [])];
+        try {
+          const gResponse = await googleCalendar.calendarList.list({ pageToken: nextPageToken! });
+          calendars = [...calendars, ...(gResponse.data.items ?? [])];
+        } catch (error: any) {
+          console.error("Could not fetch calendar list: " + error?.message ?? error);
+        }
       } while (nextPageToken);
 
       return calendars;
