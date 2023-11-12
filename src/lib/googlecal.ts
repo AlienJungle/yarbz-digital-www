@@ -1,36 +1,60 @@
 import fs from "fs";
-import { Credentials } from "google-auth-library";
+import { Credentials, OAuth2Client } from "google-auth-library";
 import { calendar_v3, google } from "googleapis";
 
 import path from "path";
+import { GlobalRef } from "./GlobalRef";
 import { ItemCache } from "./item-cache";
 
-const SCOPES = ["https://www.googleapis.com/auth/calendar.events", "https://www.googleapis.com/auth/calendar.readonly"];
+// TODO: TIDY
+
+const SCOPES = [
+  "https://www.googleapis.com/auth/calendar.events",
+  "https://www.googleapis.com/auth/calendar.readonly",
+];
 
 const KEY_PATH = path.join(process.cwd(), "./google_client_secret.json");
 const TOKEN_PATH = path.join(process.cwd(), "./google_auth_token.json");
 
-let keys = loadKeys();
+function createOAuthClient(): OAuth2Client {
+  const keys = getKeys();
 
-function loadKeys() {
+  const client = new google.auth.OAuth2(
+    keys.client_id,
+    keys.client_secret,
+    keys.redirect_uris,
+  );
+
+  const savedToken = loadTokenFromDisk();
+  if (savedToken) {
+    client.setCredentials(savedToken);
+  }
+
+  google.options({ auth: client });
+
+  return client;
+}
+
+function getKeys(): any {
   if (process.env.GOOGLE_CLIENT_SECRET) {
     const secret = JSON.parse(process.env.GOOGLE_CLIENT_SECRET);
     return secret.web;
   }
 
   if (fs.existsSync(KEY_PATH)) {
-    keys = JSON.parse(fs.readFileSync(KEY_PATH).toString()).web;
+    return JSON.parse(fs.readFileSync(KEY_PATH).toString()).web;
   }
+
+  throw "Could not load Google OAuth keys.";
 }
 
-const oauth2Client = new google.auth.OAuth2(keys.client_id, keys.client_secret, keys.redirect_uris);
-
-const savedToken = loadTokenFromDisk();
-if (savedToken) {
-  oauth2Client.setCredentials(savedToken);
+const oauth2ClientRef = new GlobalRef<OAuth2Client>("google-oauth-client");
+if (!oauth2ClientRef.value) {
+  console.log("Creating new Google OAuth client...");
+  oauth2ClientRef.value = createOAuthClient();
 }
 
-google.options({ auth: oauth2Client });
+export const oauth2Client = oauth2ClientRef.value;
 
 export const generateAuthUrl = () =>
   oauth2Client.generateAuthUrl({
@@ -72,10 +96,14 @@ export const cache = {
 
       do {
         try {
-          const gResponse = await googleCalendar.calendarList.list({ pageToken: nextPageToken! });
+          const gResponse = await googleCalendar.calendarList.list({
+            pageToken: nextPageToken!,
+          });
           calendars = [...calendars, ...(gResponse.data.items ?? [])];
         } catch (error: any) {
-          console.error("Could not fetch calendar list: " + error?.message ?? error);
+          console.error(
+            "Could not fetch calendar list: " + error?.message ?? error,
+          );
         }
       } while (nextPageToken);
 
@@ -85,6 +113,7 @@ export const cache = {
   ),
 };
 
-export const refreshSingleton = () => {};
-
-export const googleCalendar = google.calendar({ version: "v3", auth: googleClient });
+export const googleCalendar = google.calendar({
+  version: "v3",
+  auth: googleClient,
+});

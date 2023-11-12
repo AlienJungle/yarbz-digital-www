@@ -1,4 +1,9 @@
-import { createSession, db, getUserSessions, updateSession } from "@/lib/firebase-admin";
+import {
+  createSession,
+  db,
+  getUserSessions,
+  updateSession,
+} from "@/lib/firebase-admin";
 import { googleCalendar } from "@/lib/googlecal";
 import { statics } from "@/static";
 import { add } from "date-fns";
@@ -11,7 +16,10 @@ interface POSTParams {
   uid: string;
 }
 
-export async function POST(req: NextRequest, { params }: { params: POSTParams }): Promise<NextResponse> {
+export async function POST(
+  req: NextRequest,
+  { params }: { params: POSTParams },
+): Promise<NextResponse> {
   return withCurrentUser(req, async (currUser) => {
     const reqBody: Session = await req.json();
 
@@ -33,14 +41,18 @@ export async function POST(req: NextRequest, { params }: { params: POSTParams })
 
     // Create calendar event
 
-    const endDate = add(new Date(session.start_date), { minutes: session.duration_minutes });
+    const endDate = add(new Date(session.start_date), {
+      minutes: session.duration_minutes,
+    });
 
     const calResult = await googleCalendar.events.insert({
       calendarId: statics.bookingCalendarId,
       conferenceDataVersion: 1,
       requestBody: {
         summary: `${currUser.name} - Tutoring`,
-        description: "Get ready for your upcoming tutoring lesson!\n\nStudent notes: " + session.message,
+        description:
+          "Get ready for your upcoming tutoring lesson!\n\nStudent notes: " +
+          session.message,
         start: {
           dateTime: session.start_date,
           timeZone: session.timezone,
@@ -59,7 +71,10 @@ export async function POST(req: NextRequest, { params }: { params: POSTParams })
         },
         attendees: [
           { email: statics.calendarInviteEmail, displayName: currUser.name },
-          { email: currUser.email, displayName: statics.calendarInviteDisplayName },
+          {
+            email: currUser.email,
+            displayName: statics.calendarInviteDisplayName,
+          },
         ],
         reminders: {
           useDefault: false,
@@ -73,7 +88,11 @@ export async function POST(req: NextRequest, { params }: { params: POSTParams })
     });
 
     if (calResult.status === StatusCodes.OK) {
-      console.log("Successfully created calendar event for session " + docSnapshot.id, "Data=", calResult);
+      console.log(
+        "Successfully created calendar event for session " + docSnapshot.id,
+        "Data=",
+        calResult,
+      );
 
       await updateSession(docSnapshot.id, {
         meeting_link: calResult.data.hangoutLink ?? undefined,
@@ -81,7 +100,13 @@ export async function POST(req: NextRequest, { params }: { params: POSTParams })
 
       console.log("Updated meeting link for session " + docSnapshot.id);
     } else {
-      console.error("Error creating calendar event for session " + docSnapshot.id, "Status=", calResult.status, "Data=", calResult.data);
+      console.error(
+        "Error creating calendar event for session " + docSnapshot.id,
+        "Status=",
+        calResult.status,
+        "Data=",
+        calResult.data,
+      );
     }
 
     return new NextResponse(null, {
@@ -90,7 +115,10 @@ export async function POST(req: NextRequest, { params }: { params: POSTParams })
   });
 }
 
-export async function GET(req: NextRequest, { params }: { params: POSTParams }): Promise<NextResponse> {
+export async function GET(
+  req: NextRequest,
+  { params }: { params: POSTParams },
+): Promise<NextResponse> {
   return withCurrentUser(req, async (currentUser) => {
     if (!currentUser.is_admin && currentUser.uid !== params.uid) {
       return new NextResponse("UNAUTHORIZED", {
@@ -100,7 +128,10 @@ export async function GET(req: NextRequest, { params }: { params: POSTParams }):
 
     const sessionsSnapshot = await getUserSessions(params.uid);
 
-    const sessions = sessionsSnapshot.map((ss) => ss.data());
+    const sessions = sessionsSnapshot.map((ss) => ({
+      uid: ss.id,
+      ...ss.data(),
+    }));
 
     return NextResponse.json(sessions);
   });

@@ -16,7 +16,9 @@ export default function PreviousSessionsCard() {
 
   return (
     <div className="card-tut">
-      <h2 className="text-xl font-bold mb-[30px]">Your previous sessions {!isLoading && `(${sessions?.length ?? 0})`} </h2>
+      <h2 className="text-xl font-bold mb-[30px]">
+        Your previous sessions {!isLoading && `(${sessions?.length ?? 0})`}{" "}
+      </h2>
 
       <div
         className={classNames({
@@ -31,7 +33,7 @@ export default function PreviousSessionsCard() {
 
         {!!sessions?.length && (
           <table
-            className={classNames("table-fixed w-full", {
+            className={classNames("table-auto w-full", {
               skeleton: isLoading,
             })}
           >

@@ -1,5 +1,4 @@
 {
   "plugins": ["prettier-plugin-organize-imports"],
-  "proseWrap": "never",
-  "printWidth": 9999
+  "proseWrap": "never"
 }

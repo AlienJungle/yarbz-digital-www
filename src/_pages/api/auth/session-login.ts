@@ -4,7 +4,10 @@ import { setCookie } from "cookies-next";
 import { StatusCodes } from "http-status-codes";
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
   if (req.method !== "POST") {
     return res.send(StatusCodes.METHOD_NOT_ALLOWED);
   }

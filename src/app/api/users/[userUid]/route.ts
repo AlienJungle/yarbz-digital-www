@@ -8,16 +8,19 @@ export interface DBUser {
 }
 
 interface GETParams {
-  uid: string;
+  userUid: string;
 }
 
-export async function GET(req: NextRequest, { params }: { params: GETParams }): Promise<Response> {
-  const data = await getDbUser(params.uid);
+export async function GET(
+  req: NextRequest,
+  { params }: { params: GETParams },
+): Promise<Response> {
+  const data = await getDbUser(params.userUid);
 
   if (!data) {
     return Response.json(
       {
-        error: `User with uid ${params.uid} could not be found`,
+        error: `User with uid ${params.userUid} could not be found`,
       },
       {
         status: StatusCodes.NOT_FOUND,

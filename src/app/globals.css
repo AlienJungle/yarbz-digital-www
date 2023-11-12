@@ -107,7 +107,7 @@ table th {
 }
 
 .skeleton > * {
-  @apply bg-yd-grey text-transparent rounded-lg animate-pulse overflow-hidden;
+  @apply bg-yd-grey text-yd-grey text-transparent rounded-lg animate-pulse overflow-hidden pointer-events-none;
 }
 
 .landing-section {

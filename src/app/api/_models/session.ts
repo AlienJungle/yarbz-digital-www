@@ -1,11 +1,16 @@
 import { DocumentReference } from "firebase-admin/firestore";
 
 export interface Session {
+  uid?: string;
   create_date: string;
   start_date: string;
   timezone: string;
   duration_minutes: number;
-  confirmation_status?: "cancelled" | "cancelled-refunded" | "no-show" | "complete";
+  confirmation_status?:
+    | "cancelled"
+    | "cancelled-refunded"
+    | "no-show"
+    | "complete";
   message: string;
   user: DocumentReference;
   meeting_link?: string;

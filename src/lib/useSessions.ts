@@ -6,7 +6,12 @@ import useSWR from "swr";
 import { fetcher } from "./swr";
 
 export default function useSessions(uid: string) {
-  const bookSession = async (session: Pick<Session, "start_date" | "duration_minutes" | "message" | "timezone">) => {
+  const bookSession = async (
+    session: Pick<
+      Session,
+      "start_date" | "duration_minutes" | "message" | "timezone"
+    >,
+  ) => {
     return await fetch(`/api/users/${uid}/sessions`, {
       method: "POST",
       body: JSON.stringify(session),
@@ -14,7 +19,10 @@ export default function useSessions(uid: string) {
   };
 
   const getUpcomingSessions = () => {
-    const { data, isLoading, error } = useSWR<Session[], Error>(`/api/users/${uid}/sessions`, fetcher);
+    const { data, isLoading, error } = useSWR<Session[], Error>(
+      `/api/users/${uid}/sessions`,
+      fetcher,
+    );
 
     const now = new Date();
 
@@ -26,7 +34,10 @@ export default function useSessions(uid: string) {
   };
 
   const getPreviousLessons = () => {
-    const { data, isLoading, error } = useSWR<Session[], Error>(`/api/users/${uid}/sessions`, fetcher);
+    const { data, isLoading, error } = useSWR<Session[], Error>(
+      `/api/users/${uid}/sessions`,
+      fetcher,
+    );
 
     const now = new Date();
 
@@ -41,5 +52,18 @@ export default function useSessions(uid: string) {
     };
   };
 
-  return { bookSession, getUpcomingSessions, getPreviousLessons };
+  const getSession = (sessionUid: string) => {
+    const { data, isLoading, error } = useSWR<Session, Error>(
+      `/api/users/${uid}/sessions/${sessionUid}`,
+      fetcher,
+    );
+
+    return {
+      session: data,
+      isLoading,
+      error,
+    };
+  };
+
+  return { bookSession, getUpcomingSessions, getPreviousLessons, getSession };
 }

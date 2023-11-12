@@ -5,6 +5,7 @@ import { UserContext } from "@/components/providers/user-provider";
 import Button from "@/components/tutoring/button";
 import useFreeBusy from "@/lib/useFreeBusy";
 import useSessions from "@/lib/useSessions";
+import { SelectOption } from "@/models/SelectOption";
 import { add, areIntervalsOverlapping, format } from "date-fns";
 import { Formik, FormikHelpers } from "formik";
 import { useRouter } from "next/navigation";
@@ -15,12 +16,6 @@ interface BookSessionValues {
   time: string | undefined;
   duration: string | undefined;
   message: string | undefined;
-}
-
-interface SelectOption<T> {
-  label: string;
-  value: T;
-  disabled?: boolean;
 }
 
 export default function BookSessionPage() {
@@ -59,7 +54,10 @@ export default function BookSessionPage() {
     );
   }, []);
 
-  const handleBookingSubmit = async (values: BookSessionValues, helpers: FormikHelpers<BookSessionValues>) => {
+  const handleBookingSubmit = async (
+    values: BookSessionValues,
+    helpers: FormikHelpers<BookSessionValues>,
+  ) => {
     try {
       await bookSession({
         start_date: values.time!,
@@ -71,7 +69,10 @@ export default function BookSessionPage() {
       router.push("/tutoring/dashboard?bookedsession=true");
     } catch (error: any) {
       console.error(error);
-      alert("An error occurred while booking your session: " + error?.message ?? error);
+      alert(
+        "An error occurred while booking your session: " + error?.message ??
+          error,
+      );
     }
   };
 
@@ -82,7 +83,9 @@ export default function BookSessionPage() {
         <h1 className="text-3xl font-semibold my-10">Book a session</h1>
 
         <p className="my-6">
-          You have <strong>{currentUser!.available_sessions ?? 0} sessions</strong> left to book.
+          You have{" "}
+          <strong>{currentUser!.available_sessions ?? 0} sessions</strong> left
+          to book.
         </p>
 
         <Formik<BookSessionValues>
@@ -110,31 +113,63 @@ export default function BookSessionPage() {
             return errors;
           }}
         >
-          {({ values, handleSubmit, handleChange, handleBlur, isValid, errors, setFieldValue, isSubmitting }) => {
-            const handleDurationChange = async (e: ChangeEvent<HTMLSelectElement>) => {
+          {({
+            values,
+            handleSubmit,
+            handleChange,
+            handleBlur,
+            isValid,
+            errors,
+            setFieldValue,
+            isSubmitting,
+          }) => {
+            const handleDurationChange = async (
+              e: ChangeEvent<HTMLSelectElement>,
+            ) => {
               handleChange(e);
               if (e.currentTarget.value && values.date) {
                 updateTimeSlots(parseInt(e.currentTarget.value), values.date);
               }
             };
 
-            const handleDateChange = async (e: ChangeEvent<HTMLSelectElement>) => {
+            const handleDateChange = async (
+              e: ChangeEvent<HTMLSelectElement>,
+            ) => {
               handleChange(e);
               if (e.currentTarget.value && values.duration) {
-                updateTimeSlots(parseInt(values.duration), e.currentTarget.value);
+                updateTimeSlots(
+                  parseInt(values.duration),
+                  e.currentTarget.value,
+                );
               }
             };
 
-            const updateTimeSlots = async (durationValue: number, dateValue: string) => {
+            const updateTimeSlots = async (
+              durationValue: number,
+              dateValue: string,
+            ) => {
               const date = new Date(dateValue);
 
               setTimes([]);
               setLoadingTimes(true);
-              const busySlots = await getFreeBusyOnDate(dateValue, Intl.DateTimeFormat().resolvedOptions().timeZone);
+              const busySlots = await getFreeBusyOnDate(
+                dateValue,
+                Intl.DateTimeFormat().resolvedOptions().timeZone,
+              );
               setLoadingTimes(false);
 
-              const fromDateTime = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 9);
-              const toDateTime = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 22);
+              const fromDateTime = new Date(
+                date.getFullYear(),
+                date.getMonth(),
+                date.getDate(),
+                9,
+              );
+              const toDateTime = new Date(
+                date.getFullYear(),
+                date.getMonth(),
+                date.getDate(),
+                22,
+              );
 
               const timeSlots: SelectOption<Date>[] = [];
 
@@ -171,11 +206,21 @@ export default function BookSessionPage() {
             };
 
             return (
-              <form className="flex flex-col gap-y-[30px]" onSubmit={handleSubmit}>
+              <form
+                className="flex flex-col gap-y-[30px]"
+                onSubmit={handleSubmit}
+              >
                 <div className="flex flex-row gap-x-[30px]">
                   <div className="flex-1">
                     <label htmlFor="duration">Duration</label>
-                    <select id="duration" name="duration" required className="tut-form-control" onChange={handleDurationChange} onBlur={handleBlur}>
+                    <select
+                      id="duration"
+                      name="duration"
+                      required
+                      className="tut-form-control"
+                      onChange={handleDurationChange}
+                      onBlur={handleBlur}
+                    >
                       <option value={undefined}>-- Select a duration --</option>
                       {durations.map((option) => (
                         <option key={option.value} value={option.value}>
@@ -183,11 +228,19 @@ export default function BookSessionPage() {
                         </option>
                       ))}
                     </select>
-                    {errors.duration && <span className="yd-form-error">{errors.duration}</span>}
+                    {errors.duration && (
+                      <span className="yd-form-error">{errors.duration}</span>
+                    )}
                   </div>
                   <div className="flex-1">
                     <label htmlFor="date">Date</label>
-                    <select id="date" name="date" className="tut-form-control" onChange={handleDateChange} onBlur={handleBlur}>
+                    <select
+                      id="date"
+                      name="date"
+                      className="tut-form-control"
+                      onChange={handleDateChange}
+                      onBlur={handleBlur}
+                    >
                       <option value={""}>-- Select a date --</option>
                       {dates.map((date) => (
                         <option key={date.getTime()} value={date.toISOString()}>
@@ -195,32 +248,61 @@ export default function BookSessionPage() {
                         </option>
                       ))}
                     </select>
-                    {errors.date && <span className="yd-form-error">{errors.date}</span>}
+                    {errors.date && (
+                      <span className="yd-form-error">{errors.date}</span>
+                    )}
                   </div>
                   <div className="flex-1">
                     <label htmlFor="time">Time</label>
-                    <select id="time" name="time" required className="tut-form-control" onChange={handleChange} disabled={!values.date || loadingTimes}>
+                    <select
+                      id="time"
+                      name="time"
+                      required
+                      className="tut-form-control"
+                      onChange={handleChange}
+                      disabled={!values.date || loadingTimes}
+                    >
                       <option value={undefined}>
                         {loadingTimes && "Getting times..."}
                         {!loadingTimes && "-- Select a time --"}
                       </option>
                       {times.map((option) => (
-                        <option key={option.value.toISOString()} value={option.value.toISOString()} disabled={option.disabled}>
+                        <option
+                          key={option.value.toISOString()}
+                          value={option.value.toISOString()}
+                          disabled={option.disabled}
+                        >
                           {option.label}
                         </option>
                       ))}
                     </select>
-                    {errors.time && <span className="yd-form-error">{errors.time}</span>}
+                    {errors.time && (
+                      <span className="yd-form-error">{errors.time}</span>
+                    )}
                   </div>
                 </div>
 
                 <div>
                   <label htmlFor="message">Message</label>
-                  <textarea id="message" name="message" className="w-full tut-form-control block" placeholder="This session, I want to focus on..." maxLength={1000} rows={5} value={values.message} onChange={handleChange} onBlur={handleBlur} />
+                  <textarea
+                    id="message"
+                    name="message"
+                    className="w-full tut-form-control block"
+                    placeholder="This session, I want to focus on..."
+                    maxLength={1000}
+                    rows={5}
+                    value={values.message}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
                 </div>
 
                 <div className="flex flex-row justify-end">
-                  <Button theme="green" type="submit" disabled={!isValid || isSubmitting}>
+                  <Button
+                    theme="green"
+                    type="submit"
+                    disabled={!isValid || isSubmitting}
+                  >
                     Book session
                   </Button>
                 </div>

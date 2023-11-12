@@ -17,21 +17,9 @@ export default function DashboardPage() {
 
   const currUser = userCtx.currentUser;
 
-  // const { getSessions } = useSessions(currUser!.uid);
-
-  // const [sessions, setSessions] = useState<Session[]>([]);
-  const [upcomingSessionsError, setUpcomingSessionsError] = useState<string | undefined>(undefined);
-
-  // useEffect(() => {
-  //   getSessions()
-  //     .then((sessions) => {
-  //       setSessions(sessions);
-  //     })
-  //     .catch((err) => {
-  //       setUpcomingSessionsError(err);
-  //     });
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+  const [upcomingSessionsError, setUpcomingSessionsError] = useState<
+    string | undefined
+  >(undefined);
 
   return (
     <main>
@@ -43,33 +31,48 @@ export default function DashboardPage() {
               <span className="text-base opacity-50 font-semibold ">
                 logged in as {currUser.name} ({currUser!.email})
               </span>
-              <Image src={currUser.picture!} width={30} height={30} alt={"Image of " + currUser.name} className="rounded-full hidden lg:inline" />
+              <Image
+                src={currUser.picture!}
+                width={30}
+                height={30}
+                alt={"Image of " + currUser.name}
+                className="rounded-full hidden lg:inline"
+              />
             </span>
           )}
         </div>
 
-        {searchParams?.get("purchase") === "true" && <Alert className="mb-10">Your purchase was successful! You can now go ahead and book a lesson.</Alert>}
+        {searchParams?.get("purchase") === "true" && (
+          <Alert className="mb-10">
+            Your purchase was successful! You can now go ahead and book a
+            lesson.
+          </Alert>
+        )}
 
-        {searchParams?.get("bookedsession") === "true" && <Alert className="mb-10">Your session was booked successfully!</Alert>}
+        {searchParams?.get("bookedsession") === "true" && (
+          <Alert className="mb-10">Your session was booked successfully!</Alert>
+        )}
 
-        <div className="grid lg:grid-cols-4 xl:grid-cols-6 gap-[30px] lg:gap-[50px]">
-          <div className="lg:col-span-2 xl:col-span-2">
-            <SessionsCard availableSessions={currUser?.available_sessions ?? 0} />
+        <div className="grid lg:grid-cols-4 xl:grid-cols-12 gap-[30px] lg:gap-[50px]">
+          <div className="lg:col-span-2 xl:col-span-4">
+            <SessionsCard
+              availableSessions={currUser?.available_sessions ?? 0}
+            />
           </div>
 
-          <div className="lg:col-span-2 xl:col-span-2">
+          <div className="lg:col-span-2 xl:col-span-4">
             <BillingCard />
           </div>
 
-          <div className="lg:col-span-2  xl:col-span-2">
+          <div className="lg:col-span-2  xl:col-span-4">
             <SupportCard />
           </div>
 
-          <div className="lg:col-span-2 xl:col-span-2">
+          <div className="lg:col-span-2 xl:col-span-5">
             <PreviousSessionsCard />
           </div>
 
-          <div className="lg:col-span-4 xl:col-span-4">
+          <div className="lg:col-span-4 xl:col-span-7">
             <UpcomingSessionsCard />
           </div>
         </div>

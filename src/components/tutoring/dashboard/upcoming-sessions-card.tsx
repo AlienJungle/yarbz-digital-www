@@ -5,6 +5,7 @@ import useSessions from "@/lib/useSessions";
 import { statics } from "@/static";
 import classNames from "classnames";
 import { add, format } from "date-fns";
+import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import Button from "../button";
 
@@ -18,7 +19,9 @@ export default function UpcomingSessionsCard() {
 
   return (
     <div className={classNames("card-tut")}>
-      <h2 className="text-xl font-bold mb-[30px]">Upcoming sessions {!isLoading && `(${sessions?.length ?? 0})`}</h2>
+      <h2 className="text-xl font-bold mb-[30px]">
+        Upcoming sessions {!isLoading && `(${sessions?.length ?? 0})`}
+      </h2>
 
       {error && (
         <Alert type="error" className="mb-[20px]">
@@ -78,17 +81,23 @@ interface UpcomingSessionButtonsProps {
 }
 
 function UpcomingSessionButtons({ session }: UpcomingSessionButtonsProps) {
-  const now = new Date();
   const startDate = new Date(session.start_date);
+  const router = useRouter();
+
+  const now = new Date();
   const endDate = add(startDate, { minutes: session.duration_minutes });
 
   const handleJoinClick = () => {
     window.open(session.meeting_link, "_blank");
   };
 
+  const handleRescheduleClick = () => {
+    router.push(`/tutoring/dashboard/reschedule-session/${session.uid}`);
+  };
+
   return (
     <div className="flex flex-row items-center gap-x-[10px]">
-      <Button theme="black" size="small">
+      <Button theme="black" size="small" onClick={handleRescheduleClick}>
         Reschedule
       </Button>
       <Button theme="black" size="small">

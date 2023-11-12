@@ -22,7 +22,8 @@ export async function POST(req: NextRequest): Promise<Response> {
     sameSite: "strict",
   });
 
-  const sessionCookie = cookies().get(process.env.SESSION_COOKIE_NAME)?.value ?? "";
+  const sessionCookie =
+    cookies().get(process.env.SESSION_COOKIE_NAME)?.value ?? "";
   const claims = await auth.verifySessionCookie(sessionCookie, true);
 
   if (!(await getDbUser(claims.uid))) {
