@@ -22,7 +22,7 @@ export default function FAQSection() {
     },
     {
       question: "How short-notice can I book a session?",
-      answer: <>You have the flexibility to schedule a session up to 2 hours before your desired time, as long as I&apos;m available.</>,
+      answer: <>You have the flexibility to schedule a session up to 12 hours before your desired time, as long as I&apos;m available.</>,
     },
     {
       question: "How far in advance can I book a session?",

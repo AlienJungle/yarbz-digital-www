@@ -27,7 +27,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const currentUser = await getCurrentUser();
   return (
     <html lang="en" className={poppins.className}>
-      <body className="tutoring flex flex-col min-h-[100vh]">
+      <body className="tutoring flex flex-col min-h-[100vh] overflow-x-hidden">
         <>
           <UserProvider currentUser={currentUser}>
             <HeaderNav user={currentUser} />

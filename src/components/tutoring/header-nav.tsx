@@ -49,7 +49,7 @@ export default function HeaderNav(props: HeaderNavProps) {
   };
 
   return (
-    <nav className="flex flex-row justify-between items-center gap-[47px] p-[25px] lg:px-[45px] lg:py-[25px]">
+    <nav className="flex flex-row justify-between items-center gap-[47px] py-[20px] px-[25px] lg:px-[45px] lg:py-[25px]">
       <div className="flex-1">
         <motion.a href={baseHref} whileTap={tapVariant} className="inline-block">
           <Image src={logo} alt="yarbz tutoring logo" className="w-[120px] lg:w-auto" />

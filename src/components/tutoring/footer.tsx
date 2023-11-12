@@ -14,10 +14,10 @@ export default function Footer() {
         <div className="flex-1 flex flex-col lg:flex-row items-center justify-center">
           <ul className="flex flex-col lg:flex-row gap-x-[20px] gap-y-[25px] items-center lg:items-start">
             <ul>
-              <Link href="/privacy-policy">Privacy policy</Link>
+              <Link href="/privacy-policy">Privacy Policy</Link>
             </ul>
             <li>
-              <Link href="/terms-of-service">Terms of service</Link>
+              <Link href="/terms-of-service">Terms of Service</Link>
             </li>
             <li>
               <a href="#">Back to top</a>

@@ -111,7 +111,7 @@ table th {
 }
 
 .landing-section {
-  @apply my-[52px] lg:my-32;
+  @apply my-[51px] lg:my-32;
 }
 
 h1,

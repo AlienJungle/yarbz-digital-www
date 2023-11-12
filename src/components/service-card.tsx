@@ -2,7 +2,7 @@
 
 import { Variants, motion, useAnimation } from "framer-motion";
 import Image, { StaticImageData } from "next/image";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface ServiceCardProps {
   imageSrc: StaticImageData;
@@ -61,10 +61,18 @@ export default function ServiceCard({ imageSrc, imageAlt, title, description }: 
     });
   }, [cardAnimation]);
 
+  const contRef = useRef<HTMLDivElement>(null);
+
+  const [active, setActive] = useState(false);
+
+  const handleContainerClick = (e: React.MouseEvent<HTMLElement>) => {
+    setActive(!active);
+  };
+
   return (
-    <motion.div tabIndex={0} className="service-card rounded-xl border-2 group" variants={cardVariants} initial={"inactive"} whileHover={"active"} whileFocus={"active"} whileTap={"active"} whileInView={"visible"}>
-      <div className="p-[25px] flex flex-row items-center gap-x-[32px]">
-        <Image src={imageSrc} className="flex-shrink-0" alt={imageAlt} height={115} width={115} />
+    <motion.div className="service-card rounded-xl border-2 group cursor-pointer shadow-yd-default" variants={cardVariants} initial={"inactive"} animate={active ? "active" : "inactive"} whileInView={"visible"} ref={contRef} onClick={handleContainerClick}>
+      <div className="p-[20px] lg:p-[25px] flex flex-row items-center gap-x-[32px]">
+        <Image src={imageSrc} className="flex-shrink-0 w-[75px] h-[75px] lg:w-[115px] lg:h-[115px]" alt={imageAlt} height={115} width={115} />
         <p className="font-semibold text-lg pr-[20px]">{title}</p>
       </div>
       <motion.p className="px-[25px] overflow-hidden relative" variants={textVariants}>

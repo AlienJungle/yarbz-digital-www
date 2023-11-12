@@ -19,6 +19,7 @@ export default function WorkSlider({ children }: PropsWithChildren): JSX.Element
           prevNextButtons: false,
           cellAlign: "left",
           resize: true,
+          adaptiveHeight: true,
         }}
       >
         {children}

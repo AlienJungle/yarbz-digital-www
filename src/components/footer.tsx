@@ -11,8 +11,8 @@ export default function Footer(): JSX.Element {
       <div>
         <BookCallCTABlock />
       </div>
-      <footer className="grid grid-cols-3 items-center justify-between px-[45px] py-[30px]">
-        <ul className="flex flex-row gap-[30px] items-center">
+      <footer className="grid grid-cols-1 lg:grid-cols-3 lg:items-center lg:justify-between px-[45px] py-[30px]">
+        <ul className="flex flex-col lg:flex-row gap-[20px] lg:gap-[30px] items-center">
           <li>
             <motion.a href="#" className="font-semibold inline-block" whileTap={tapVariant} whileHover={hoverVariant}>
               Back to top
@@ -28,14 +28,14 @@ export default function Footer(): JSX.Element {
           <li>
             <Link href="/terms-of-service" tabIndex={0} className="font-semibold">
               <motion.span className="inline-block" whileHover={hoverVariant} whileTap={tapVariant}>
-                Terms of service
+                Terms of Service
               </motion.span>
             </Link>
           </li>
         </ul>
-        <div className="text-center">© 2024 Yarbz Digital Ltd</div>
+        <div className="text-center my-5 lg:my-0">© 2024 Yarbz Digital Ltd</div>
 
-        <div className="flex flex-row justify-end gap-x-5">
+        <div className="flex lg:flex-row justify-center lg:justify-end gap-x-5">
           <motion.a className="inline-block" whileTap={tapVariant} whileHover={hoverVariant} href="https://www.linkedin.com/in/aaronjyarborough/" target="_blank" rel="nofollow noopener" tabIndex={0}>
             <svg className="inline" height={socialIconWidthPx} viewBox="0 0 56.693 56.693" width={socialIconWidthPx} xmlns="http://www.w3.org/2000/svg">
               <path d="M30.071 27.101v-.077a2.031 2.031 0 0 1-.05.077h.05z" className="fill-yd-dark-blue" />

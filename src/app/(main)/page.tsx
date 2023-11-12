@@ -25,6 +25,8 @@ import RebrandBanner from "@/components/rebrand-banner";
 import ServiceCard from "@/components/service-card";
 import Testimonial from "@/components/testimonial";
 import TestimonialSlider from "@/components/testimonial-slider";
+import WorkImage from "@/components/work-image";
+import WorkSlider from "@/components/work-slider";
 import { introVariants } from "@/lib/animations";
 import * as motion from "@/lib/motion";
 import { Variants } from "framer-motion";
@@ -113,27 +115,27 @@ function HeaderSection(): JSX.Element {
 }
 function ServicesSection(): JSX.Element {
   return (
-    <div className="mb-[200px] container px-[125px]">
-      <div className="px-[125px] pt-[104px] container faded-bg rounded-[50px]">
+    <div className="landing-section container lg:px-[125px] lg:!mb-[400px]">
+      <div className="lg:px-[125px] lg:pt-[104px] lg:container faded-bg rounded-[20px] lg:rounded-[50px]">
         <motion.h2 id="services" className="text-[43.95px] font-semibold text-yd-orange" variants={introVariants} initial={"hidden"} whileInView={"visible"} viewport={{ once: true }}>
           Services I offer
         </motion.h2>
-        <div className="flex flex-row gap-x-[77px] items-stretch">
-          <div className="w-[50%] flex flex-col justify-between">
-            <div className="mx-[50px] leading-[30px] mt-[40px]">
+        <div className="flex flex-col lg:flex-row gap-x-[77px] items-stretch">
+          <div className="lg:w-[50%] flex flex-col justify-between">
+            <div className="lg:mx-[50px] mt-[25px] lg:mt-[40px]">
               <TypedTextAnimation text="Dive into a decade of software experience with a seasoned freelance engineer. Crafting robust solutions since 2010. Let's turn your ideas into digital marvels together. Explore my services to find out what I can offer!" />
             </div>
             <Image
               src={aaron}
               alt="Headshot of Aaron"
-              className="-mt-[150px] pointer-events-none"
+              className="-mt-[150px] pointer-events-none hidden lg:block"
               style={{
                 objectFit: "cover",
               }}
             />
           </div>
 
-          <div className="w-[50%] relative flex flex-col gap-y-[46px] justify-start mt-[40px] mb-[80px]">
+          <div className="lg:w-[50%] relative flex flex-col gap-y-[25px] lg:gap-y-[46px] justify-start mt-[40px] lg:mb-[80px]">
             <ServiceCard
               imageSrc={thumbBespokeDev}
               imageAlt="a person sitting in front of a computer"
@@ -173,21 +175,26 @@ function ServicesSection(): JSX.Element {
   );
 }
 
+import workFFF from "@/../public/work-fff.png";
+import workNSFGroup from "@/../public/work-nsfgroup.png";
+import workRehomeDog from "@/../public/work-rehome-dog.png";
+import workSportank from "@/../public/work-sportank.png";
+
 function WorkSection(): JSX.Element {
   return (
-    <div id="work" className="my-[300px] container relative">
-      <Image src={blobOrange} alt="" className="absolute right-[150px] -top-[150px] -z-10" />
-      <Image src={blobBlue} alt="" className="absolute left-[50px] -bottom-[150px] -z-10" />
+    <div id="work" className="landing-section container relative">
+      <Image src={blobOrange} alt="" className="hidden lg:block absolute right-[150px] -top-[150px] -z-10" />
+      <Image src={blobBlue} alt="" className="hidden lg:block absolute left-[50px] -bottom-[150px] -z-10" />
 
-      <div className="max-w-[70%] mx-auto relative">
-        {/* <WorkSlider>
+      <div className="lg:max-w-[70%] mx-auto relative">
+        <WorkSlider>
           <WorkImage imageSrc={workFFF} imageAlt="Fifty Five and Five's site redesign, showing a blog page titled how to boost your b2b marketing during a recession." />
           <WorkImage imageSrc={workSportank} imageAlt="Sportank's homepage, showing a collection widgets that offer sign up functionality, as well as fixtures, leagues, and news items." />
           <WorkImage imageSrc={workRehomeDog} imageAlt="NSF Group's sign-in page." />
           <WorkImage imageSrc={workNSFGroup} imageAlt="Newcastle Dog and Cat shelter's re-home a dog page." />
-        </WorkSlider> */}
+        </WorkSlider>
 
-        <Image src={arrowRecentWork} alt="Arrow with caption 'check out my recent work'" className="absolute -right-[50px] -bottom-[250px] pointer-events-none" width={303} height={293} />
+        <Image src={arrowRecentWork} alt="Arrow with caption 'check out my recent work'" className="hidden lg:relative absolute -right-[50px] -bottom-[250px] pointer-events-none" width={303} height={293} />
       </div>
     </div>
   );
@@ -217,10 +224,10 @@ function ClientsSection(): JSX.Element {
   };
 
   return (
-    <div className="mt-[500px] mb-[200px] container relative">
-      <Image src={arrowHappyClients} alt="Arrow with caption 'check out my recent work'" className="absolute left-[550px] -top-[200px] pointer-events-none" width={303} height={293} />
+    <div className="landing-section container relative">
+      <Image src={arrowHappyClients} alt="Arrow with caption 'check out my recent work'" className="hidden lg:relative absolute left-[550px] -top-[200px] pointer-events-none" width={303} height={293} />
 
-      <motion.div className="grid grid-cols-4 gap-x-[50px] items-center px-[10%]" variants={variants} initial={"hidden"} whileInView={"visible"} viewport={{ once: true }}>
+      <motion.div className="grid grid-cols-2 lg:grid-cols-4 gap-[50px] items-center px-[10%] lg:mt-[400px]" variants={variants} initial={"hidden"} whileInView={"visible"} viewport={{ once: true }}>
         <motion.div className="flex flex-row items-center justify-center" variants={item}>
           <Image src={clientSportank} alt="sportank logo" width={328} height={38.11}></Image>
         </motion.div>
@@ -241,7 +248,7 @@ function ClientsSection(): JSX.Element {
 
 function ReviewsSection(): JSX.Element {
   return (
-    <div id="testimonials" className="my-[200px] container relative flex flex-col max-w-[998px] items-center">
+    <div id="testimonials" className="landing-section container relative flex flex-col max-w-[998px] items-center">
       <motion.h2
         className="text-3xl text-yd-orange font-semibold text-center max-w-[627px]"
         variants={introVariants}

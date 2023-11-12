@@ -14,8 +14,6 @@ interface GETParams {
 export async function GET(req: NextRequest, { params }: { params: GETParams }): Promise<Response> {
   const data = await getDbUser(params.uid);
 
-  console.log("DOES THIS WORK?");
-
   if (!data) {
     return Response.json(
       {

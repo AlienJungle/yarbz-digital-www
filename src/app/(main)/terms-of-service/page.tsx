@@ -3,7 +3,7 @@ import * as motion from "@/lib/motion";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms of service",
+  title: "Terms of Service",
 };
 
 export default function TermsOfService() {
@@ -19,7 +19,7 @@ export default function TermsOfService() {
     >
       <div
         dangerouslySetInnerHTML={{
-          __html: `<h1><strong>Terms of service</strong></h1>
+          __html: `<h1><strong>Terms of Service</strong></h1>
 <p><strong>Last updated</strong> <strong>November 11, 2023</strong></p>
 <p><strong>AGREEMENT TO OUR LEGAL TERMS</strong></p>
 <p>We are Alien Jungle Ltd ('<strong>Company</strong>', '<strong>we</strong>', '<strong>us</strong>', or '<strong>our</strong>'), a company registered in England at PO Box C/O NATA, ARCH WORKSPACE LINTONVILLE PARKWAY, ASHINGTON, NORTHUMBERLAND NE63 9JZ. Our VAT number is GB388066850.</p>

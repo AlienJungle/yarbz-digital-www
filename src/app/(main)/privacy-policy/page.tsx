@@ -19,7 +19,7 @@ export default function PrivacyPolicy() {
       }}
     >
       <div>
-        <h1>Privacy Policy for Alien Jungle Ltd</h1>
+        <h1>Privacy policy</h1>
         <p>At Yarbz Digital, accessible from {statics.siteURL}, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Yarbz Digital and how we use it.</p>
         <p>If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us.</p>
         <p>This Privacy Policy applies only to our online activities and is valid for visitors to our website with regards to the information that they shared and/or collect in Yarbz Digital. This policy is not applicable to any information collected offline or via channels other than this website.</p>

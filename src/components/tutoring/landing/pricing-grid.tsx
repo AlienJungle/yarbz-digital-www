@@ -111,7 +111,7 @@ export default function PricingGrid({ rates }: PricingGridProps) {
             ))}
           </select>
         </div>
-        <p className="text-sm max-w-[270px]">Prices converted automatically using live data. £1 = {getCurrencySymbol() + rates[currency]}. All purchases are made in GBP. Currency conversion made by your bank.</p>
+        <p className="text-sm md:max-w-[270px] text-right">Prices converted automatically using live data. £1 = {getCurrencySymbol() + rates[currency]}. All purchases are made in GBP. Currency conversion made by your bank.</p>
       </motion.div>
     </>
   );
