@@ -7,7 +7,12 @@ interface UICardProps {
   theme?: "green" | "grey";
 }
 
-export default function Card({ title, children, className, theme }: UICardProps & PropsWithChildren) {
+export default function Card({
+  title,
+  children,
+  className,
+  theme,
+}: UICardProps & PropsWithChildren) {
   const currTheme = theme ?? "grey";
 
   return (

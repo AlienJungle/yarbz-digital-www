@@ -6,7 +6,11 @@ interface TypedTextAnimationProps extends HTMLMotionProps<"p"> {
   animationVariant?: Variant;
 }
 
-export default function TypedTextAnimation({ text, animationVariant, ...props }: TypedTextAnimationProps): JSX.Element {
+export default function TypedTextAnimation({
+  text,
+  animationVariant,
+  ...props
+}: TypedTextAnimationProps): JSX.Element {
   const captionVariants: Variants = {
     visible: {
       transition: {
@@ -26,7 +30,13 @@ export default function TypedTextAnimation({ text, animationVariant, ...props }:
   };
 
   return (
-    <motion.p variants={captionVariants} initial={"hidden"} whileInView={"visible"} viewport={{ once: true }} {...props}>
+    <motion.p
+      variants={captionVariants}
+      initial={"hidden"}
+      whileInView={"visible"}
+      viewport={{ once: true }}
+      {...props}
+    >
       {text.split("").map((char, i) => (
         <motion.span key={i} variants={captionCharacterVariants}>
           {char}

@@ -51,8 +51,16 @@ export default function HeaderNav(props: HeaderNavProps) {
   return (
     <nav className="flex flex-row justify-between items-center gap-[47px] py-[20px] px-[25px] lg:px-[45px] lg:py-[25px]">
       <div className="flex-1">
-        <motion.a href={baseHref} whileTap={tapVariant} className="inline-block">
-          <Image src={logo} alt="yarbz tutoring logo" className="w-[120px] lg:w-auto" />
+        <motion.a
+          href={baseHref}
+          whileTap={tapVariant}
+          className="inline-block"
+        >
+          <Image
+            src={logo}
+            alt="yarbz tutoring logo"
+            className="w-[120px] lg:w-auto"
+          />
         </motion.a>
       </div>
 
@@ -60,7 +68,12 @@ export default function HeaderNav(props: HeaderNavProps) {
         {!props.hideNavItems &&
           links.map((link) => {
             return (
-              <motion.a key={link.href} href={link.href} whileTap={tapVariant} whileHover={hoverVariant}>
+              <motion.a
+                key={link.href}
+                href={link.href}
+                whileTap={tapVariant}
+                whileHover={hoverVariant}
+              >
                 {link.text}
               </motion.a>
             );
@@ -71,7 +84,10 @@ export default function HeaderNav(props: HeaderNavProps) {
         {props.user && (
           <>
             <motion.span whileHover={hoverVariant} whileTap={tapVariant}>
-              <Link href={"/tutoring/dashboard"} className={classNames("btn-tut", THEME_CLASSNAME_GREEN)}>
+              <Link
+                href={"/tutoring/dashboard"}
+                className={classNames("btn-tut", THEME_CLASSNAME_GREEN)}
+              >
                 Dashboard
               </Link>
             </motion.span>
@@ -85,7 +101,10 @@ export default function HeaderNav(props: HeaderNavProps) {
         {!props.user && (
           <>
             <motion.span whileHover={hoverVariant} whileTap={tapVariant}>
-              <Link href={"/tutoring/login"} className={classNames("btn-tut", THEME_CLASSNAME_GREEN)}>
+              <Link
+                href={"/tutoring/login"}
+                className={classNames("btn-tut", THEME_CLASSNAME_GREEN)}
+              >
                 Student login
               </Link>
             </motion.span>
@@ -95,7 +114,12 @@ export default function HeaderNav(props: HeaderNavProps) {
 
       <div className="lg:hidden">
         <button>
-          <svg height="32" viewBox="0 0 32 32" width="32" xmlns="http://www.w3.org/2000/svg">
+          <svg
+            height="32"
+            viewBox="0 0 32 32"
+            width="32"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <path d="M4 10h24a2 2 0 0 0 0-4H4a2 2 0 0 0 0 4zm24 4H4a2 2 0 0 0 0 4h24a2 2 0 0 0 0-4zm0 8H4a2 2 0 0 0 0 4h24a2 2 0 0 0 0-4z" />
           </svg>
         </button>

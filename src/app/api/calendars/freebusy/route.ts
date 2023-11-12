@@ -19,7 +19,8 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     );
   }
 
-  const calendarIds: string[] = (await cache.calendarlist.get())?.map((cal) => cal.id!) ?? [];
+  const calendarIds: string[] =
+    (await cache.calendarlist.get())?.map((cal) => cal.id!) ?? [];
 
   const fromDate = set(new Date(date), {
     minutes: 0,

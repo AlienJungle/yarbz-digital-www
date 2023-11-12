@@ -3,7 +3,9 @@
 import { PropsWithChildren } from "react";
 import Flickity from "react-flickity-component";
 
-export default function WorkSlider({ children }: PropsWithChildren): JSX.Element {
+export default function WorkSlider({
+  children,
+}: PropsWithChildren): JSX.Element {
   return (
     <div className="overflow-x-hidden overflow-y-hidden">
       <Flickity

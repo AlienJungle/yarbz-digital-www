@@ -1,4 +1,8 @@
-import Post, { getPostBySlug, getPostSlugs, markdownToHtml } from "@/services/post-service";
+import Post, {
+  getPostBySlug,
+  getPostSlugs,
+  markdownToHtml,
+} from "@/services/post-service";
 import { statics } from "@/static";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";

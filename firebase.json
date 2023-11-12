@@ -1,7 +1,19 @@
 {
   "hosting": {
     "source": ".",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**", ".env.local", "**/.github/**", "**/.husky/**", "**/src/**", "**/.vscode/**", "*.log", "**/.git/**", "**/.netlify/**"],
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      ".env.local",
+      "**/.github/**",
+      "**/.husky/**",
+      "**/src/**",
+      "**/.vscode/**",
+      "*.log",
+      "**/.git/**",
+      "**/.netlify/**"
+    ],
     "frameworksBackend": {
       "region": "europe-west1"
     }

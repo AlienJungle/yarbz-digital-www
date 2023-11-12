@@ -20,8 +20,15 @@ export default function Signup() {
   const searchParams = useSearchParams();
   const redirect = searchParams?.get("redirect");
 
-  const handleFormSubmit = (values: SignupValues, helpers: FormikHelpers<SignupValues>) => {
-    createUserWithEmailAndPassword(fbContext.auth, values.email, values.password)
+  const handleFormSubmit = (
+    values: SignupValues,
+    helpers: FormikHelpers<SignupValues>,
+  ) => {
+    createUserWithEmailAndPassword(
+      fbContext.auth,
+      values.email,
+      values.password,
+    )
       .then((userCredential: UserCredential) => {
         const user = userCredential.user;
         if (user) {
@@ -36,7 +43,9 @@ export default function Signup() {
         const fbError = error as FirebaseError;
         switch (fbError.code) {
           case "auth/email-already-in-use":
-            alert("That email address already exists. Please choose another email address, or log in with your existing credentials.");
+            alert(
+              "That email address already exists. Please choose another email address, or log in with your existing credentials.",
+            );
             break;
 
           default:
@@ -54,10 +63,18 @@ export default function Signup() {
         <div className="max-w-[600px] mx-auto relative my-20">
           <BackButton text="Back to login" href={"/tutoring/login"} />
           <h1 className="text-3xl font-semibold my-[40px]">Sign up</h1>
-          <p className="leading-[32px] my-[20px]">To get started, create an account by filling in the details below. You&apos;ll be able to use this account to view your upcoming lessons, manage your billing, and book new lessons with me.</p>
+          <p className="leading-[32px] my-[20px]">
+            To get started, create an account by filling in the details below.
+            You&apos;ll be able to use this account to view your upcoming
+            lessons, manage your billing, and book new lessons with me.
+          </p>
           <p className="leading-[32px] my-[20px]">
             Already have an account?{" "}
-            <CustomLink href="/tutoring/login" className="font-bold underline" preserveQuery={true}>
+            <CustomLink
+              href="/tutoring/login"
+              className="font-bold underline"
+              preserveQuery={true}
+            >
               Login here!
             </CustomLink>
           </p>
@@ -75,35 +92,84 @@ export default function Signup() {
               }
 
               if (values.password.length < 6) {
-                errors.password = "Passwords must be at least 6 characters long.";
+                errors.password =
+                  "Passwords must be at least 6 characters long.";
               }
 
               return errors;
             }}
             onSubmit={handleFormSubmit}
           >
-            {({ handleSubmit, errors, values, isSubmitting, handleChange, handleBlur, isValid }) => {
+            {({
+              handleSubmit,
+              errors,
+              values,
+              isSubmitting,
+              handleChange,
+              handleBlur,
+              isValid,
+            }) => {
               return (
-                <form onSubmit={handleSubmit} className="flex flex-col gap-y-[30px] my-[40px]">
+                <form
+                  onSubmit={handleSubmit}
+                  className="flex flex-col gap-y-[30px] my-[40px]"
+                >
                   <div>
                     <label htmlFor="email">Email</label>
-                    <input type="email" name="email" id="email" className="tut-form-control" placeholder="john.smith@gmail.com" onChange={handleChange} onBlur={handleBlur} value={values.email} />
+                    <input
+                      type="email"
+                      name="email"
+                      id="email"
+                      className="tut-form-control"
+                      placeholder="john.smith@gmail.com"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.email}
+                    />
                   </div>
 
                   <div>
                     <label htmlFor="password">Password</label>
-                    <input type="password" name="password" id="password" className="tut-form-control" onChange={handleChange} onBlur={handleBlur} value={values.password} />
-                    {errors.password && <span className="yd-form-error">{errors.password}</span>}
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      className="tut-form-control"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.password}
+                    />
+                    {errors.password && (
+                      <span className="yd-form-error">{errors.password}</span>
+                    )}
                   </div>
 
                   <div>
-                    <label htmlFor="passwordRepeated">Password (repeated)</label>
-                    <input type="password" name="passwordRepeated" id="passwordRepeated" className="tut-form-control" onChange={handleChange} onBlur={handleBlur} value={values.passwordRepeated} />
-                    {errors.passwordRepeated && <span className="yd-form-error">{errors.passwordRepeated}</span>}
+                    <label htmlFor="passwordRepeated">
+                      Password (repeated)
+                    </label>
+                    <input
+                      type="password"
+                      name="passwordRepeated"
+                      id="passwordRepeated"
+                      className="tut-form-control"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.passwordRepeated}
+                    />
+                    {errors.passwordRepeated && (
+                      <span className="yd-form-error">
+                        {errors.passwordRepeated}
+                      </span>
+                    )}
                   </div>
 
                   <div className="flex flex-row justify-end">
-                    <button type="submit" className="btn-tut bg-yd-tut-green text-yd-tut-black" disabled={isSubmitting || !isValid}>
+                    <button
+                      type="submit"
+                      className="btn-tut bg-yd-tut-green text-yd-tut-black"
+                      disabled={isSubmitting || !isValid}
+                    >
                       Sign up!
                     </button>
                   </div>

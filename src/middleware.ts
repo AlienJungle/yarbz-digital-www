@@ -9,11 +9,16 @@ export function middleware(request: NextRequest) {
   const url = new URL(request.url);
 
   if (!request.cookies.get("session")) {
-    const loginRedirect = authedUrlBase.some((x) => request.nextUrl.pathname.startsWith(x));
+    const loginRedirect = authedUrlBase.some((x) =>
+      request.nextUrl.pathname.startsWith(x),
+    );
     if (loginRedirect) {
-      return NextResponse.redirect(`${url.origin}/tutoring/login?redirect=${request.nextUrl.pathname}`, {
-        headers: requestHeaders,
-      });
+      return NextResponse.redirect(
+        `${url.origin}/tutoring/login?redirect=${request.nextUrl.pathname}`,
+        {
+          headers: requestHeaders,
+        },
+      );
     }
   }
 

@@ -1,4 +1,7 @@
-export const fetchLogged = async (input: RequestInfo, init?: RequestInit | undefined) => {
+export const fetchLogged = async (
+  input: RequestInfo,
+  init?: RequestInit | undefined,
+) => {
   console.log(`Fetch request: ${input.toString()}`, {
     init,
   });

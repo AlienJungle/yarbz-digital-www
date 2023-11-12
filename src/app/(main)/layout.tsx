@@ -8,9 +8,11 @@ import { Poppins } from "next/font/google";
 export const metadata: Metadata = {
   title: {
     template: "%s | Yarbz Digital",
-    default: "👨🏻‍💻 Aaron Yarborough - Freelance Software Consultant | Yarbz Digital",
+    default:
+      "👨🏻‍💻 Aaron Yarborough - Freelance Software Consultant | Yarbz Digital",
   },
-  description: "With over a decade of expertise, I transform businesses and their clients into digital success stories by crafting elegant, efficient, and cost-effective web and mobile solutions.",
+  description:
+    "With over a decade of expertise, I transform businesses and their clients into digital success stories by crafting elegant, efficient, and cost-effective web and mobile solutions.",
 };
 
 const poppins = Poppins({
@@ -19,7 +21,11 @@ const poppins = Poppins({
   variable: "--font-poppins",
 });
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" className={`${poppins.className} overflow-x-hidden`}>
       <body>

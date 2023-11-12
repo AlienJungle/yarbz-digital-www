@@ -38,20 +38,51 @@ export default function HeaderNav() {
 
   return (
     <nav className="flex flex-row justify-between items-center gap-[47px] px-[20px] py-[20px] lg:px-[45px] lg:py-[25px]">
-      <motion.a variants={item} initial="hidden" animate="visible" href="/" whileTap={tapVariant} whileHover={hoverVariant}>
-        <Image src={logo} alt="yarbz.digital logo" width={130} className="w-[115px] lg:w-[130px]" />
+      <motion.a
+        variants={item}
+        initial="hidden"
+        animate="visible"
+        href="/"
+        whileTap={tapVariant}
+        whileHover={hoverVariant}
+      >
+        <Image
+          src={logo}
+          alt="yarbz.digital logo"
+          width={130}
+          className="w-[115px] lg:w-[130px]"
+        />
       </motion.a>
 
-      <motion.div className="hidden lg:flex flex-row gap-[47px] justify-end items-center font-semibold" variants={variants} initial="hidden" animate="visible">
+      <motion.div
+        className="hidden lg:flex flex-row gap-[47px] justify-end items-center font-semibold"
+        variants={variants}
+        initial="hidden"
+        animate="visible"
+      >
         {links.map((link) => {
           return (
-            <motion.a key={link.href} href={link.href} variants={item} whileTap={tapVariant} whileHover={hoverVariant}>
+            <motion.a
+              key={link.href}
+              href={link.href}
+              variants={item}
+              whileTap={tapVariant}
+              whileHover={hoverVariant}
+            >
               {link.text}
             </motion.a>
           );
         })}
 
-        <motion.a className="bg-yd-orange text-yd-white btn" href={statics.bookingURL} target="_blank" rel="nofollow noopener" variants={item} whileTap={tapVariant} whileHover={hoverVariant}>
+        <motion.a
+          className="bg-yd-orange text-yd-white btn"
+          href={statics.bookingURL}
+          target="_blank"
+          rel="nofollow noopener"
+          variants={item}
+          whileTap={tapVariant}
+          whileHover={hoverVariant}
+        >
           Get in touch
         </motion.a>
       </motion.div>

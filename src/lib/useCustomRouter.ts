@@ -9,13 +9,20 @@ export function useCustomRouter() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const push = (href: string, routerOptions?: CustomRouterOptions, options?: NavigateOptions) => {
+  const push = (
+    href: string,
+    routerOptions?: CustomRouterOptions,
+    options?: NavigateOptions,
+  ) => {
     let url = href;
 
     if (routerOptions?.preserveQuery) {
       const searchParamsString = searchParams?.toString();
       if (searchParamsString) {
-        url = href.indexOf("?") >= 0 ? href + searchParamsString : href + "?" + searchParamsString;
+        url =
+          href.indexOf("?") >= 0
+            ? href + searchParamsString
+            : href + "?" + searchParamsString;
       }
     }
 

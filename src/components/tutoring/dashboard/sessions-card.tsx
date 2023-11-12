@@ -19,11 +19,17 @@ export default function SessionsCard(props: SessionsCardProps) {
 
       <div className="flex flex-col gap-y-[20px]">
         {props.availableSessions > 0 && (
-          <Button theme="green" onClick={() => router.push("/tutoring/dashboard/book-session")}>
+          <Button
+            theme="green"
+            onClick={() => router.push("/tutoring/dashboard/book-session")}
+          >
             Book a session
           </Button>
         )}
-        <Link href={"/tutoring#pricing"} className={classNames("btn-tut text-center", THEME_CLASSNAME_BLACK)}>
+        <Link
+          href={"/tutoring#pricing"}
+          className={classNames("btn-tut text-center", THEME_CLASSNAME_BLACK)}
+        >
           Buy more sessions
         </Link>
       </div>

@@ -8,7 +8,12 @@ export class ItemCache<TItem> {
 
   private expiryTime: Date | null;
 
-  constructor(initialValue: TItem, lifetimeMinutes: number, loadAction: () => Promise<TItem>, description: string) {
+  constructor(
+    initialValue: TItem,
+    lifetimeMinutes: number,
+    loadAction: () => Promise<TItem>,
+    description: string,
+  ) {
     this.expiryTime = null;
 
     this.value = initialValue;

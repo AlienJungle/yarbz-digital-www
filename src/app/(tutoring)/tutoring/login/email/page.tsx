@@ -18,8 +18,15 @@ export default function LoginEmail() {
 
   const { loginWithEmailAndPassword } = useAuth();
 
-  const handleLoginSubmit = (values: LoginEmailValues, helpers: FormikHelpers<LoginEmailValues>) => {
-    loginWithEmailAndPassword(values.email, values.password, searchParams?.get("redirect") ?? undefined)
+  const handleLoginSubmit = (
+    values: LoginEmailValues,
+    helpers: FormikHelpers<LoginEmailValues>,
+  ) => {
+    loginWithEmailAndPassword(
+      values.email,
+      values.password,
+      searchParams?.get("redirect") ?? undefined,
+    )
       .catch((error) => {
         alert(error);
       })
@@ -43,23 +50,61 @@ export default function LoginEmail() {
             validate={(values) => {}}
             onSubmit={handleLoginSubmit}
           >
-            {({ handleSubmit, values, errors, isSubmitting, isValid, handleChange, handleBlur }) => {
+            {({
+              handleSubmit,
+              values,
+              errors,
+              isSubmitting,
+              isValid,
+              handleChange,
+              handleBlur,
+            }) => {
               return (
-                <form onSubmit={handleSubmit} className="flex flex-col gap-y-[30px] my-[40px]">
+                <form
+                  onSubmit={handleSubmit}
+                  className="flex flex-col gap-y-[30px] my-[40px]"
+                >
                   <div>
                     <label htmlFor="email">Email</label>
-                    <input type="email" name="email" id="email" className="tut-form-control" placeholder="john.smith@gmail.com" onChange={handleChange} onBlur={handleBlur} value={values.email} required />
+                    <input
+                      type="email"
+                      name="email"
+                      id="email"
+                      className="tut-form-control"
+                      placeholder="john.smith@gmail.com"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.email}
+                      required
+                    />
                   </div>
                   <div>
                     <label htmlFor="password">Password</label>
-                    <input type="password" name="password" id="password" className="tut-form-control" onChange={handleChange} onBlur={handleBlur} value={values.password} required />
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      className="tut-form-control"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.password}
+                      required
+                    />
                   </div>
 
                   <div className="flex flex-row gap-x-[20px] justify-end">
-                    <Button theme={"green"} type="submit" disabled={isSubmitting || !isValid}>
+                    <Button
+                      theme={"green"}
+                      type="submit"
+                      disabled={isSubmitting || !isValid}
+                    >
                       Login
                     </Button>
-                    <CustomLink preserveQuery={true} href={"/tutoring/forgot-password"} className={classNames("btn-tut", THEME_CLASSNAME_BLACK)}>
+                    <CustomLink
+                      preserveQuery={true}
+                      href={"/tutoring/forgot-password"}
+                      className={classNames("btn-tut", THEME_CLASSNAME_BLACK)}
+                    >
                       Forgot password
                     </CustomLink>
                   </div>

@@ -12,7 +12,8 @@ export const metadata: Metadata = {
     template: "%s | Yarbz Tutoring",
     default: "Expert tutoring from a software professional | Yarbz Tutoring",
   },
-  description: "I help people learn software development, no matter where they're starting from.",
+  description:
+    "I help people learn software development, no matter where they're starting from.",
 };
 
 const poppins = Poppins({
@@ -21,7 +22,11 @@ const poppins = Poppins({
   variable: "--font-poppins",
 });
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const { getCurrentUser } = useServerAuth();
 
   const currentUser = await getCurrentUser();

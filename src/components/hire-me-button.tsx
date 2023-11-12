@@ -30,7 +30,17 @@ export default function HireMeButton(): JSX.Element {
   }, [hireMeControls]);
 
   return (
-    <motion.a href={statics.bookingURL} target="_blank" rel="nofollow noopener" className="btn bg-yd-dark-blue text-yd-white mt-[50px] !px-[30px]" variants={hireMeVariants} initial={"hidden"} animate={hireMeControls} whileTap={tapVariant} whileHover={hoverVariant}>
+    <motion.a
+      href={statics.bookingURL}
+      target="_blank"
+      rel="nofollow noopener"
+      className="btn bg-yd-dark-blue text-yd-white mt-[50px] !px-[30px]"
+      variants={hireMeVariants}
+      initial={"hidden"}
+      animate={hireMeControls}
+      whileTap={tapVariant}
+      whileHover={hoverVariant}
+    >
       Hire me!
     </motion.a>
   );

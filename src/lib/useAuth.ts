@@ -1,19 +1,37 @@
 // import * as fbContext from "@/lib/firebase";
 import { FirebaseError } from "firebase/app";
-import { GithubAuthProvider, GoogleAuthProvider, UserCredential, getIdToken, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import {
+  GithubAuthProvider,
+  GoogleAuthProvider,
+  UserCredential,
+  getIdToken,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
 import { auth } from "./firebase";
 
 export function useAuth() {
-  const loginWithEmailAndPassword = async (email: string, password: string, redirect?: string): Promise<void> => {
+  const loginWithEmailAndPassword = async (
+    email: string,
+    password: string,
+    redirect?: string,
+  ): Promise<void> => {
     try {
-      const credential = await signInWithEmailAndPassword(auth, email, password);
+      const credential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
       return loginWithCredential(credential, redirect);
     } catch (error) {
       handleLoginError(error);
     }
   };
 
-  const loginWithProvider = async (provider: GoogleAuthProvider | GithubAuthProvider, redirect?: string): Promise<void> => {
+  const loginWithProvider = async (
+    provider: GoogleAuthProvider | GithubAuthProvider,
+    redirect?: string,
+  ): Promise<void> => {
     try {
       const credential = await signInWithPopup(auth, provider);
       return loginWithCredential(credential, redirect);
@@ -28,7 +46,9 @@ export function useAuth() {
 
   /*---*/
 
-  async function loginWithIdToken(credential: UserCredential): Promise<Response> {
+  async function loginWithIdToken(
+    credential: UserCredential,
+  ): Promise<Response> {
     const idToken = await getIdToken(credential.user);
     const body = {
       idToken,
@@ -55,7 +75,10 @@ export function useAuth() {
     }
   }
 
-  async function loginWithCredential(credential: UserCredential, redirect?: string) {
+  async function loginWithCredential(
+    credential: UserCredential,
+    redirect?: string,
+  ) {
     const resp = await loginWithIdToken(credential);
 
     await auth.signOut();

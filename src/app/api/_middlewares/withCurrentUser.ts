@@ -4,13 +4,17 @@ import { StatusCodes } from "http-status-codes";
 import { NextRequest, NextResponse } from "next/server";
 import { DecodedIdTokenUser } from "../_models/user";
 
-export default async function withCurrentUser(req: NextRequest, callback: (decodedIdTokenUser: DecodedIdTokenUser) => Promise<NextResponse>): Promise<NextResponse> {
+export default async function withCurrentUser(
+  req: NextRequest,
+  callback: (decodedIdTokenUser: DecodedIdTokenUser) => Promise<NextResponse>,
+): Promise<NextResponse> {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { getCurrentUser } = useServerAuth();
 
   try {
     // TODO: Move getCurrentUser logic to firebase-admin.ts
-    const decodedIdTokenUser: DecodedIdTokenUser | null = await getCurrentUser();
+    const decodedIdTokenUser: DecodedIdTokenUser | null =
+      await getCurrentUser();
     if (!decodedIdTokenUser) {
       return new NextResponse("UNAUTHORIZED", {
         status: StatusCodes.UNAUTHORIZED,

@@ -12,7 +12,9 @@ export function getPostSlugs(): string[] {
 
 export function getAllPosts(): Post[] {
   const slugs = getPostSlugs();
-  const posts: Post[] = slugs.map((slug) => getPostBySlug(slug)).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const posts: Post[] = slugs
+    .map((slug) => getPostBySlug(slug))
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return posts;
 }

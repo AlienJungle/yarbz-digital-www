@@ -36,12 +36,20 @@ function Socials() {
   return (
     <ul className="flex flex-row gap-x-[20px]">
       <li>
-        <a href={statics.socialURLs.linkedin} target="_blank" rel="nofollow noopener">
+        <a
+          href={statics.socialURLs.linkedin}
+          target="_blank"
+          rel="nofollow noopener"
+        >
           <Image src={iconLinkedin} alt="linkedin icon" width={32} />
         </a>
       </li>
       <li>
-        <a href={statics.socialURLs.gitHub} target="_blank" rel="nofollow noopener">
+        <a
+          href={statics.socialURLs.gitHub}
+          target="_blank"
+          rel="nofollow noopener"
+        >
           <Image src={iconGitHub} alt="github icon" width={32} />
         </a>
       </li>

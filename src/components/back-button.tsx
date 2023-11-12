@@ -9,7 +9,11 @@ interface BackButtonProps {
 
 export default function BackButton({ text, className, href }: BackButtonProps) {
   return (
-    <CustomLink href={href} className={classNames("block mb-3", className)} preserveQuery={true}>
+    <CustomLink
+      href={href}
+      className={classNames("block mb-3", className)}
+      preserveQuery={true}
+    >
       &lt; {text}
     </CustomLink>
   );

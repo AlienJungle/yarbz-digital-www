@@ -67,7 +67,10 @@ export const createSession = async (session: Session) => {
   return doc;
 };
 
-export const updateSession = async (uid: string, session: Pick<Session, "meeting_link">) => {
+export const updateSession = async (
+  uid: string,
+  session: Pick<Session, "meeting_link">,
+) => {
   return await db.collection("sessions").doc(uid).update({
     meeting_link: session.meeting_link,
   });
@@ -75,14 +78,18 @@ export const updateSession = async (uid: string, session: Pick<Session, "meeting
 
 export const getUserSessions = async (uid: string) => {
   const userDoc = db.collection("users").doc(uid);
-  const query = db.collection("sessions").where("user", "==", userDoc).orderBy("start_date", "desc");
+  const query = db
+    .collection("sessions")
+    .where("user", "==", userDoc)
+    .orderBy("start_date", "desc");
 
   const docs = (await query.get()).docs;
   return docs;
 };
 
 export const getCurrentUserFromSession = async () => {
-  const sessionCookie = cookies().get(process.env.SESSION_COOKIE_NAME)?.value ?? "";
+  const sessionCookie =
+    cookies().get(process.env.SESSION_COOKIE_NAME)?.value ?? "";
 
   if (!sessionCookie) return null;
 

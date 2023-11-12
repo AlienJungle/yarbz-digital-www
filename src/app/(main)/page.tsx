@@ -34,7 +34,11 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {};
 
-export default function Home({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
+export default function Home({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   return (
     <>
       {searchParams.rebrandNotice === "true" && <RebrandBanner />}
@@ -100,7 +104,9 @@ function HeaderSection(): JSX.Element {
       </motion.p>
       <div className="max-w-[418px] text-center mt-[40px]">
         <TypedTextAnimation
-          text={"With over a decade of expertise, I transform businesses and their clients into digital success stories by crafting elegant, efficient, and cost-effective web and mobile solutions."}
+          text={
+            "With over a decade of expertise, I transform businesses and their clients into digital success stories by crafting elegant, efficient, and cost-effective web and mobile solutions."
+          }
           animationVariant={{
             transition: {
               delayChildren: 0.5,
@@ -117,7 +123,14 @@ function ServicesSection(): JSX.Element {
   return (
     <div className="landing-section container lg:px-[125px] lg:!mb-[400px]">
       <div className="lg:px-[125px] lg:pt-[104px] lg:container faded-bg rounded-[20px] lg:rounded-[50px]">
-        <motion.h2 id="services" className="text-[43.95px] font-semibold text-yd-orange" variants={introVariants} initial={"hidden"} whileInView={"visible"} viewport={{ once: true }}>
+        <motion.h2
+          id="services"
+          className="text-[43.95px] font-semibold text-yd-orange"
+          variants={introVariants}
+          initial={"hidden"}
+          whileInView={"visible"}
+          viewport={{ once: true }}
+        >
           Services I offer
         </motion.h2>
         <div className="flex flex-col lg:flex-row gap-x-[77px] items-stretch">
@@ -142,7 +155,17 @@ function ServicesSection(): JSX.Element {
               title={<>Bespoke Software Development</>}
               description={
                 <>
-                  Turning ideas into reality is my passion. With a decade of experience, I guide projects from concept to reality, whether it&apos;s building <strong>websites, web applications, or mobile apps</strong>. Need a seasoned developer to bolster your efforts? I&apos;m here for <strong>spec-writing, prototyping, design, development, and ongoing support.</strong> Let&apos;s build something shiny and new together!
+                  Turning ideas into reality is my passion. With a decade of
+                  experience, I guide projects from concept to reality, whether
+                  it&apos;s building{" "}
+                  <strong>websites, web applications, or mobile apps</strong>.
+                  Need a seasoned developer to bolster your efforts? I&apos;m
+                  here for{" "}
+                  <strong>
+                    spec-writing, prototyping, design, development, and ongoing
+                    support.
+                  </strong>{" "}
+                  Let&apos;s build something shiny and new together!
                 </>
               }
             />
@@ -153,7 +176,12 @@ function ServicesSection(): JSX.Element {
               title={<>Hosting, Support & Ongoing Maintenance</>}
               description={
                 <>
-                  From small-scale sites to large-scale platforms, I bring experience to enhance your site&apos;s accessibility up to <strong>WCAG AAA standards</strong>. Whether you need a <strong>comprehensive audit</strong> of existing issues or a <strong>complete accessibility makeover,</strong> I&apos;ve got you covered.
+                  From small-scale sites to large-scale platforms, I bring
+                  experience to enhance your site&apos;s accessibility up to{" "}
+                  <strong>WCAG AAA standards</strong>. Whether you need a{" "}
+                  <strong>comprehensive audit</strong> of existing issues or a{" "}
+                  <strong>complete accessibility makeover,</strong> I&apos;ve
+                  got you covered.
                 </>
               }
             />
@@ -164,7 +192,17 @@ function ServicesSection(): JSX.Element {
               title={<>Accessibility Audits & Improvements</>}
               description={
                 <>
-                  Whether it&apos;s providing dedicated support for something we&apos;ve created or taking on the care of an established product, we&apos;ve got your back. We offer <strong>ongoing maintenance services</strong>, including <strong>server patching, updates, security reviews, and 24/7 uptime monitoring</strong>. Plus, our hosting options are cost-effective, scalable, and eco-friendly, with servers <strong>powered entirely by renewable energy.</strong>
+                  Whether it&apos;s providing dedicated support for something
+                  we&apos;ve created or taking on the care of an established
+                  product, we&apos;ve got your back. We offer{" "}
+                  <strong>ongoing maintenance services</strong>, including{" "}
+                  <strong>
+                    server patching, updates, security reviews, and 24/7 uptime
+                    monitoring
+                  </strong>
+                  . Plus, our hosting options are cost-effective, scalable, and
+                  eco-friendly, with servers{" "}
+                  <strong>powered entirely by renewable energy.</strong>
                 </>
               }
             />
@@ -183,18 +221,44 @@ import workSportank from "@/../public/work-sportank.png";
 function WorkSection(): JSX.Element {
   return (
     <div id="work" className="landing-section container relative">
-      <Image src={blobOrange} alt="" className="hidden lg:block absolute right-[150px] -top-[150px] -z-10" />
-      <Image src={blobBlue} alt="" className="hidden lg:block absolute left-[50px] -bottom-[150px] -z-10" />
+      <Image
+        src={blobOrange}
+        alt=""
+        className="hidden lg:block absolute right-[150px] -top-[150px] -z-10"
+      />
+      <Image
+        src={blobBlue}
+        alt=""
+        className="hidden lg:block absolute left-[50px] -bottom-[150px] -z-10"
+      />
 
       <div className="lg:max-w-[70%] mx-auto relative">
         <WorkSlider>
-          <WorkImage imageSrc={workFFF} imageAlt="Fifty Five and Five's site redesign, showing a blog page titled how to boost your b2b marketing during a recession." />
-          <WorkImage imageSrc={workSportank} imageAlt="Sportank's homepage, showing a collection widgets that offer sign up functionality, as well as fixtures, leagues, and news items." />
-          <WorkImage imageSrc={workRehomeDog} imageAlt="NSF Group's sign-in page." />
-          <WorkImage imageSrc={workNSFGroup} imageAlt="Newcastle Dog and Cat shelter's re-home a dog page." />
+          <WorkImage
+            imageSrc={workFFF}
+            imageAlt="Fifty Five and Five's site redesign, showing a blog page titled how to boost your b2b marketing during a recession."
+          />
+          <WorkImage
+            imageSrc={workSportank}
+            imageAlt="Sportank's homepage, showing a collection widgets that offer sign up functionality, as well as fixtures, leagues, and news items."
+          />
+          <WorkImage
+            imageSrc={workRehomeDog}
+            imageAlt="NSF Group's sign-in page."
+          />
+          <WorkImage
+            imageSrc={workNSFGroup}
+            imageAlt="Newcastle Dog and Cat shelter's re-home a dog page."
+          />
         </WorkSlider>
 
-        <Image src={arrowRecentWork} alt="Arrow with caption 'check out my recent work'" className="hidden lg:relative absolute -right-[50px] -bottom-[250px] pointer-events-none" width={303} height={293} />
+        <Image
+          src={arrowRecentWork}
+          alt="Arrow with caption 'check out my recent work'"
+          className="hidden lg:relative absolute -right-[50px] -bottom-[250px] pointer-events-none"
+          width={303}
+          height={293}
+        />
       </div>
     </div>
   );
@@ -225,21 +289,65 @@ function ClientsSection(): JSX.Element {
 
   return (
     <div className="landing-section container relative">
-      <Image src={arrowHappyClients} alt="Arrow with caption 'check out my recent work'" className="hidden lg:relative absolute left-[550px] -top-[200px] pointer-events-none" width={303} height={293} />
+      <Image
+        src={arrowHappyClients}
+        alt="Arrow with caption 'check out my recent work'"
+        className="hidden lg:relative absolute left-[550px] -top-[200px] pointer-events-none"
+        width={303}
+        height={293}
+      />
 
-      <motion.div className="grid grid-cols-2 lg:grid-cols-4 gap-[50px] items-center px-[10%] lg:mt-[400px]" variants={variants} initial={"hidden"} whileInView={"visible"} viewport={{ once: true }}>
-        <motion.div className="flex flex-row items-center justify-center" variants={item}>
-          <Image src={clientSportank} alt="sportank logo" width={328} height={38.11}></Image>
+      <motion.div
+        className="grid grid-cols-2 lg:grid-cols-4 gap-[50px] items-center px-[10%] lg:mt-[400px]"
+        variants={variants}
+        initial={"hidden"}
+        whileInView={"visible"}
+        viewport={{ once: true }}
+      >
+        <motion.div
+          className="flex flex-row items-center justify-center"
+          variants={item}
+        >
+          <Image
+            src={clientSportank}
+            alt="sportank logo"
+            width={328}
+            height={38.11}
+          ></Image>
         </motion.div>
-        <motion.div className="flex flex-row items-center justify-center" variants={item}>
-          <Image src={clientAverbis} alt="averbis GmbH logo" width={200} height={66}></Image>
+        <motion.div
+          className="flex flex-row items-center justify-center"
+          variants={item}
+        >
+          <Image
+            src={clientAverbis}
+            alt="averbis GmbH logo"
+            width={200}
+            height={66}
+          ></Image>
         </motion.div>
-        <motion.div className="flex flex-row items-center justify-center" variants={item}>
-          <Image src={clientHippo} alt="hippo digital logo" width={192.13} height={57.39}></Image>
+        <motion.div
+          className="flex flex-row items-center justify-center"
+          variants={item}
+        >
+          <Image
+            src={clientHippo}
+            alt="hippo digital logo"
+            width={192.13}
+            height={57.39}
+          ></Image>
         </motion.div>
 
-        <motion.div className="flex flex-row items-center justify-center" variants={item}>
-          <Image src={clientFFF} alt="Fifty Five and Five logo" width={301} height={45}></Image>
+        <motion.div
+          className="flex flex-row items-center justify-center"
+          variants={item}
+        >
+          <Image
+            src={clientFFF}
+            alt="Fifty Five and Five logo"
+            width={301}
+            height={45}
+          ></Image>
         </motion.div>
       </motion.div>
     </div>
@@ -248,7 +356,10 @@ function ClientsSection(): JSX.Element {
 
 function ReviewsSection(): JSX.Element {
   return (
-    <div id="testimonials" className="landing-section container relative flex flex-col max-w-[998px] items-center">
+    <div
+      id="testimonials"
+      className="landing-section container relative flex flex-col max-w-[998px] items-center"
+    >
       <motion.h2
         className="text-3xl text-yd-orange font-semibold text-center max-w-[627px]"
         variants={introVariants}
@@ -261,12 +372,38 @@ function ReviewsSection(): JSX.Element {
       >
         What those I&apos;ve worked with have to say...
       </motion.h2>
-      <motion.div className="mt-[60px] max-w-[900px] w-full overflow-hidden" variants={introVariants} initial={"hidden"} whileInView={"visible"} viewport={{ once: true }}>
+      <motion.div
+        className="mt-[60px] max-w-[900px] w-full overflow-hidden"
+        variants={introVariants}
+        initial={"hidden"}
+        whileInView={"visible"}
+        viewport={{ once: true }}
+      >
         <TestimonialSlider>
-          <Testimonial author="Dan Dalton" authorImageSrc={testDanD} position="Head of Product @ Flock" body="Aaron is a passionate, driven and exceptionally talented individual. Not only in his ability as a developer, but in his leadership, accountability and focus. I had the pleasure of woking with Aaron across several projects in our time at Orange Bus. In this time Aaron proved to be a invaluable part of each project team he operated in, from mobile app builds to re-platforming initiatives. Never shying from a challenge, persisting through often pressurised and difficult circumstance and motivating others to follow his example." />
-          <Testimonial author="Phil Smith" authorImageSrc={testPhilS} position="CTO @ NorthLink Digital" body="Aaron is by far one of the most talented and passionate developers I know. Even at the start of his career he had continually outperformed developers many years his senior, and once I had moved away from the company we were both working at, I had to take him with me! Very outgoing & outspoken, able to take a joke, always up for a laugh, and forever working hard to be the best developer possible." />
-          <Testimonial author="Torsten Koller" authorImageSrc={testAverbis} position="Developer @ Averbis GmbH" body="Within our expected timeline, Aaron was successfully able to provide us with a working prototype of our desired application. We perceived him as reliable and diligent and would be happy to work with him again in a future project." />
-          <Testimonial author="Mert Özgül" authorImageSrc={testMert} position="English Language Teacher" body="I hired Aaron to help build our company's image through our website. He has done an immaculate job. He is very easy to work with and cooperative. It was an amazing experience." />
+          <Testimonial
+            author="Dan Dalton"
+            authorImageSrc={testDanD}
+            position="Head of Product @ Flock"
+            body="Aaron is a passionate, driven and exceptionally talented individual. Not only in his ability as a developer, but in his leadership, accountability and focus. I had the pleasure of woking with Aaron across several projects in our time at Orange Bus. In this time Aaron proved to be a invaluable part of each project team he operated in, from mobile app builds to re-platforming initiatives. Never shying from a challenge, persisting through often pressurised and difficult circumstance and motivating others to follow his example."
+          />
+          <Testimonial
+            author="Phil Smith"
+            authorImageSrc={testPhilS}
+            position="CTO @ NorthLink Digital"
+            body="Aaron is by far one of the most talented and passionate developers I know. Even at the start of his career he had continually outperformed developers many years his senior, and once I had moved away from the company we were both working at, I had to take him with me! Very outgoing & outspoken, able to take a joke, always up for a laugh, and forever working hard to be the best developer possible."
+          />
+          <Testimonial
+            author="Torsten Koller"
+            authorImageSrc={testAverbis}
+            position="Developer @ Averbis GmbH"
+            body="Within our expected timeline, Aaron was successfully able to provide us with a working prototype of our desired application. We perceived him as reliable and diligent and would be happy to work with him again in a future project."
+          />
+          <Testimonial
+            author="Mert Özgül"
+            authorImageSrc={testMert}
+            position="English Language Teacher"
+            body="I hired Aaron to help build our company's image through our website. He has done an immaculate job. He is very easy to work with and cooperative. It was an amazing experience."
+          />
         </TestimonialSlider>
       </motion.div>
     </div>
