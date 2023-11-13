@@ -11,7 +11,7 @@ export default function TestimonialSlider({
       elementType={"div"}
       className="w-full"
       reloadOnUpdate={true}
-      static={false}
+      static={true}
       options={{
         wrapAround: false,
         autoPlay: 6000,
@@ -20,6 +20,7 @@ export default function TestimonialSlider({
         prevNextButtons: true,
         cellAlign: "left",
         resize: true,
+        adaptiveHeight: true,
       }}
     >
       {children}

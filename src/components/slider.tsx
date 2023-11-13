@@ -1,13 +1,143 @@
-import { PropsWithChildren, ReactNode } from "react";
+"use client";
 
-export default function Slider(props: PropsWithChildren) {
+import * as motion from "@/lib/motion";
+import classNames from "classnames";
+import { AnimatePresence, Variants } from "framer-motion";
+import { PropsWithChildren, ReactNode, useEffect, useState } from "react";
+import { useSwipeable } from "react-swipeable";
+import Button from "./tutoring/button";
+
+interface SliderProps extends PropsWithChildren {
+  sliderClassName?: string;
+  pageClassName?: string;
+}
+
+export default function Slider({
+  children,
+  sliderClassName,
+  pageClassName,
+}: SliderProps) {
+  const [sliderIndex, setCurrentIndex] = useState(0);
+  const [slideDirection, setSlideDirection] = useState<string | undefined>(
+    undefined,
+  );
+
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: () => {
+      updateSliderIndex(sliderIndex - 1);
+    },
+    onSwipedRight: () => {
+      updateSliderIndex(sliderIndex + 1);
+    },
+  });
+
+  const childrenArray = Array(children)[0] as ReactNode[];
+
+  useEffect(() => {}, [childrenArray.length, sliderIndex]);
+
+  const updateSliderIndex = (newIndex: number) => {
+    if (newIndex > childrenArray.length - 1) {
+      setCurrentIndex(0);
+      setSlideDirection("right");
+    } else if (newIndex < 0) {
+      setCurrentIndex(childrenArray.length - 1);
+      setSlideDirection("left");
+    } else {
+      setCurrentIndex(newIndex);
+      setSlideDirection(newIndex > sliderIndex ? "right" : "left");
+    }
+  };
+
+  const pageVariants: Variants = {
+    hover: {
+      scale: 1.2,
+    },
+    inactive: {},
+    active: {
+      background: "var(--yd-orange)",
+    },
+  };
+
+  const slideVariants: Variants = {
+    hiddenRight: {
+      x: "100%",
+      opacity: 0,
+    },
+    hiddenLeft: {
+      x: "-100%",
+      opacity: 0,
+    },
+    visible: {
+      x: "0",
+      opacity: 1,
+      transition: {
+        duration: 0.3,
+      },
+    },
+    exit: {
+      opacity: 0,
+      scale: 0.8,
+      position: "absolute",
+
+      transition: {
+        duration: 0.3,
+      },
+    },
+  };
+
   return (
-    <div>
-      {Array(props.children).map((child: ReactNode, i: number) => (
-        <div key={i} className="absolute">
-          {child}
+    <div className="carousel">
+      <div className="carousel-content relative">
+        <AnimatePresence>
+          <motion.div
+            key={sliderIndex}
+            className={classNames(sliderClassName, "overflow-hidden")}
+            variants={slideVariants}
+            animate="visible"
+            exit="exit"
+            initial={slideDirection === "right" ? "hiddenRight" : "hiddenLeft"}
+            {...swipeHandlers}
+          >
+            {childrenArray[sliderIndex]}
+          </motion.div>
+        </AnimatePresence>
+
+        <div className="flex-row justify-between absolute top-1/2 left-0 w-full -translate-y-1/2 hidden xl:flex">
+          <Button
+            theme="orange"
+            className="-translate-x-1/2 shadow-yd-default text-lg"
+            onClick={() => updateSliderIndex(sliderIndex - 1)}
+          >
+            {"<"}
+          </Button>
+          <Button
+            theme="orange"
+            className="translate-x-1/2 shadow-yd-default text-lg"
+            onClick={() => updateSliderIndex(sliderIndex + 1)}
+          >
+            {">"}
+          </Button>
         </div>
-      ))}
+      </div>
+
+      <div className="carousel-pages flex flex-row gap-x-5 justify-center my-6">
+        {childrenArray.map((_, i) => (
+          <motion.div
+            key={i}
+            className={classNames(
+              "w-[20px] h-[20px] rounded-full bg-yd-grey cursor-pointer",
+              pageClassName,
+              {
+                active: sliderIndex === i,
+              },
+            )}
+            variants={pageVariants}
+            animate={sliderIndex === i ? "active" : "inactive"}
+            whileHover={"hover"}
+            onClick={() => updateSliderIndex(i)}
+          ></motion.div>
+        ))}
+      </div>
     </div>
   );
 }
