@@ -120,7 +120,6 @@ export default function BookSessionPage() {
             handleBlur,
             isValid,
             errors,
-            setFieldValue,
             isSubmitting,
           }) => {
             const handleDurationChange = async (

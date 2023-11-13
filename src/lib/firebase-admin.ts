@@ -69,10 +69,11 @@ export const createSession = async (session: Session) => {
 
 export const updateSession = async (
   uid: string,
-  session: Pick<Session, "meeting_link">,
+  session: Pick<Session, "meeting_link" | "event_id">,
 ) => {
   return await db.collection("sessions").doc(uid).update({
     meeting_link: session.meeting_link,
+    event_id: session.event_id,
   });
 };
 
@@ -112,4 +113,8 @@ export const getCurrentUserFromSession = async () => {
     console.error("Could not get current user", JSON.stringify(firebaseError));
     return null;
   }
+};
+
+export const getSession = (uid: string) => {
+  return db.collection("sessions").doc(uid).get();
 };

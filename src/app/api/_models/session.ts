@@ -14,6 +14,7 @@ export interface Session {
   message: string;
   user: DocumentReference;
   meeting_link?: string;
+  event_id?: string;
 }
 
 // cancelled - user has cancelled the lesson, but less than 4 hours before

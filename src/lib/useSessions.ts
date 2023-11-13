@@ -65,5 +65,21 @@ export default function useSessions(uid: string) {
     };
   };
 
-  return { bookSession, getUpcomingSessions, getPreviousLessons, getSession };
+  const updateSession = async (
+    sessionUid: string,
+    updatedSession: Partial<Session>,
+  ) => {
+    return await fetch(`/api/users/${uid}/sessions/${sessionUid}`, {
+      method: "PATCH",
+      body: JSON.stringify(updatedSession),
+    });
+  };
+
+  return {
+    bookSession,
+    getUpcomingSessions,
+    getPreviousLessons,
+    getSession,
+    updateSession,
+  };
 }

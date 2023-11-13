@@ -13,7 +13,7 @@ import withCurrentUser from "../../../_middlewares/withCurrentUser";
 import { Session } from "../../../_models/session";
 
 interface POSTParams {
-  uid: string;
+  userUid: string;
 }
 
 export async function POST(
@@ -24,7 +24,7 @@ export async function POST(
     const reqBody: Session = await req.json();
 
     const session: Session = {
-      user: db.doc("/users/" + params.uid),
+      user: db.doc("/users/" + params.userUid),
       duration_minutes: reqBody.duration_minutes,
       message: reqBody.message,
       start_date: reqBody.start_date,
@@ -45,67 +45,92 @@ export async function POST(
       minutes: session.duration_minutes,
     });
 
-    const calResult = await googleCalendar.events.insert({
-      calendarId: statics.bookingCalendarId,
-      conferenceDataVersion: 1,
-      requestBody: {
-        summary: `${currUser.name} - Tutoring`,
-        description:
-          "Get ready for your upcoming tutoring lesson!\n\nStudent notes: " +
-          session.message,
-        start: {
-          dateTime: session.start_date,
-          timeZone: session.timezone,
-        },
-        end: {
-          dateTime: endDate.toISOString(),
-          timeZone: session.timezone,
-        },
-        conferenceData: {
-          createRequest: {
-            conferenceSolutionKey: {
-              type: "hangoutsMeet",
+    try {
+      const calResult = await googleCalendar.events.insert({
+        calendarId: statics.bookingCalendarId,
+        conferenceDataVersion: 1,
+        requestBody: {
+          summary: `${currUser.name} - Tutoring`,
+          description:
+            "Get ready for your upcoming tutoring lesson!\n\nStudent notes: " +
+            session.message,
+          start: {
+            dateTime: session.start_date,
+            timeZone: session.timezone,
+          },
+          end: {
+            dateTime: endDate.toISOString(),
+            timeZone: session.timezone,
+          },
+          conferenceData: {
+            createRequest: {
+              conferenceSolutionKey: {
+                type: "hangoutsMeet",
+              },
+              requestId: crypto.randomUUID(),
             },
-            requestId: crypto.randomUUID(),
           },
-        },
-        attendees: [
-          { email: statics.calendarInviteEmail, displayName: currUser.name },
-          {
-            email: currUser.email,
-            displayName: statics.calendarInviteDisplayName,
-          },
-        ],
-        reminders: {
-          useDefault: false,
-          overrides: [
-            { method: "email", minutes: 24 * 60 },
-            { method: "email", minutes: 1 * 60 },
-            { method: "popup", minutes: 10 },
+          attendees: [
+            { email: statics.calendarInviteEmail, displayName: currUser.name },
+            {
+              email: currUser.email,
+              displayName: statics.calendarInviteDisplayName,
+            },
           ],
+          reminders: {
+            useDefault: false,
+            overrides: [
+              { method: "email", minutes: 24 * 60 },
+              { method: "email", minutes: 1 * 60 },
+              { method: "popup", minutes: 10 },
+            ],
+          },
         },
-      },
-    });
-
-    if (calResult.status === StatusCodes.OK) {
-      console.log(
-        "Successfully created calendar event for session " + docSnapshot.id,
-        "Data=",
-        calResult,
-      );
-
-      await updateSession(docSnapshot.id, {
-        meeting_link: calResult.data.hangoutLink ?? undefined,
       });
 
-      console.log("Updated meeting link for session " + docSnapshot.id);
-    } else {
+      if (calResult.status === StatusCodes.OK) {
+        console.log(
+          "Successfully created calendar event for session " + docSnapshot.id,
+          "Data=",
+          calResult,
+        );
+
+        if (!calResult.data.hangoutLink) {
+          throw new Error("No hangoutLink was returned.");
+        }
+
+        if (!calResult.data.iCalUID) {
+          throw new Error("No iCalUID was returned.");
+        }
+
+        await updateSession(docSnapshot.id, {
+          meeting_link: calResult.data.hangoutLink ?? undefined,
+          event_id: calResult.data.id ?? undefined,
+        });
+
+        console.log("Updated meeting link for session " + docSnapshot.id);
+      } else {
+        throw new Error(
+          `Calendar creation request failed (status=${calResult.status}): ${calResult.data}`,
+        );
+      }
+    } catch (error: any) {
+      const errorMsg = error?.message ?? error;
+
       console.error(
-        "Error creating calendar event for session " + docSnapshot.id,
-        "Status=",
-        calResult.status,
-        "Data=",
-        calResult.data,
+        `Error created calendar event for session ID=${docSnapshot.id}: ${errorMsg}`,
+      );
+
+      // Delete the new event if anything goes wrong after creation
+      await docSnapshot.ref.delete();
+
+      return NextResponse.json(
+        {
+          message: `Error creating Google Calendar event: ${errorMsg}`,
+        },
+        {
+          status: StatusCodes.INTERNAL_SERVER_ERROR,
+        },
       );
     }
 
@@ -120,13 +145,13 @@ export async function GET(
   { params }: { params: POSTParams },
 ): Promise<NextResponse> {
   return withCurrentUser(req, async (currentUser) => {
-    if (!currentUser.is_admin && currentUser.uid !== params.uid) {
+    if (currentUser.uid !== params.userUid) {
       return new NextResponse("UNAUTHORIZED", {
         status: StatusCodes.UNAUTHORIZED,
       });
     }
 
-    const sessionsSnapshot = await getUserSessions(params.uid);
+    const sessionsSnapshot = await getUserSessions(params.userUid);
 
     const sessions = sessionsSnapshot.map((ss) => ({
       uid: ss.id,

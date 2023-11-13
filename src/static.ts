@@ -1,6 +1,6 @@
 const statics = {
   bookingURL:
-    "https://calendar.google.com/calendar/u/0/appointments/AcZssZ1ZPkUU44B0LkdmDl-CGCYbUubeGbSifgF4mTA=",
+    "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3KX5ovrDTAj1nwIghSKr6ZVbkxbxYOCUyyRWvtO_XpYX3grEK2VlQo-J9Mf4pC-ZWFwxGevX0r",
   siteURL: "https://www.yarbz.digital",
   stripeCustomerLogin: "https://billing.stripe.com/p/login/5kA15Mbr971M9mE4gg",
   trialLessonBookingURL:

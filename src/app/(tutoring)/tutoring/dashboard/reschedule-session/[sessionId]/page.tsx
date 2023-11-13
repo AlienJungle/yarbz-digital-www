@@ -1,6 +1,8 @@
 "use client";
 
 import { Session } from "@/app/api/_models/session";
+import Alert from "@/components/alert";
+import BackButton from "@/components/back-button";
 import Container from "@/components/container";
 import { UserContext } from "@/components/providers/user-provider";
 import Button from "@/components/tutoring/button";
@@ -8,6 +10,8 @@ import { getTimeSlots } from "@/helpers/misc-helpers";
 import useFreeBusy from "@/lib/useFreeBusy";
 import useSessions from "@/lib/useSessions";
 import { SelectOption } from "@/models/SelectOption";
+import { statics } from "@/static";
+import classNames from "classnames";
 import { add, format } from "date-fns";
 import { Formik, FormikHelpers } from "formik";
 import { ChangeEvent, useContext, useEffect, useState } from "react";
@@ -24,50 +28,109 @@ export default function RescheduleSessionPage({
   const userCtx = useContext(UserContext);
   const currentUser = userCtx.currentUser;
 
-  const { getSession } = useSessions(currentUser!.uid);
+  const { getSession, updateSession } = useSessions(currentUser!.uid);
 
-  const { session, isLoading, error } = getSession(params.sessionId);
+  const {
+    session,
+    isLoading: getSessionLoading,
+    error: getSessionError,
+  } = getSession(params.sessionId);
 
-  const handleFormSubmit = (
+  const handleFormSubmit = async (
     values: RescheduleFormValues,
     formikHelpers: FormikHelpers<RescheduleFormValues>,
-  ) => {};
+  ) => {
+    console.log(values);
+    try {
+      const updatedSession: Partial<Session> = {
+        start_date: values.time,
+      };
+
+      await updateSession(params.sessionId, updatedSession);
+    } catch (error) {
+      // TODO: Handle error
+    } finally {
+      formikHelpers.setSubmitting(false);
+    }
+  };
 
   return (
     <main>
       <Container maxWidth={900}>
+        <BackButton
+          href="/tutoring/dashboard"
+          text="Back to dashboard"
+        ></BackButton>
         <h1 className="my-10">Reschedule your session</h1>
 
-        <div>
-          <InfoCard />
-          <RescheduleForm
-            onSubmit={handleFormSubmit}
-            currentSession={session}
-          />
-        </div>
+        {getSessionError ? (
+          <Alert className="mb-6" type="error">
+            {getSessionError?.message ?? getSessionError}
+          </Alert>
+        ) : null}
+
+        {!getSessionError && (
+          <div>
+            <InfoCard
+              session={session}
+              isLoading={getSessionLoading}
+              error={getSessionError}
+            />
+            <RescheduleForm
+              onSubmit={handleFormSubmit}
+              currentSession={session}
+            />
+          </div>
+        )}
       </Container>
     </main>
   );
 }
 
-function InfoCard() {
+function InfoCard(props: {
+  session: Session | undefined;
+  isLoading: boolean;
+  error: Error | undefined;
+}) {
   return (
     <div className="shadow-yd-default rounded-lg p-8">
       <h2 className="text-xl mb-6">Your existing session</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div
+        className={classNames("grid grid-cols-1 md:grid-cols-3 gap-4", {
+          skeleton: props.isLoading,
+        })}
+      >
         <div>
           <p className="font-bold">Date</p>
-          <p>9th August 2023</p>
+          <p>
+            {props.session?.start_date
+              ? format(
+                  new Date(props.session!.start_date),
+                  statics.dateFormats.date,
+                )
+              : null}
+          </p>
         </div>
 
         <div>
           <p className="font-bold">Time</p>
-          <p>09:00 AM</p>
+          <p>
+            {props.session?.start_date
+              ? format(
+                  new Date(props.session!.start_date),
+                  statics.dateFormats.time,
+                )
+              : null}
+          </p>
         </div>
 
         <div>
           <p className="font-bold">Duration</p>
-          <p>90 minutes</p>
+          <p>
+            {props.session?.duration_minutes
+              ? `${props.session.duration_minutes} minutes`
+              : null}
+          </p>
         </div>
       </div>
     </div>

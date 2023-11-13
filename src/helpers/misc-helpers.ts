@@ -1,5 +1,5 @@
 import { statics } from "@/static";
-import { add, areIntervalsOverlapping } from "date-fns";
+import { add, areIntervalsOverlapping, differenceInHours } from "date-fns";
 import { calendar_v3 } from "googleapis";
 
 export async function getTimeSlots(
@@ -23,29 +23,35 @@ export async function getTimeSlots(
     statics.availability.finishHour,
   );
 
+  const now = new Date();
+
   let startDate = fromDateTime;
   while (startDate <= toDateTime) {
     const endDate = add(startDate, { minutes: duration });
+    const lessThan24Hours = differenceInHours(startDate, now) < 24;
+
     // Only add event to list if the end time doesn't exceed
     // the end time specified
     if (endDate <= toDateTime) {
       timeSlots.push({
         date: startDate,
-        isAvailable: busySlots.some((bs) => {
-          const bsStart = new Date(bs.start!);
-          const bsEnd = new Date(bs.end!);
+        isAvailable:
+          !lessThan24Hours &&
+          !busySlots.some((bs) => {
+            const bsStart = new Date(bs.start!);
+            const bsEnd = new Date(bs.end!);
 
-          return !areIntervalsOverlapping(
-            {
-              start: bsStart,
-              end: bsEnd,
-            },
-            {
-              start: startDate,
-              end: endDate,
-            },
-          );
-        }),
+            return areIntervalsOverlapping(
+              {
+                start: bsStart,
+                end: bsEnd,
+              },
+              {
+                start: startDate,
+                end: endDate,
+              },
+            );
+          }),
       });
     }
     startDate = add(startDate, { minutes: 15 });
