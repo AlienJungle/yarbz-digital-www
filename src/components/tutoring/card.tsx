@@ -17,9 +17,13 @@ export default function Card({
 
   return (
     <div
-      className={classNames("col-span-2 card-tut", className, {
-        "!bg-yd-tut-lightgreen shadow-yd-default": currTheme === "green",
-      })}
+      className={classNames(
+        "col-span-2 card-tut shadow-yd-default",
+        className,
+        {
+          "!bg-yd-tut-lightgreen shadow-yd-default": currTheme === "green",
+        },
+      )}
     >
       {title && <h2 className="text-xl font-bold mb-4">{title}</h2>}
       <>{children}</>

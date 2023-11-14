@@ -1,10 +1,11 @@
 import Alert from "@/components/alert";
 import { UserContext } from "@/components/providers/user-provider";
+import { formatDate, formatTime } from "@/helpers/misc-helpers";
 import useSessions from "@/lib/useSessions";
 import { statics } from "@/static";
 import classNames from "classnames";
-import { format } from "date-fns";
 import { useContext } from "react";
+import Card from "../card";
 
 export default function PreviousSessionsCard() {
   const userCtx = useContext(UserContext);
@@ -15,7 +16,7 @@ export default function PreviousSessionsCard() {
   const { sessions, error, isLoading } = getPreviousLessons();
 
   return (
-    <div className="card-tut">
+    <Card>
       <h2 className="text-xl font-bold mb-[30px]">
         Your previous sessions {!isLoading && `(${sessions?.length ?? 0})`}{" "}
       </h2>
@@ -50,8 +51,8 @@ export default function PreviousSessionsCard() {
                 const startDate = new Date(session.start_date);
                 return (
                   <tr key={i} className="items-center">
-                    <td>{format(startDate, statics.dateFormats.date)}</td>
-                    <td>{format(startDate, statics.dateFormats.time)}</td>
+                    <td>{formatDate(startDate)}</td>
+                    <td>{formatTime(statics.dateFormats.time)}</td>
                     <td>{session.duration_minutes} minutes</td>
                     <td className="flex flex-row justify-end items-center"></td>
                   </tr>
@@ -67,6 +68,6 @@ export default function PreviousSessionsCard() {
           {error.message}
         </Alert>
       )}
-    </div>
+    </Card>
   );
 }

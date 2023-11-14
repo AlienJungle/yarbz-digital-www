@@ -79,7 +79,7 @@
 }
 
 .card-tut {
-  @apply bg-yd-tut-white p-[28px] rounded-[8px];
+  @apply p-[28px] rounded-[8px] border-yd-light-grey border-[3px];
 }
 
 input.tut-form-control,

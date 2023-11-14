@@ -1,5 +1,6 @@
 "use client";
 
+import { Session } from "@/app/api/_models/session";
 import Alert from "@/components/alert";
 import { UserContext } from "@/components/providers/user-provider";
 import BillingCard from "@/components/tutoring/dashboard/billing-card";
@@ -7,6 +8,8 @@ import PreviousSessionsCard from "@/components/tutoring/dashboard/previous-sessi
 import SessionsCard from "@/components/tutoring/dashboard/sessions-card";
 import SupportCard from "@/components/tutoring/dashboard/support-card";
 import UpcomingSessionsCard from "@/components/tutoring/dashboard/upcoming-sessions-card";
+import Modal from "@/components/tutoring/modal";
+import CancelSessionModalContent from "@/components/tutoring/modal-content/cancel-session-modal-content";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useContext, useState } from "react";
@@ -19,6 +22,10 @@ export default function DashboardPage() {
 
   const [upcomingSessionsError, setUpcomingSessionsError] = useState<
     string | undefined
+  >(undefined);
+
+  const [cancellingSession, setCancellingSession] = useState<
+    Session | undefined
   >(undefined);
 
   return (
@@ -73,10 +80,27 @@ export default function DashboardPage() {
           </div>
 
           <div className="lg:col-span-4 xl:col-span-7">
-            <UpcomingSessionsCard />
+            <UpcomingSessionsCard
+              onCancel={(session) => setCancellingSession(session)}
+            />
           </div>
         </div>
       </div>
+
+      <Modal
+        title="Cancel session"
+        isOpen={!!cancellingSession}
+        onClose={() => setCancellingSession(undefined)}
+        className="lg:max-w-[600px]"
+      >
+        {cancellingSession && (
+          <CancelSessionModalContent
+            onClose={() => setCancellingSession(undefined)}
+            onCancel={() => null}
+            session={cancellingSession}
+          />
+        )}
+      </Modal>
     </main>
   );
 }

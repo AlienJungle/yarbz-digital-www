@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { getDbUser } from "@/lib/firebase-admin";
 import { StatusCodes } from "http-status-codes";
+import { NotFound, NotFoundMessages } from "../../responses";
 
 export interface DBUser {
   available_sessions: number;
@@ -18,14 +19,7 @@ export async function GET(
   const data = await getDbUser(params.userUid);
 
   if (!data) {
-    return Response.json(
-      {
-        error: `User with uid ${params.userUid} could not be found`,
-      },
-      {
-        status: StatusCodes.NOT_FOUND,
-      },
-    );
+    return NotFound(NotFoundMessages.entityNotFound("User", params.userUid));
   }
 
   return NextResponse.json(data, {

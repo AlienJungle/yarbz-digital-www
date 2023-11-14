@@ -5,14 +5,14 @@ import { add } from "date-fns";
 import useSWR from "swr";
 import { fetcher } from "./swr";
 
-export default function useSessions(uid: string) {
+export default function useSessions(userUid: string) {
   const bookSession = async (
     session: Pick<
       Session,
       "start_date" | "duration_minutes" | "message" | "timezone"
     >,
   ) => {
-    return await fetch(`/api/users/${uid}/sessions`, {
+    return await fetch(`/api/users/${userUid}/sessions`, {
       method: "POST",
       body: JSON.stringify(session),
     });
@@ -20,7 +20,7 @@ export default function useSessions(uid: string) {
 
   const getUpcomingSessions = () => {
     const { data, isLoading, error } = useSWR<Session[], Error>(
-      `/api/users/${uid}/sessions`,
+      `/api/users/${userUid}/sessions`,
       fetcher,
     );
 
@@ -35,7 +35,7 @@ export default function useSessions(uid: string) {
 
   const getPreviousLessons = () => {
     const { data, isLoading, error } = useSWR<Session[], Error>(
-      `/api/users/${uid}/sessions`,
+      `/api/users/${userUid}/sessions`,
       fetcher,
     );
 
@@ -54,7 +54,7 @@ export default function useSessions(uid: string) {
 
   const getSession = (sessionUid: string) => {
     const { data, isLoading, error } = useSWR<Session, Error>(
-      `/api/users/${uid}/sessions/${sessionUid}`,
+      `/api/users/${userUid}/sessions/${sessionUid}`,
       fetcher,
     );
 
@@ -69,10 +69,27 @@ export default function useSessions(uid: string) {
     sessionUid: string,
     updatedSession: Partial<Session>,
   ) => {
-    return await fetch(`/api/users/${uid}/sessions/${sessionUid}`, {
+    return await fetch(`/api/users/${userUid}/sessions/${sessionUid}`, {
       method: "PATCH",
       body: JSON.stringify(updatedSession),
     });
+  };
+
+  const cancelSession = (sessionUid: string | undefined) => {
+    const { data, isLoading, error } = useSWR<any, Error>(
+      () =>
+        sessionUid ? `/api/users/${userUid}/sessions/${sessionUid}` : null,
+      (url: string) =>
+        fetcher(url, {
+          method: "DELETE",
+        }),
+    );
+
+    return {
+      data,
+      isLoading,
+      error,
+    };
   };
 
   return {
@@ -81,5 +98,6 @@ export default function useSessions(uid: string) {
     getPreviousLessons,
     getSession,
     updateSession,
+    cancelSession,
   };
 }

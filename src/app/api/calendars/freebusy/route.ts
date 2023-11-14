@@ -1,7 +1,7 @@
 import { cache, googleCalendar } from "@/lib/googlecal";
 import { add, set } from "date-fns";
-import { StatusCodes } from "http-status-codes";
 import { NextRequest, NextResponse } from "next/server";
+import { BadRequest } from "../../responses";
 
 export async function GET(req: NextRequest): Promise<NextResponse> {
   const searchParams = req.nextUrl.searchParams;
@@ -9,14 +9,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
   const timezone = searchParams.get("timezone");
 
   if (!date || !timezone) {
-    return NextResponse.json(
-      {
-        error: "date and timezone params required.",
-      },
-      {
-        status: StatusCodes.BAD_REQUEST,
-      },
-    );
+    return BadRequest("query", "date", "timezone");
   }
 
   const calendarIds: string[] =

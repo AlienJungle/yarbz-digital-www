@@ -1,5 +1,12 @@
 import withCurrentUser from "@/app/api/_middlewares/withCurrentUser";
 import { Session } from "@/app/api/_models/session";
+import {
+  BadRequest,
+  InternalServerError,
+  NotFound,
+  NotFoundMessages,
+  Unauthorized,
+} from "@/app/api/responses";
 import { getSession } from "@/lib/firebase-admin";
 import { googleCalendar } from "@/lib/googlecal";
 import { statics } from "@/static";
@@ -21,13 +28,15 @@ export async function GET(req: NextRequest, { params }: { params: GETParams }) {
       .get();
 
     if (!doc.exists) {
-      return NotFoundResponse(params.sessionUid);
+      return NotFound(
+        NotFoundMessages.entityNotFound("Session", params.sessionUid),
+      );
     }
 
     const data = doc.data() as Session;
 
     if (data.user.id != currUser.uid) {
-      return NotAuthorisedResponse();
+      return Unauthorized();
     }
 
     const session = {
@@ -48,18 +57,20 @@ export async function PATCH(
       const { start_date }: { start_date: string } = await req.json();
 
       if (!start_date) {
-        return InvalidRequest(["start_date"]);
+        return BadRequest("body", "start_date");
       }
 
       const doc = await getSession(params.sessionUid);
 
       if (!doc.exists) {
-        return NotFoundResponse(params.sessionUid);
+        return NotFound(
+          NotFoundMessages.entityNotFound("Session", params.sessionUid),
+        );
       }
 
       const data = doc.data() as Session;
       if (data.user.id !== currUser.uid) {
-        return NotAuthorisedResponse();
+        return Unauthorized();
       }
 
       await doc.ref.update({
@@ -110,45 +121,10 @@ export async function PATCH(
     } catch (error: any) {
       const errorMsg = error?.message ?? error;
       console.error(`Failed to reschedule session: ${errorMsg}`);
-
-      return NextResponse.json(
-        {
-          message: `Error occurred rescheduling session: ${errorMsg}`,
-        },
-        {
-          status: StatusCodes.INTERNAL_SERVER_ERROR,
-        },
+      return InternalServerError(
+        "Error occurred rescheduling session",
+        errorMsg,
       );
     }
   });
 }
-
-const NotFoundResponse = (sessionUid: string) =>
-  NextResponse.json(
-    {
-      message: `Session with ID ${sessionUid} could not be found`,
-    },
-    {
-      status: StatusCodes.NOT_FOUND,
-    },
-  );
-
-const NotAuthorisedResponse = () =>
-  NextResponse.json(
-    { message: "UNAUTHORIZED" },
-    {
-      status: StatusCodes.UNAUTHORIZED,
-    },
-  );
-
-const InvalidRequest = (requiredArgs: string[]) =>
-  NextResponse.json(
-    {
-      message: `Arguments missing from body. Required arguments: ${requiredArgs.join(
-        ",",
-      )}`,
-    },
-    {
-      status: StatusCodes.BAD_REQUEST,
-    },
-  );

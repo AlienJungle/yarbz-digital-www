@@ -1,6 +1,29 @@
 import { statics } from "@/static";
-import { add, areIntervalsOverlapping, differenceInHours } from "date-fns";
+import {
+  add,
+  areIntervalsOverlapping,
+  differenceInHours,
+  format,
+} from "date-fns";
 import { calendar_v3 } from "googleapis";
+
+export async function formatDate(val: string | Date) {
+  const date: Date = typeof val === "string" ? new Date(val) : val;
+  return format(date, statics.dateFormats.date);
+}
+
+export async function formatTime(val: string | Date) {
+  const date: Date = typeof val === "string" ? new Date(val) : val;
+  return format(date, statics.dateFormats.time);
+}
+
+export async function formatDateTime(val: string | Date) {
+  const date: Date = typeof val === "string" ? new Date(val) : val;
+  return format(
+    date,
+    `${statics.dateFormats.date} ${statics.dateFormats.time}`,
+  );
+}
 
 export async function getTimeSlots(
   busySlots: calendar_v3.Schema$TimePeriod[],

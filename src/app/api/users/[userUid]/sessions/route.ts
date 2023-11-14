@@ -1,3 +1,4 @@
+import { InternalServerError, Unauthorized } from "@/app/api/responses";
 import {
   createSession,
   db,
@@ -124,13 +125,9 @@ export async function POST(
       // Delete the new event if anything goes wrong after creation
       await docSnapshot.ref.delete();
 
-      return NextResponse.json(
-        {
-          message: `Error creating Google Calendar event: ${errorMsg}`,
-        },
-        {
-          status: StatusCodes.INTERNAL_SERVER_ERROR,
-        },
+      return InternalServerError(
+        "Error creating Google Calender event",
+        error?.message ?? error,
       );
     }
 
@@ -146,9 +143,7 @@ export async function GET(
 ): Promise<NextResponse> {
   return withCurrentUser(req, async (currentUser) => {
     if (currentUser.uid !== params.userUid) {
-      return new NextResponse("UNAUTHORIZED", {
-        status: StatusCodes.UNAUTHORIZED,
-      });
+      return Unauthorized();
     }
 
     const sessionsSnapshot = await getUserSessions(params.userUid);

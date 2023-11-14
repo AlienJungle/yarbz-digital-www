@@ -1,15 +1,22 @@
 import { Session } from "@/app/api/_models/session";
 import Alert from "@/components/alert";
 import { UserContext } from "@/components/providers/user-provider";
+import { formatDate, formatTime } from "@/helpers/misc-helpers";
 import useSessions from "@/lib/useSessions";
-import { statics } from "@/static";
 import classNames from "classnames";
-import { add, format } from "date-fns";
+import { add } from "date-fns";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import Button from "../button";
+import Card from "../card";
 
-export default function UpcomingSessionsCard() {
+interface UpcomingSessionsCardProps {
+  onCancel: (session: Session) => void;
+}
+
+export default function UpcomingSessionsCard({
+  onCancel,
+}: UpcomingSessionsCardProps) {
   const userCtx = useContext(UserContext);
   const currUser = userCtx.currentUser;
 
@@ -18,7 +25,7 @@ export default function UpcomingSessionsCard() {
   const { sessions, error, isLoading } = getSessions();
 
   return (
-    <div className={classNames("card-tut")}>
+    <Card>
       <h2 className="text-xl font-bold mb-[30px]">
         Upcoming sessions {!isLoading && `(${sessions?.length ?? 0})`}
       </h2>
@@ -56,14 +63,16 @@ export default function UpcomingSessionsCard() {
             </thead>
             <tbody>
               {sessions?.map((session, i) => {
-                const startDate = new Date(session.start_date);
                 return (
                   <tr key={i} className="items-center">
-                    <td>{format(startDate, statics.dateFormats.date)}</td>
-                    <td>{format(startDate, statics.dateFormats.time)}</td>
+                    <td>{formatDate(session.start_date)}</td>
+                    <td>{formatTime(session.start_date)}</td>
                     <td>{session.duration_minutes} minutes</td>
                     <td className="flex flex-row justify-end items-center">
-                      <UpcomingSessionButtons session={session} />
+                      <UpcomingSessionButtons
+                        session={session}
+                        onCancel={onCancel}
+                      />
                     </td>
                   </tr>
                 );
@@ -72,15 +81,19 @@ export default function UpcomingSessionsCard() {
           </table>
         )}
       </div>
-    </div>
+    </Card>
   );
 }
 
-interface UpcomingSessionButtonsProps {
+interface UpcomingSessionButtonsProps
+  extends Pick<UpcomingSessionsCardProps, "onCancel"> {
   session: Session;
 }
 
-function UpcomingSessionButtons({ session }: UpcomingSessionButtonsProps) {
+function UpcomingSessionButtons({
+  session,
+  onCancel,
+}: UpcomingSessionButtonsProps) {
   const startDate = new Date(session.start_date);
   const router = useRouter();
 
@@ -95,12 +108,16 @@ function UpcomingSessionButtons({ session }: UpcomingSessionButtonsProps) {
     router.push(`/tutoring/dashboard/reschedule-session/${session.uid}`);
   };
 
+  const handleCancelClick = () => {
+    onCancel(session);
+  };
+
   return (
     <div className="flex flex-row items-center gap-x-[10px]">
       <Button theme="black" size="small" onClick={handleRescheduleClick}>
         Reschedule
       </Button>
-      <Button theme="black" size="small">
+      <Button theme="black" size="small" onClick={handleCancelClick}>
         Cancel
       </Button>
       <Button theme="green" size="small" onClick={handleJoinClick}>

@@ -6,11 +6,11 @@ import BackButton from "@/components/back-button";
 import Container from "@/components/container";
 import { UserContext } from "@/components/providers/user-provider";
 import Button from "@/components/tutoring/button";
-import { getTimeSlots } from "@/helpers/misc-helpers";
+import Card from "@/components/tutoring/card";
+import { formatDate, formatTime, getTimeSlots } from "@/helpers/misc-helpers";
 import useFreeBusy from "@/lib/useFreeBusy";
 import useSessions from "@/lib/useSessions";
 import { SelectOption } from "@/models/SelectOption";
-import { statics } from "@/static";
 import classNames from "classnames";
 import { add, format } from "date-fns";
 import { Formik, FormikHelpers } from "formik";
@@ -93,7 +93,7 @@ function InfoCard(props: {
   error: Error | undefined;
 }) {
   return (
-    <div className="shadow-yd-default rounded-lg p-8">
+    <Card>
       <h2 className="text-xl mb-6">Your existing session</h2>
       <div
         className={classNames("grid grid-cols-1 md:grid-cols-3 gap-4", {
@@ -104,10 +104,7 @@ function InfoCard(props: {
           <p className="font-bold">Date</p>
           <p>
             {props.session?.start_date
-              ? format(
-                  new Date(props.session!.start_date),
-                  statics.dateFormats.date,
-                )
+              ? formatDate(props.session!.start_date)
               : null}
           </p>
         </div>
@@ -116,10 +113,7 @@ function InfoCard(props: {
           <p className="font-bold">Time</p>
           <p>
             {props.session?.start_date
-              ? format(
-                  new Date(props.session!.start_date),
-                  statics.dateFormats.time,
-                )
+              ? formatTime(props.session!.start_date)
               : null}
           </p>
         </div>
@@ -133,7 +127,7 @@ function InfoCard(props: {
           </p>
         </div>
       </div>
-    </div>
+    </Card>
   );
 }
 
