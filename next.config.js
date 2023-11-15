@@ -7,10 +7,23 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
+        protocol: "https",
         hostname: "avatars.githubusercontent.com",
       },
     ],
   },
+  rewrites: async () => {
+    return [
+      {
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: "(?tutoring.*)\\..*",
+          },
+        ],
+        destination: `/tutoring/:path*`,
+      },
+    ];
+  },
 };
-
-module.exports = nextConfig;

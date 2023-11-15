@@ -10,7 +10,6 @@ import SupportCard from "@/components/tutoring/dashboard/support-card";
 import UpcomingSessionsCard from "@/components/tutoring/dashboard/upcoming-sessions-card";
 import Modal from "@/components/tutoring/modal";
 import CancelSessionModalContent from "@/components/tutoring/modal-content/cancel-session-modal-content";
-import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useContext, useState } from "react";
 
@@ -19,10 +18,6 @@ export default function DashboardPage() {
   const userCtx = useContext(UserContext);
 
   const currUser = userCtx.currentUser;
-
-  const [upcomingSessionsError, setUpcomingSessionsError] = useState<
-    string | undefined
-  >(undefined);
 
   const [cancellingSession, setCancellingSession] = useState<
     Session | undefined
@@ -38,13 +33,13 @@ export default function DashboardPage() {
               <span className="text-base opacity-50 font-semibold ">
                 logged in as {currUser.name} ({currUser!.email})
               </span>
-              <Image
+              {/* <Image
                 src={currUser.picture!}
                 width={30}
                 height={30}
                 alt={"Image of " + currUser.name}
                 className="rounded-full hidden lg:inline"
-              />
+              /> */}
             </span>
           )}
         </div>
