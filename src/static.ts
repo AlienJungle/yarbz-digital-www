@@ -14,6 +14,8 @@ const statics = {
     },
   },
   pricingIDs: {
+    singleSession: "price_1O7mL1FIOlqrQJheXUGQRpTI",
+    subscriptionSession: "price_1O7mL1FIOlqrQJheqReAICRe",
     test: {
       singleSession: "price_1O7mAAFIOlqrQJheK6PyXDys",
       subscriptionSession: "price_1O7mDEFIOlqrQJheJ3fzf2kt",
