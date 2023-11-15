@@ -2,7 +2,6 @@ import Alert from "@/components/alert";
 import { UserContext } from "@/components/providers/user-provider";
 import { formatDate, formatTime } from "@/helpers/misc-helpers";
 import useSessions from "@/lib/useSessions";
-import { statics } from "@/static";
 import classNames from "classnames";
 import { useContext } from "react";
 import Card from "../card";
@@ -48,11 +47,10 @@ export default function PreviousSessionsCard() {
             </thead>
             <tbody>
               {sessions?.map((session, i) => {
-                const startDate = new Date(session.start_date);
                 return (
                   <tr key={i} className="items-center">
-                    <td>{formatDate(startDate)}</td>
-                    <td>{formatTime(statics.dateFormats.time)}</td>
+                    <td>{formatDate(session.start_date)}</td>
+                    <td>{formatTime(session.start_date)}</td>
                     <td>{session.duration_minutes} minutes</td>
                     <td className="flex flex-row justify-end items-center"></td>
                   </tr>

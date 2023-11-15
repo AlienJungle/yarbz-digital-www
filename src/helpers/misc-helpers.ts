@@ -7,17 +7,17 @@ import {
 } from "date-fns";
 import { calendar_v3 } from "googleapis";
 
-export async function formatDate(val: string | Date) {
+export function formatDate(val: string | Date) {
   const date: Date = typeof val === "string" ? new Date(val) : val;
   return format(date, statics.dateFormats.date);
 }
 
-export async function formatTime(val: string | Date) {
+export function formatTime(val: string | Date) {
   const date: Date = typeof val === "string" ? new Date(val) : val;
   return format(date, statics.dateFormats.time);
 }
 
-export async function formatDateTime(val: string | Date) {
+export function formatDateTime(val: string | Date) {
   const date: Date = typeof val === "string" ? new Date(val) : val;
   return format(
     date,
