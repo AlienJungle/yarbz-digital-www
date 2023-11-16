@@ -52,7 +52,7 @@ export default function MobileNav({
 
   return (
     <motion.div
-      className="fixed xl:hidden top-0 left-0 w-screen h-screen px-[25px] py-[20px] bg-yd-tut-black z-10"
+      className="absolute xl:hidden top-0 left-0 w-screen h-auto px-[25px] py-[20px] bg-yd-tut-black z-10 overflow-y-visible"
       animate={isOpen ? "visible" : "hidden"}
       initial={"hidden"}
       variants={menuVariants}
@@ -77,7 +77,7 @@ export default function MobileNav({
         </button>
       </div>
 
-      <div className="mt-[100px]">
+      <div className="mt-[100px] mb-[50px]">
         <motion.ul
           className="flex flex-col items-center font-medium text-2xl text-yd-white gap-y-[40px]"
           variants={menuListVariants}

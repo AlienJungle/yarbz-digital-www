@@ -102,8 +102,9 @@ export default function PricingGrid({ rates, prices }: PricingGridProps) {
             )}/session`}
           >
             <>
-              You can book one or many single sessions, which you can then book
-              with me when you want. All lessons can be rescheduled.
+              You can purchase one or many individual sessions, which you can
+              then book with me whenever you want. All lessons can be
+              rescheduled.
             </>
           </PricingCard>
         </motion.div>

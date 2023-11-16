@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 
+import logoWhite from "@/../public/tutoring/logo-white.svg";
 import logo from "@/../public/tutoring/logo.svg";
 import { DecodedIdTokenUser } from "@/app/api/_models/user";
 import { hoverVariant, tapVariant } from "@/lib/animations";
@@ -131,7 +132,7 @@ export default function HeaderNav(props: HeaderNavProps) {
 
       <MobileNav
         isOpen={isMobileNavOpen}
-        icon={logo}
+        icon={logoWhite}
         links={mobileLinks}
         onClose={() => setIsMobileNavOpen(false)}
       />
