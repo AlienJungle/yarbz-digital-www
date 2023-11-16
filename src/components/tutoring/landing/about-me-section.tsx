@@ -59,7 +59,7 @@ export default function AboutMeSection() {
           className="col-span-5 relative mt-[52px] lg:mt-0"
           variants={introSlideInFromRight}
         >
-          <motion.div className="sticky top-[50px]">
+          <div className="sticky top-[50px]">
             <iframe
               className="rounded-xl w-full h-[55vw] lg:w-[500px] lg:h-[333px]"
               width="500"
@@ -129,7 +129,7 @@ export default function AboutMeSection() {
                 </li>
               </ul>
             </div>
-          </motion.div>
+          </div>
         </motion.div>
       </motion.div>
     </div>

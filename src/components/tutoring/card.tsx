@@ -1,22 +1,25 @@
 import classNames from "classnames";
 import { PropsWithChildren } from "react";
 
-interface UICardProps {
+interface UICardProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    PropsWithChildren {
   title?: string;
-  className?: string;
   theme?: "green" | "grey";
 }
 
 export default function Card({
   title,
   children,
-  className,
   theme,
-}: UICardProps & PropsWithChildren) {
+  className,
+  style,
+}: UICardProps) {
   const currTheme = theme ?? "grey";
 
   return (
     <div
+      style={style}
       className={classNames(
         "col-span-2 card-tut shadow-yd-default",
         className,

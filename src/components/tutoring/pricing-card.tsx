@@ -1,5 +1,6 @@
 "use client";
 
+import bgTile from "@/../public/tutoring/bg-tile.png";
 import { PropsWithChildren } from "react";
 import Button from "./button";
 import Card from "./card";
@@ -20,6 +21,11 @@ export default function PricingCard(
     <Card
       theme="green"
       className="flex flex-col items-center p-[20px] lg:p-[34px]"
+      style={{
+        backgroundImage: `url(${bgTile.src})`,
+        backgroundPositionX: -20,
+        backgroundPositionY: -50,
+      }}
     >
       <h2 className="text-lg lg:text-xl font-semibold lg:mt-[10px] mb-[20px] lg:mb-[40px]">
         {title}

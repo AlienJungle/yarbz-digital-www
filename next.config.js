@@ -19,7 +19,7 @@ const nextConfig = {
         has: [
           {
             type: "host",
-            value: "(?tutoring.*)\\..*",
+            value: "tutoring.yarbz.digital",
           },
         ],
         destination: `/tutoring/:path*`,

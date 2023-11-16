@@ -54,13 +54,12 @@ export default function PricingGrid({ rates, prices }: PricingGridProps) {
     }
   };
 
-  // const [rate, setRate] = useState(1);
   const [currency, setCurrency] = useState("GBP");
 
   return (
     <>
       <motion.div
-        className="grid lg:grid-cols-3 gap-x-[76px] gap-y-[25px] lg:gap-y-[20px]"
+        className="grid lg:grid-cols-3 gap-x-[65px] gap-y-[25px] lg:gap-y-[20px]"
         initial="hidden"
         whileInView={"visible"}
         viewport={{ once: true }}
@@ -151,7 +150,8 @@ export default function PricingGrid({ rates, prices }: PricingGridProps) {
         <p className="text-sm md:max-w-[270px] text-right">
           Prices converted automatically using live data. £1 ={" "}
           {getCurrencySymbol() + rates[currency]}. All purchases are made in
-          GBP. Currency conversion made by your bank.
+          GBP. Currency conversion made by your bank. All prices shown inc. of
+          VAT.
         </p>
       </motion.div>
     </>
