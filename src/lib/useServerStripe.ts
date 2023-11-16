@@ -17,8 +17,8 @@ export function useServerStripe() {
     };
   } else {
     pricingIds = {
-      single: "TODO",
-      subscription: "TODO",
+      single: statics.pricingIDs.singleSession,
+      subscription: statics.pricingIDs.subscriptionSession,
     };
   }
 
