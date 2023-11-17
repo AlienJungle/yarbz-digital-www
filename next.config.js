@@ -13,18 +13,20 @@ const nextConfig = {
     ],
   },
   rewrites: async () => {
-    return [
-      {
-        source: "/:path*",
-        has: [
-          {
-            type: "host",
-            value: "tutoring.yarbz.digital",
-          },
-        ],
-        destination: `/tutoring/:path*`,
-      },
-    ];
+    return {
+      beforeFiles: [
+        {
+          source: "/:path*",
+          has: [
+            {
+              type: "host",
+              value: "tutoring.yarbz.digital",
+            },
+          ],
+          destination: "/tutoring/:path*",
+        },
+      ],
+    };
   },
 };
 
