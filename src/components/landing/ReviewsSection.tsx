@@ -14,7 +14,7 @@ export default function ReviewsSection(): JSX.Element {
       className="landing-section container relative flex flex-col max-w-[998px] items-center"
     >
       <motion.h2
-        className="text-3xl text-yd-orange font-semibold text-center max-w-[627px]"
+        className="text-yd-orange font-semibold text-center max-w-[627px]"
         variants={introVariants}
         initial={"hidden"}
         whileInView={"visible"}
@@ -26,7 +26,7 @@ export default function ReviewsSection(): JSX.Element {
         What those I&apos;ve worked with have to say...
       </motion.h2>
       <motion.div
-        className="mt-[60px] max-w-[950px] w-full"
+        className="mt-[30px] md:mt-[60px] max-w-[950px] w-full"
         variants={introVariants}
         initial={"hidden"}
         whileInView={"visible"}

@@ -21,7 +21,7 @@ export default function HeaderSection(): JSX.Element {
   };
 
   return (
-    <header className="h-[calc(100vh-142px)] min-h-[700px] flex flex-col items-center relative w-full justify-center">
+    <header className="h-[calc(100vh-142px)] md:min-h-[700px] flex flex-col items-center relative w-full justify-center px-[20px]">
       <Image
         src={bgWave}
         fill={true}
@@ -32,20 +32,15 @@ export default function HeaderSection(): JSX.Element {
         className="pointer-events-none"
       />
       <motion.h1
-        className="font-semibold text-3xl"
+        className="font-semibold text-xl md:text-3xl"
         variants={headingVariants}
         initial={"hidden"}
         animate={"visible"}
-        transition={
-          {
-            // delay: 0.5,
-          }
-        }
       >
         Aaron Yarborough
       </motion.h1>
       <motion.p
-        className="font-semibold text-xl text-yd-orange"
+        className="font-semibold text-lg md:text-xl text-yd-orange"
         variants={headingVariants}
         initial={"hidden"}
         animate={"visible"}

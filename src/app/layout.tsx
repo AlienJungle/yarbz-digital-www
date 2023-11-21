@@ -1,10 +1,16 @@
+import HeaderNav from "@/components/header-nav";
 import type { Metadata } from "next";
-import "../globals.css";
+import "./globals.css";
 
+import Footer from "@/components/footer";
 import { Poppins } from "next/font/google";
 
 export const metadata: Metadata = {
-  title: "Coming soon... | Yarbz Digital",
+  title: {
+    template: "%s | Yarbz Digital",
+    default:
+      "👨🏻‍💻 Aaron Yarborough - Freelance Software Consultant | Yarbz Digital",
+  },
   description:
     "With over a decade of expertise, I transform businesses and their clients into digital success stories by crafting elegant, efficient, and cost-effective web and mobile solutions.",
 };
@@ -21,9 +27,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={poppins.className}>
-      <body className="bg-[#050533]">
-        <>{children}</>
+    <html lang="en" className={`${poppins.className} overflow-x-hidden`}>
+      <body>
+        <>
+          <HeaderNav />
+          {children}
+          <Footer />
+        </>
       </body>
     </html>
   );

@@ -5,7 +5,6 @@ import classNames from "classnames";
 import { AnimatePresence, Variants } from "framer-motion";
 import { PropsWithChildren, ReactNode, useEffect, useState } from "react";
 import { useSwipeable } from "react-swipeable";
-import Button from "./tutoring/button";
 
 interface SliderProps extends PropsWithChildren {
   sliderClassName?: string;
@@ -102,21 +101,19 @@ export default function Slider({
           </motion.div>
         </AnimatePresence>
 
-        <div className="flex-row justify-between absolute top-1/2 left-0 w-full -translate-y-1/2 hidden xl:flex">
-          <Button
-            theme="orange"
-            className="-translate-x-1/2 shadow-yd-default text-lg"
+        <div className="flex-row justify-between absolute top-1/2 left-0 w-full -translate-y-1/2 flex">
+          <button
+            className="slider-btn slider-btn-left"
             onClick={() => updateSliderIndex(sliderIndex - 1)}
           >
             {"<"}
-          </Button>
-          <Button
-            theme="orange"
-            className="translate-x-1/2 shadow-yd-default text-lg"
+          </button>
+          <button
+            className="slider-btn slider-btn-right"
             onClick={() => updateSliderIndex(sliderIndex + 1)}
           >
             {">"}
-          </Button>
+          </button>
         </div>
       </div>
 
@@ -124,13 +121,9 @@ export default function Slider({
         {childrenArray.map((_, i) => (
           <motion.div
             key={i}
-            className={classNames(
-              "w-[20px] h-[20px] rounded-full bg-yd-grey cursor-pointer",
-              pageClassName,
-              {
-                active: sliderIndex === i,
-              },
-            )}
+            className={classNames("slider-dot", pageClassName, {
+              active: sliderIndex === i,
+            })}
             variants={pageVariants}
             animate={sliderIndex === i ? "active" : "inactive"}
             whileHover={"hover"}

@@ -15,7 +15,7 @@ export default function ServicesSection(): JSX.Element {
       <div className="lg:px-[125px] lg:pt-[104px] lg:container faded-bg rounded-[20px] lg:rounded-[50px]">
         <motion.h2
           id="services"
-          className="text-[43.95px] font-semibold text-yd-orange"
+          className="font-semibold text-yd-orange"
           variants={introVariants}
           initial={"hidden"}
           whileInView={"visible"}

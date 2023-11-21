@@ -52,7 +52,7 @@ export default function MobileNav({
 
   return (
     <motion.div
-      className="absolute xl:hidden top-0 left-0 w-screen h-auto px-[25px] py-[20px] bg-yd-tut-black z-10 overflow-y-visible"
+      className="absolute xl:hidden top-0 left-0 w-screen h-screen px-[25px] py-[20px] bg-yd-dark-blue z-10 overflow-y-visible"
       animate={isOpen ? "visible" : "hidden"}
       initial={"hidden"}
       variants={menuVariants}

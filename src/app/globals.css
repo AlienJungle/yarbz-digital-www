@@ -10,11 +10,12 @@
 
 @layer base {
   html {
-    @apply text-yd-dark-blue text-[18px] overflow-x-hidden scroll-smooth;
+    @apply text-yd-dark-blue text-[18px] scroll-smooth;
   }
 
-  body.tutoring {
-    @apply leading-relaxed;
+  html,
+  body {
+    @apply overflow-x-hidden;
   }
 }
 
@@ -66,50 +67,6 @@
   @apply text-yd-orange;
 }
 
-.btn-tut {
-  @apply rounded-[5px] px-[18px] py-[8px] font-medium;
-}
-
-.btn-tut-small {
-  @apply px-[12px] py-[2px] text-sm;
-}
-
-.btn-tut:disabled {
-  @apply opacity-50;
-}
-
-.card-tut {
-  @apply p-[28px] rounded-[8px] border-yd-light-grey border-[3px];
-}
-
-input.tut-form-control,
-select.tut-form-control,
-textarea.tut-form-control {
-  @apply bg-yd-tut-white text-yd-tut-black px-[15px] py-[6px] rounded-[5px] block w-full;
-}
-
-input.tut-form-control:disabled,
-select.tut-form-control:disabled,
-textarea.tut-form-control:disabled {
-  @apply opacity-40;
-}
-
-.yd-form-error {
-  @apply text-red-500 text-sm;
-}
-
-.prose-tut li::marker {
-  @apply text-yd-tut-green;
-}
-
-table th {
-  @apply text-left;
-}
-
-.skeleton > * {
-  @apply bg-yd-grey text-yd-grey text-transparent rounded-lg animate-pulse overflow-hidden pointer-events-none;
-}
-
 .landing-section {
   @apply my-[51px] lg:my-32;
 }
@@ -124,21 +81,25 @@ h5 {
 
 h1,
 h2 {
-  @apply text-2xl lg:text-3xl;
+  @apply text-xl md:text-3xl;
 }
 
 h3 {
-  @apply text-xl lg:text-2xl font-semibold;
+  @apply text-xl md:text-2xl font-semibold;
 }
 
-.hiw-arrow {
-  @apply rotate-90 lg:rotate-0 my-[40px] lg:my-0 w-[50px] lg:w-auto self-center;
+.slider-dot {
+  @apply w-[15px] h-[15px] rounded-full bg-yd-grey cursor-pointer;
 }
 
-.hiw-step {
-  @apply text-lg font-semibold mb-[27px];
+.slider-btn {
+  @apply shadow-yd-default text-base w-[50px] h-[50px] border-yd-orange rounded-full bg-yd-white border-2;
 }
 
-.hiw-section {
-  @apply lg:max-w-[260px] flex flex-col justify-between w-full md:w-auto;
+.slider-btn.slider-btn-left {
+  @apply md:-translate-x-1/2 -translate-x-1/4;
+}
+
+.slider-btn.slider-btn-right {
+  @apply md:translate-x-1/2 translate-x-1/4;
 }
